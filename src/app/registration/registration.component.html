@@ -1,0 +1,23 @@
+<form [formGroup]="registrationForm">
+    <div>
+        <label>User Name</label>
+        <input type="text" name="name" formControlName="userName">
+    </div>
+    <div>
+        <label>Email ID</label>
+        <input type="text" name="emailID" formControlName="emailID">
+    </div>
+    <div>
+        <label>Phone No</label>
+        <input type="text" name="phoneNo" formControlName="phoneNo">
+    </div>
+    <div>
+        <label>Password</label>
+        <input type="text" name="password" formControlName="password">
+    </div>
+    <div>
+        <label>Confrim Password</label>
+        <input type="text" name="confrimPassword" formControlName="confrimPassword">
+    </div>
+    <input type="button" value="submit" (click)="onSubmit()" />
+</form>

@@ -1,0 +1,21 @@
+<form [formGroup]="addeditblogForm">
+        <div>
+            <label>Title</label>
+            <input type="text" name="title"  formControlName="title">
+        </div>
+        <div>
+            <label>Image Url</label>
+            <input type="url" name="imageUrl" formControlName="imageUrl">
+        </div>
+        <div>
+            <label>Description</label>
+            <textarea name="description" formControlName="description"></textarea>
+        </div>
+        <div>
+            <label>Category</label>
+            <select  name="password" formControlName="category">
+                <option *ngFor='let category of categoryList'>{{category}}</option>
+            </select>
+        </div>
+        <input type="button" value="submit" (click)="onSubmit()" />
+    </form>
