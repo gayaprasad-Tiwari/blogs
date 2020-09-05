@@ -15,33 +15,33 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./blog-list.component.scss']
 })
 export class BlogListComponent implements OnInit {
-  blogsObservable:Observable<any>
+  blogsObservable: Observable<any>
   bloglist: any;
   isloggedin: boolean = false;
-  constructor(private store: Store<any>,private router: Router, private authService:AuthService, ) { 
+  constructor(private store: Store<any>, private router: Router, private authService: AuthService, ) {
     this.blogsObservable = this.store.select(state => state.blog)
-    }
+  }
 
   ngOnInit(): void {
-    if(this.authService.getToken()){
-      this.isloggedin=true;
+    if (this.authService.getToken()) {
+      this.isloggedin = true;
     }
-    this.blogsObservable.subscribe((data)=>{
-      if(data){
-        this.bloglist = data.blog  
+    this.blogsObservable.subscribe((data) => {
+      if (data) {
+        this.bloglist = data.blog
       }
-      if(data.Message=='Succesfully deleted the blog'){
+      if (data.Message == 'Succesfully deleted the blog') {
         alert(data.Message)
         this.store.dispatch(new Load())
       }
     })
     this.store.dispatch(new Load())
   }
-  editBlock(id){
+  editBlock(id) {
     this.router.navigate(['addEdit', { id: id }]);
   }
-  deleteBlock(id){
-    if(confirm("Are you sure you want to delete this blog?")){
+  deleteBlock(id) {
+    if (confirm("Are you sure you want to delete this blog?")) {
       this.store.dispatch(new deleteBlog(id))
     }
   }

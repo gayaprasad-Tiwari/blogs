@@ -19,8 +19,7 @@ export class RegistrationComponent implements OnInit {
       'userName':['', Validators.required],
       'email':['', Validators.required],
       'phoneNo':[''],
-      'password':['', Validators.required],
-      'confrimPassword':['', Validators.required]
+      'password':['', Validators.required]
     })
   }
   onSubmit(){
@@ -28,7 +27,6 @@ export class RegistrationComponent implements OnInit {
    let email = this.registrationForm.controls['email'].value;
    let phoneNo = this.registrationForm.controls['phoneNo'].value;
    let password = this.registrationForm.controls['password'].value;
-   let confrimPassword = this.registrationForm.controls['confrimPassword'].value;
   let payload = {
     name,
     email,
