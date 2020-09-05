@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { BlogState } from '../models/blog-state';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-blog-list',
@@ -15,12 +16,16 @@ import { Router } from '@angular/router';
 })
 export class BlogListComponent implements OnInit {
   blogsObservable:Observable<any>
-  bloglist
-  constructor(private store: Store<any>,private router: Router ) { 
+  bloglist: any;
+  isloggedin: boolean = false;
+  constructor(private store: Store<any>,private router: Router, private authService:AuthService, ) { 
     this.blogsObservable = this.store.select(state => state.blog)
     }
 
   ngOnInit(): void {
+    if(this.authService.getToken()){
+      this.isloggedin=true;
+    }
     this.blogsObservable.subscribe((data)=>{
       if(data){
         this.bloglist = data.blog  

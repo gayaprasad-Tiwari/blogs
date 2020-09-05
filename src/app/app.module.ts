@@ -17,6 +17,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { reducers } from './models/store/app.state';
 import { StoreModule } from '@ngrx/store';
 import { BlogEffects } from './store/effects/blog.effects';
+import { CanActivateAddEdit } from './canActivateAddEdit';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +36,7 @@ import { BlogEffects } from './store/effects/blog.effects';
     StoreModule.forRoot(reducers, { }),
     EffectsModule.forRoot([AuthEffects,BlogEffects])
   ],
-  providers: [AuthService],
+  providers: [AuthService, CanActivateAddEdit],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

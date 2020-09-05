@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../models/store/app.state';
 import { LogOut } from '../store/actions/auth.actions';
 import { ThemeService } from '../services/theme.service';
+import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -10,8 +11,14 @@ import { ThemeService } from '../services/theme.service';
 })
 export class HeaderComponent implements OnInit {
   theme="ligth" 
-  constructor( private store: Store<AppState>, public themeService: ThemeService,) { }
-  ngOnInit(): void{}
+  constructor( private store: Store<AppState>, private authService:AuthService, public themeService: ThemeService,) { }
+  isloggedin: boolean = false;
+  ngOnInit(): void{
+    if(this.authService.getToken()){
+      this.isloggedin=true;
+    }
+  }
+
   logOut(): void {
     this.store.dispatch(new LogOut);
   }
