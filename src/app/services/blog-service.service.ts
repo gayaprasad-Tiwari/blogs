@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class BlogService {
   private BASE_URL = 'http://localhost:3000/';
-
+  
   constructor(private http: HttpClient) {}
   blogList(): Observable<IBlog[]> {
     const url = `${this.BASE_URL}blogList`;

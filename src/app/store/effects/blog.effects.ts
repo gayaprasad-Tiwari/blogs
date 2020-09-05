@@ -39,7 +39,7 @@ export class BlogEffects {
         switchMap((id) => {
             return this.blogService.blog(id).pipe(
                 map((blog) => { 
-                    return new LoadSingleSuccess({blog});
+                    return new LoadSingleSuccess(blog);
                 }),
                 catchError((error) => {
                     console.log(error);
@@ -67,7 +67,7 @@ export class BlogEffects {
     )
     @Effect()
     edit: Observable<any> = this.actions.pipe(
-        ofType(blogActionType.INSERT),
+        ofType(blogActionType.Edit),
         switchMap((payload) => {
             return this.blogService.editList(payload).pipe(
                 map((blog:IBlog[]) => {

@@ -41,8 +41,8 @@ export class AddEditBlogListComponent implements OnInit {
     })
     if(this.editId){
       this.blogsObservable.subscribe((data)=>{
-        if(data && data.singleBlog && data.singleBlog.blog){
-          let dataObj = data.singleBlog.blog
+        if(data && data.Message==="single blog loaded"){
+          let dataObj = data.blog
           this.addeditblogForm.patchValue({
             title :dataObj.title,
             imageUrl:dataObj.imageUrl,
