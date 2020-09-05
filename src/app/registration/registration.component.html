@@ -1,23 +1,23 @@
 <form [formGroup]="registrationForm">
     <div>
         <label>User Name</label>
-        <input type="text" name="name" formControlName="userName">
+        <input type="text" name="name" aria-placeholder="User Name" placeholder="User Name" formControlName="userName">
     </div>
     <div>
         <label>Email ID</label>
-        <input type="text" name="emailID" formControlName="emailID">
+        <input type="text" name="email" formControlName="email"  aria-placeholder="email" placeholder="email" >
     </div>
     <div>
         <label>Phone No</label>
-        <input type="text" name="phoneNo" formControlName="phoneNo">
+        <input type="text" name="phoneNo" formControlName="phoneNo" aria-placeholder="phoneNo" placeholder="phoneNo" >
     </div>
     <div>
         <label>Password</label>
-        <input type="text" name="password" formControlName="password">
+        <input type="text" name="password" formControlName="password"  aria-placeholder="password" placeholder="password" >
     </div>
     <div>
         <label>Confrim Password</label>
-        <input type="text" name="confrimPassword" formControlName="confrimPassword">
+        <input type="text" name="confrimPassword" formControlName="confrimPassword"  aria-placeholder="confrimPassword" placeholder="confrimPassword" >
     </div>
-    <input type="button" value="submit" (click)="onSubmit()" />
+    <input type="button" value="submit" (click)="onSubmit()" aria-label="submit Button"/>
 </form>

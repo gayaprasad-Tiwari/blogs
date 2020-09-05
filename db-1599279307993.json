@@ -1,0 +1,63 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "olivier@mail.com",
+      "password": "bestPassw0rd"
+    },
+    {
+      "email": "dinesh01ga@gmail.com",
+      "password": "$2a$10$KD6tsstMyCCv9a2bF53vZ.DR3aDiCvqChOWe0WgkttZ7qCOl6n1yS",
+      "id": 2
+    },
+    {
+      "email": "dinesh011ga@gmail.com",
+      "password": "$2a$10$uIG97nuoY4zv3yEm4z3d2eSO7p/R2tCLPHuAlY10YvuMabhOOqL2S",
+      "id": 3
+    },
+    {
+      "email": "dinesh0112ga@gmail.com",
+      "password": "$2a$10$Kj29x/EJtJ3/vpyOGq0w3esEQZEXKPqWQ.XBM95/ZZlciZpeSjBSa",
+      "id": 4
+    },
+    {
+      "email": "dinesh011223ga@gmail.com",
+      "password": "$2a$10$RxV4gN4ZUjOyKIA/h7fE5OV.zkC7Os7pRUu95qXXssb0CWIlDr8FW",
+      "name": "naman tiwari",
+      "phoneNo": "123456",
+      "id": 5
+    },
+    {
+      "email": "dinesh01wwwga@gmail.com",
+      "password": "$2a$10$QT0XfY/b00DODjHWiN9OpudEDrql.EnhWtCruhlG3rJh9pmK8u6oO",
+      "name": "namanq tiwari",
+      "phoneNo": "41",
+      "id": 6
+    },
+    {
+      "email": "dinesh01wwwqga@gmail.com",
+      "password": "$2a$10$AJW90W3U3Konaa8mj1bVtOXQZ/ZHrz2C9mcT9swJQsaMvSLrKVBXW",
+      "name": "naman222 tiwari",
+      "phoneNo": "2221",
+      "id": 7
+    }
+  ],
+  "blogList": [
+    {
+      "id": 1,
+      "title": "Rental Arbitrage: $200k in Profit Without Owning Any Property",
+      "imageUrl": "https://www.sidehustlenation.com/wp-content/uploads/2020/08/rental-arbitrage.jpg",
+      "description": "Rental arbitrage gives you a way to make money with Airbnb — without owning any prop.Traditionally, building a real estate side hustle takes big bucks for down payments, closing costs, and renovation projects. But enterprising short-term rental moguls are questioning if owning the property is even necessary. These rental arbitrage entrepreneurs sign long-term leases, and then turn around and sub-let the property on a short-term basis — profiting on the spread.",
+      "category": "others",
+      "date": ""
+    },
+    {
+      "title": "Blogging For Dummies Cheat Sheet",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "When you start a new blog, one of your most important decisions is choosing what blogging software to use. You also need to decide what type of blogger you’ll be. Is there a certain niche that would be a great fit to match your interests and expertise? Whether you’re a new blogger or looking to switch blogging platforms, the range of blogging tools and options you find here can give you a head start on your search for your blogging software and blog niche match.",
+      "category": "others",
+      "date": "2020-09-05T04:12:23.184Z",
+      "id": 2
+    }
+  ]
+}

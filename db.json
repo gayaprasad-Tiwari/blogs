@@ -1,13 +1,333 @@
-
 {
-    "blogList":[
-        {
-        "id":1, 
-        "title":"Rental Arbitrage: $200k in Profit Without Owning Any Property",
-        "imageUrl":"https://www.sidehustlenation.com/wp-content/uploads/2020/08/rental-arbitrage.jpg",
-        "description":"Rental arbitrage gives you a way to make money with Airbnb — without owning any prop.Traditionally, building a real estate side hustle takes big bucks for down payments, closing costs, and renovation projects. But enterprising short-term rental moguls are questioning if owning the property is even necessary. These rental arbitrage entrepreneurs sign long-term leases, and then turn around and sub-let the property on a short-term basis — profiting on the spread.",
-        "category":"others",
-        "date": ""
-        }
-    ]
+  "users": [
+    {
+      "id": 1,
+      "email": "olivier@mail.com",
+      "password": "bestPassw0rd"
+    },
+    {
+      "email": "dinesh01ga@gmail.com",
+      "password": "$2a$10$KD6tsstMyCCv9a2bF53vZ.DR3aDiCvqChOWe0WgkttZ7qCOl6n1yS",
+      "id": 2
+    },
+    {
+      "email": "dinesh011ga@gmail.com",
+      "password": "$2a$10$uIG97nuoY4zv3yEm4z3d2eSO7p/R2tCLPHuAlY10YvuMabhOOqL2S",
+      "id": 3
+    },
+    {
+      "email": "dinesh0112ga@gmail.com",
+      "password": "$2a$10$Kj29x/EJtJ3/vpyOGq0w3esEQZEXKPqWQ.XBM95/ZZlciZpeSjBSa",
+      "id": 4
+    },
+    {
+      "email": "dinesh011223ga@gmail.com",
+      "password": "$2a$10$RxV4gN4ZUjOyKIA/h7fE5OV.zkC7Os7pRUu95qXXssb0CWIlDr8FW",
+      "name": "naman tiwari",
+      "phoneNo": "123456",
+      "id": 5
+    },
+    {
+      "email": "dinesh01wwwga@gmail.com",
+      "password": "$2a$10$QT0XfY/b00DODjHWiN9OpudEDrql.EnhWtCruhlG3rJh9pmK8u6oO",
+      "name": "namanq tiwari",
+      "phoneNo": "41",
+      "id": 6
+    },
+    {
+      "email": "dinesh01wwwqga@gmail.com",
+      "password": "$2a$10$AJW90W3U3Konaa8mj1bVtOXQZ/ZHrz2C9mcT9swJQsaMvSLrKVBXW",
+      "name": "naman222 tiwari",
+      "phoneNo": "2221",
+      "id": 7
+    },
+    {
+      "email": "dinesh0112gwa@gmail.com",
+      "password": "$2a$10$nf.6TVe7QNaINoWVz19qbeRW717OWMLS785T4th7xoyJa2HoWTvge",
+      "name": "naman tiwari",
+      "phoneNo": "12414",
+      "id": 8
+    },
+    {
+      "email": "dinesh011w2ga@gmail.com",
+      "password": "$2a$10$oFy.4TZgq21mwb8JWtgmBet8UugILyHx61zzT4c4EExwQLOU8Ow8e",
+      "name": "naman tiwari",
+      "phoneNo": "2",
+      "id": 9
+    }
+  ],
+  "blogList": [
+    {
+      "id": 1,
+      "title": "Rental Arbitrage: $200k in Profit Without Owning Any Property",
+      "imageUrl": "https://www.sidehustlenation.com/wp-content/uploads/2020/08/rental-arbitrage.jpg",
+      "description": "Rental arbitrage gives you a way to make money with Airbnb — without owning any prop.Traditionally, building a real estate side hustle takes big bucks for down payments, closing costs, and renovation projects. But enterprising short-term rental moguls are questioning if owning the property is even necessary. These rental arbitrage entrepreneurs sign long-term leases, and then turn around and sub-let the property on a short-term basis — profiting on the spread.",
+      "category": "others",
+      "date": ""
+    },
+    {
+      "title": "Blogging For Dummies Cheat Sheet",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "When you start a new blog, one of your most important decisions is choosing what blogging software to use. You also need to decide what type of blogger you’ll be. Is there a certain niche that would be a great fit to match your interests and expertise? Whether you’re a new blogger or looking to switch blogging platforms, the range of blogging tools and options you find here can give you a head start on your search for your blogging software and blog niche match.",
+      "category": "others",
+      "date": "2020-09-05T04:12:23.184Z",
+      "id": 2
+    },
+    {
+      "title": "Blogging For Dummies Cheat Sheet",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "When you choose to blog using a hosted blog service, you don’t need to worry about the software technology at all. You can concentrate on the topic for your next blog post, rather than on how to configure a web server. To use hosted blogging software, you log into the editing tool, write a post, click the Publish button, and log out.\n\n",
+      "category": "Beauty",
+      "date": "2020-09-05T04:17:38.715Z",
+      "id": 3
+    },
+    {
+      "title": "Blogging For Dummies Cheat Sheet",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "When you choose to blog using a hosted blog service, you don’t need to worry about the software technology at all. You can concentrate on the topic for your next blog post, rather than on how to configure a web server. To use hosted blogging software, you log into the editing tool, write a post, click the Publish button, and log out.\n\n",
+      "category": "Beauty",
+      "date": "2020-09-05T04:17:47.491Z",
+      "id": 4
+    },
+    {
+      "title": "Bar with negative stack",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "When you choose to blog using a hosted blog service, you don’t need to worry about the software technology at all. You can concentrate on the topic for your next blog post, rather than on how to configure a web server. To use hosted blogging software, you log into the editing tool, write a post, click the Publish button, and log out.\n\n",
+      "category": "Car",
+      "date": "2020-09-05T04:18:29.547Z",
+      "id": 5
+    },
+    {
+      "title": "Bar with negative stack",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "When you choose to blog using a hosted blog service, you don’t need to worry about the software technology at all. You can concentrate on the topic for your next blog post, rather than on how to configure a web server. To use hosted blogging software, you log into the editing tool, write a post, click the Publish button, and log out.\n\n",
+      "category": "Beauty",
+      "date": "2020-09-05T04:19:04.075Z",
+      "id": 6
+    },
+    {
+      "title": "Bar with negative stack",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "When you choose to blog using a hosted blog service, you don’t need to worry about the software technology at all. You can concentrate on the topic for your next blog post, rather than on how to configure a web server. To use hosted blogging software, you log into the editing tool, write a post, click the Publish button, and log out.\n\n",
+      "category": "Beauty",
+      "date": "2020-09-05T04:19:33.746Z",
+      "id": 7
+    },
+    {
+      "title": "Bar with negative stack",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "When you choose to blog using a hosted blog service, you don’t need to worry about the software technology at all. You can concentrate on the topic for your next blog post, rather than on how to configure a web server. To use hosted blogging software, you log into the editing tool, write a post, click the Publish button, and log out.\n\n",
+      "category": "",
+      "date": "2020-09-05T04:20:30.699Z",
+      "id": 8
+    },
+    {
+      "title": "Bar with negative stack",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "When you choose to blog using a hosted blog service, you don’t need to worry about the software technology at all. You can concentrate on the topic for your next blog post, rather than on how to configure a web server. To use hosted blogging software, you log into the editing tool, write a post, click the Publish button, and log out.\n\n",
+      "category": "",
+      "date": "2020-09-05T05:16:37.808Z",
+      "id": 9
+    },
+    {
+      "title": "Bar with negative stack",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "When you choose to blog using a hosted blog service, you don’t need to worry about the software technology at all. You can concentrate on the topic for your next blog post, rather than on how to configure a web server. To use hosted blogging software, you log into the editing tool, write a post, click the Publish button, and log out.\n\n",
+      "category": "Real State",
+      "date": "2020-09-05T05:17:07.656Z",
+      "id": 10
+    },
+    {
+      "title": "Bar with negative stack",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "INSERT_SUCCESS",
+      "category": "Car",
+      "date": "2020-09-05T05:18:59.240Z",
+      "id": 11
+    },
+    {
+      "title": "Bar with negative stack",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "INSERT_SUCCESS",
+      "category": "Car",
+      "date": "2020-09-05T05:19:29.616Z",
+      "id": 12
+    },
+    {
+      "title": "Bar with negative stack",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "sdhse",
+      "category": "",
+      "date": "2020-09-05T05:37:57.175Z",
+      "id": 13
+    },
+    {
+      "title": "Bar with negative stack",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "eAvgv",
+      "category": "",
+      "date": "2020-09-05T06:29:14.061Z",
+      "id": 14
+    },
+    {
+      "title": "Bar with negative stack",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "awgwsga",
+      "category": "",
+      "date": "2020-09-05T07:18:21.378Z",
+      "id": 15
+    },
+    {
+      "title": "Bar with negative stack",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "awgwsga",
+      "category": "",
+      "date": "2020-09-05T07:19:01.154Z",
+      "id": 16
+    },
+    {
+      "title": "Bar with negative stack",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "awgwsga",
+      "category": "",
+      "date": "2020-09-05T07:19:48.674Z",
+      "id": 17
+    },
+    {
+      "title": "Bar with negative stack",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "sgs",
+      "category": "",
+      "date": "2020-09-05T07:57:11.401Z",
+      "id": 18
+    },
+    {
+      "title": "Bar with negative stack",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "sv",
+      "category": "",
+      "date": "2020-09-05T07:57:46.825Z",
+      "id": 19
+    },
+    {
+      "title": "Bar with negative stack",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "agw",
+      "category": "",
+      "date": "2020-09-05T07:59:40.272Z",
+      "id": 20
+    },
+    {
+      "title": "Bar with negative stack",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "sfzgs",
+      "category": "",
+      "date": "2020-09-05T08:00:38.552Z",
+      "id": 21
+    },
+    {
+      "title": "Bar with negative stack",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "f",
+      "category": "",
+      "date": "2020-09-05T08:01:57.921Z",
+      "id": 22
+    },
+    {
+      "title": "Bar with negative stack",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "f",
+      "category": "",
+      "date": "2020-09-05T08:02:11.392Z",
+      "id": 23
+    },
+    {
+      "title": "Bar with negative stack",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "fsszgs",
+      "category": "",
+      "date": "2020-09-05T08:02:59.040Z",
+      "id": 24
+    },
+    {
+      "title": "Bar with negative stack",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "ewe",
+      "category": "",
+      "date": "2020-09-05T08:05:37.457Z",
+      "id": 25
+    },
+    {
+      "title": "Bar with negative stack",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "ewgg",
+      "category": null,
+      "date": "2020-09-05T08:05:45.200Z",
+      "id": 26
+    },
+    {
+      "title": "Bar with negative stack",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "egsg",
+      "category": "",
+      "date": "2020-09-05T08:07:16.712Z",
+      "id": 27
+    },
+    {
+      "title": "Bar with negative stack",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "segg",
+      "category": "",
+      "date": "2020-09-05T08:08:38.720Z",
+      "id": 28
+    },
+    {
+      "title": "Bar with negative stack",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "segge",
+      "category": "",
+      "date": "2020-09-05T08:09:11.008Z",
+      "id": 29
+    },
+    {
+      "title": "Rental Arbitrage: $201k in Profit Without Owning Any Property",
+      "imageUrl": "https://www.sidehustlenation.com/wp-content/uploads/2020/08/rental-arbitrage.jpg",
+      "description": "Rental arbitrage gives you a way to make money with Airbnb — without owning any prop.Traditionally, building a real estate side hustle takes big bucks for down payments, closing costs, and renovation projects. But enterprising short-term rental moguls are questioning if owning the property is even necessary. These rental arbitrage entrepreneurs sign long-term leases, and then turn around and sub-let the property on a short-term basis — profiting on the spread.",
+      "category": "others",
+      "date": "2020-09-05T09:55:36.275Z",
+      "id": 30
+    },
+    {
+      "title": "Rental Arbitrage: $201k in Profit Without Owning Any Property",
+      "imageUrl": "https://www.sidehustlenation.com/wp-content/uploads/2020/08/rental-arbitrage.jpg",
+      "description": "Rental arbitrage gives you a way to make money with Airbnb — without owning any prop.Traditionally, building a real estate side hustle takes big bucks for down payments, closing costs, and renovation projects. But enterprising short-term rental moguls are questioning if owning the property is even necessary. These rental arbitrage entrepreneurs sign long-term leases, and then turn around and sub-let the property on a short-term basis — profiting on the spread.",
+      "category": "others",
+      "date": "2020-09-05T09:56:03.379Z",
+      "id": 31
+    },
+    {
+      "title": "Bar with negative stack",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "wfw",
+      "category": "",
+      "date": "2020-09-05T10:38:39.785Z",
+      "id": 32
+    },
+    {
+      "title": "Bar with negative stack",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "ndndn",
+      "category": "",
+      "date": "2020-09-05T11:12:20.671Z",
+      "id": 33
+    },
+    {
+      "title": "Bar with negative stack",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "aevesv",
+      "category": "",
+      "date": "2020-09-05T13:15:32.506Z",
+      "id": 34
+    }
+  ]
 }

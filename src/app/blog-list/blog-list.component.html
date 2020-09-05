@@ -1,28 +1,30 @@
 <main>
-    <ul>
-        <li>
+    <ul *ngIf="bloglist">
+        <li *ngFor="let blog of bloglist trackBy bloglist.id">
             <article>
                 <header>
                     <h2>
-                            Rental Arbitrage: $200k in Profit Without Owning Any Property
+                        {{blog.title}}
                     </h2>
                     <div>
-                            September 2, 2020
+                        {{blog.date}} 
                     </div>
                 </header>
                 <section>
                     <ul>
                         <li>
                             <figure>
-                                <img src="https://www.sidehustlenation.com/wp-content/uploads/2020/08/rental-arbitrage.jpg" title="">
+                                <img [src]="blog.imageUrl" title="">
                             </figure>
                             <section>
-                                    Rental arbitrage gives you a way to make money with Airbnb — without owning any property.
-
-                                    Traditionally, building a real estate side hustle takes big bucks for down payments, closing costs, and renovation projects.
-                                    
-                                    But enterprising short-term rental “moguls” are questioning if owning the property is even necessary. These rental arbitrage entrepreneurs sign long-term leases, and then turn around and sub-let the property on a short-term basis — profiting on the spread.
-                            </section>
+                                    {{blog.description}}
+                           </section>
+                           <section>
+                                category: {{blog.category}}
+                           </section>
+                        </li>
+                        <li>
+                            <a (click)="editBlock(blog.id)">Edit Blog</a>
                         </li>
                     </ul>
                 </section>

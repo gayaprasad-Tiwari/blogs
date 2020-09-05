@@ -2,16 +2,29 @@
     <h1>
         Blogs
     </h1>
-    <section>
-        <ul>
-            <li><a>log in</a>
-                <login-element></login-element>
+    <nav>
+        <ul >
+            <li><a routerLink="/" routerLinkActive="active">list</a>
             </li>
-            <li> <a>registration</a>
-                <app-registration></app-registration>
+            <li><a routerLink="/addEdit" routerLinkActive="active">add Blog</a>
+            </li>
+            <li><a routerLink="/log-in" routerLinkActive="active">log in</a>
+            </li>
+            <li><a (click)='logOut()'>log out</a>
+            </li>
+            <li> <a routerLink="/sign-up" routerLinkActive="active">registration</a>
             </li>
         </ul>
-    </section>
+    </nav>
+    <div style="float:right; font-size:16px;margin:18px 10px 0 0">
+        <label class="radio-inline">
+        <input type="radio" value="ligth" name="theme"   [(ngModel)]="theme" (change)="changeTheme()"> ligth theme
+        </label>
+        <label class="radio-inline">
+        <input type="radio" value="dark" name="theme"  [(ngModel)]="theme"  (change)="changeTheme()"> dark theme
+        </label>
+    </div>
 </header>
+
 
 
