@@ -23,7 +23,8 @@ export function blogReducer(blogState = initialState, action: All): BlogState {
     }
     case blogActionType.LOAD: {
       return {
-        ...blogState
+        ...blogState,
+        Message:null
       }
     }
     case blogActionType.LOAD_SUCCESS: {
@@ -41,6 +42,13 @@ export function blogReducer(blogState = initialState, action: All): BlogState {
         Message: 'blog added successfully'
       }
     }
+    case blogActionType.EDIT_SUCCESS: {
+      return {
+        ...blogState,
+        blog: action.payload,
+        Message: 'blog Edited successfully'
+      }
+    }
     case blogActionType.LOAD_SINGLE: {
       let newBlog = action.payload
       return {
@@ -52,6 +60,18 @@ export function blogReducer(blogState = initialState, action: All): BlogState {
         ...blogState,
         blog: { ...action.payload },
         Message: 'single blog loaded'
+      }
+    }
+    case blogActionType.DELETE: {
+      return {
+        ...blogState,
+        Message:null
+      }
+    }
+    case blogActionType.DELETE_SUCCESS: {
+      return {
+        ...blogState,
+        Message:'Succesfully deleted the blog'
       }
     }
     default: {

@@ -26,5 +26,9 @@ export class BlogService {
     const url = `${this.BASE_URL}blogList/${payload.payload.id}`;
     return this.http.patch<IBlog[]>(url,payload.payload);
   }
+  deleteBlog(payload): Observable<any> {
+    const url = `${this.BASE_URL}blogList/${payload.payload}`;
+    return this.http.delete<any>(url,payload.payload);
+  }
  
 }

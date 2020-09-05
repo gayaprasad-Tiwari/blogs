@@ -5,7 +5,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { tap, map, switchMap, catchError } from 'rxjs/operators';
 import {
-   blogActionType,Load,Insert, LoadSuccess, InsertSuccess, LoadSingleSuccess
+   blogActionType,Load,Insert, LoadSuccess, InsertSuccess, LoadSingleSuccess, EditSuccess, DeleteSuccess
 } from '../actions/blog.action';
 import { IBlog } from 'src/app/models/blog';
 import { BlogService } from 'src/app/services/blog-service.service';
@@ -72,7 +72,23 @@ export class BlogEffects {
             return this.blogService.editList(payload).pipe(
                 map((blog:IBlog[]) => {
                     console.log(blog);
-                    return new InsertSuccess(blog);
+                    return new EditSuccess(blog);
+                }),
+                catchError((error) => {
+                    console.log(error);
+                    return error //of(new SignUpFailure({ error: error }));
+                })
+            )
+        })
+    )
+    @Effect()
+    deleteBlog: Observable<any> = this.actions.pipe(
+        ofType(blogActionType.DELETE),
+        switchMap((payload) => {
+            return this.blogService.deleteBlog(payload).pipe(
+                map((blog) => {
+                    console.log(blog);
+                    return new DeleteSuccess(blog);
                 }),
                 catchError((error) => {
                     console.log(error);

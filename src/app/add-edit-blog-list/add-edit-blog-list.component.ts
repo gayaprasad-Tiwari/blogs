@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../models/store/app.state';
 import { Insert, LoadSingle, Edit } from '../store/actions/blog.action';
 import { map } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -18,12 +18,13 @@ export class AddEditBlogListComponent implements OnInit {
   blogObj: IBlog;
   blogsObservable: Observable<any>;
   message: any;
-  editId
-  constructor(private fb:FormBuilder, private route :ActivatedRoute,private store: Store<AppState>) {
+  editId: any;
+  constructor(private fb: FormBuilder, private route: ActivatedRoute,
+    private router: Router, private store: Store<AppState>) {
     this.editId = this.route.snapshot.paramMap.get('id')
     this.blogsObservable = this.store.select(state => state.blog)
-   }
-  categoryList =[
+  }
+  categoryList = [
     'Music',
     'Fashion',
     'Car',
@@ -33,53 +34,63 @@ export class AddEditBlogListComponent implements OnInit {
     'others'
   ]
   ngOnInit(): void {
-    this.addeditblogForm =this.fb.group({
-      'title':[''],
-      'imageUrl':[''],
-      'description':[''],
-      'category':['']
+    this.addeditblogForm = this.fb.group({
+      'title': [''],
+      'imageUrl': [''],
+      'description': [''],
+      'category': ['']
     })
-    if(this.editId){
-      this.blogsObservable.subscribe((data)=>{
-        if(data && data.Message==="single blog loaded"){
+    if (this.editId) {
+      this.blogsObservable.subscribe((data) => {
+        if (data && data.Message === "single blog loaded") {
           let dataObj = data.blog
           this.addeditblogForm.patchValue({
-            title :dataObj.title,
-            imageUrl:dataObj.imageUrl,
-            description:dataObj.description,
-            category:dataObj.category
+            title: dataObj.title,
+            imageUrl: dataObj.imageUrl,
+            description: dataObj.description,
+            category: dataObj.category
           })
         }
       })
       this.getEditBlog(this.editId)
     }
-    
+
   }
-  getEditBlog(id){
+  getEditBlog(id) {
     this.store.dispatch(new LoadSingle(id))
   }
-  onSubmit(){
-    let title =this.addeditblogForm.controls['title'].value;
-    let imageUrl =this.addeditblogForm.controls['imageUrl'].value;
-    let description =this.addeditblogForm.controls['description'].value;
-    let category =this.addeditblogForm.controls['category'].value;
+  onSubmit() {
+    let title = this.addeditblogForm.controls['title'].value;
+    let imageUrl = this.addeditblogForm.controls['imageUrl'].value;
+    let description = this.addeditblogForm.controls['description'].value;
+    let category = this.addeditblogForm.controls['category'].value;
     let date = new Date()
-    this.blogObj={
+    this.blogObj = {
       title,
       imageUrl,
       description,
       category,
       date
     }
-    if(this.editId){
-      this.blogObj.id=this.editId;
+    if (this.editId) {
+      this.blogObj.id = this.editId;
       this.store.dispatch(new Edit(this.blogObj))
-    }else{
-         this.store.dispatch(new Insert(this.blogObj))
+    } else {
+      this.store.dispatch(new Insert(this.blogObj))
     }
- 
-    this.blogsObservable.subscribe((data)=>{
+
+    this.blogsObservable.subscribe((data) => {
       this.message = data.Message;
+      if (this.message == 'blog Edited successfully') {
+        setTimeout(() => {
+          this.router.navigateByUrl('/');
+        }, 100000)
+      }
+      if (this.message == 'blog added successfully') {
+        setTimeout(() => {
+          this.message = null;
+        }, 500)
+      }
       this.addeditblogForm.reset()
     })
   }

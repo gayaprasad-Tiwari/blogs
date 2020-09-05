@@ -61,7 +61,7 @@ export class AuthEffects {
                 map((user) => {
                     return new SignUpSuccess({ token: user.accessToken, email: payload.email });
                 }),
-                catchError((error) => {
+            catchError((error) => {
                     return of(new SignUpFailure({ error: error }));
                 })
             )
