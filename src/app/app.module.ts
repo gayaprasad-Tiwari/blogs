@@ -18,6 +18,7 @@ import { reducers } from './models/store/app.state';
 import { StoreModule } from '@ngrx/store';
 import { BlogEffects } from './store/effects/blog.effects';
 import { CanActivateAddEdit } from './canActivateAddEdit';
+import { FooterComponent } from './footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +27,7 @@ import { CanActivateAddEdit } from './canActivateAddEdit';
     BlogListComponent,
     AddEditBlogListComponent,
     LogInComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

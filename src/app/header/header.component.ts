@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
     }
   }
   logOut(): void {
-    this.store.dispatch(new LogOut());
+     this.store.dispatch(new LogOut());
   }
   changeTheme(){
     if (this.theme === 'ligth'){

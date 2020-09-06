@@ -14,5 +14,9 @@ module.exports = {
         "<rootDir>/dist/",
         "<rootDir>/cypress/",
         "<rootDir>/src/test.ts",
-    ]
+    ],
+    'collectCoverage': true,
+    'coverageReporters': ["html"],
+    'clearMocks': true,
+    'coverageDirectory': "coverage",
 };

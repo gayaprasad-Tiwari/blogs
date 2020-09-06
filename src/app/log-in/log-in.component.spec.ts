@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { LogInComponent } from './log-in.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('LogInComponent', () => {
   let component: LogInComponent;
@@ -8,7 +9,9 @@ describe('LogInComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LogInComponent ]
+      declarations: [ LogInComponent ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      providers: [provideMockStore()],
     })
     .compileComponents();
   });

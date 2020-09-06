@@ -1,4 +1,6 @@
-<form [formGroup]="registrationForm">
+<section class="form-outer">
+<h2> Registration Form</h2>
+<form [formGroup]="registrationForm" class="form-container">
     <div>
         <label>User Name</label>
         <input type="text" name="name" aria-placeholder="User Name" placeholder="User Name" formControlName="userName">
@@ -15,5 +17,9 @@
         <label>Password</label>
         <input type="text" name="password" formControlName="password"  aria-placeholder="password" placeholder="password" >
     </div>
-    <input type="button" value="submit" (click)="onSubmit()" aria-label="submit Button"/>
+    <div class="form-button-outer">
+            <input type="button" value="submit" class="button" (click)="onSubmit()" aria-label="submit Button"/>
+    </div>
+   
 </form>
+</section>

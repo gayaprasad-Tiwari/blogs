@@ -1,5 +1,5 @@
 @import 'reset';
-:root {
+:root { 
     /* Colors */
     --background-default: #f4faff;
     --primary-default: #000000;
@@ -11,3 +11,35 @@
     padding: 0;
     margin: 0;
   }
+
+  .form-outer{
+    padding: 10px 15%;
+    h2{
+      font-size: 25px;
+      margin: 10px 0;
+    }
+    >.form-container{
+      padding: 10px 0;
+        >div{
+          display: flex;
+          margin: 10px;
+          label{
+            width: 20%;
+            line-height: 38px;
+          }
+          .input{
+            width: 70%;
+            padding: 10px;
+          }
+          .form-button-outer{
+            border-top:1px solid;
+            .button{
+              width: auto;
+              padding: 5px 20px;
+            }
+          }
+        }
+    }
+  }
+  
+  

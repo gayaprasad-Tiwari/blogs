@@ -1,6 +1,7 @@
 import {  ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { AddEditBlogListComponent } from './add-edit-blog-list.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('AddEditBlogListComponent', () => {
   let component: AddEditBlogListComponent;
@@ -8,7 +9,8 @@ describe('AddEditBlogListComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddEditBlogListComponent ]
+      declarations: [ AddEditBlogListComponent ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   }));

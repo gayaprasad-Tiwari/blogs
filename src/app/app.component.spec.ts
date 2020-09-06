@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import {HeaderComponent} from './header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -16,6 +17,7 @@ describe('AppComponent', () => {
         AppComponent,
         HeaderComponent
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
   }));
 
