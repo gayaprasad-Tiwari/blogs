@@ -33,9 +33,9 @@ export class AuthEffects {
                 }),
                 catchError((error) => {
                     console.log(error);
-                    return of(new LogInFailure({ error: error }));
+                    return of(new LogInFailure({ error }));
                 })
-            )
+            );
         })
     );
 
@@ -44,7 +44,8 @@ export class AuthEffects {
         ofType(AuthActionTypes.LOGIN_SUCCESS),
         tap((user) => {
             localStorage.setItem('token', user.payload.token);
-            this.router.navigateByUrl('/');
+           // this.router.navigateByUrl('/');
+            window.location.href = '/';
         })
     );
     @Effect({ dispatch: false })
@@ -62,11 +63,11 @@ export class AuthEffects {
                     return new SignUpSuccess({ token: user.accessToken, email: payload.email });
                 }),
             catchError((error) => {
-                    return of(new SignUpFailure({ error: error }));
+                    return of(new SignUpFailure({ error }));
                 })
-            )
+            );
         })
-    )
+    );
 
     @Effect({ dispatch: false })
     SignUpSuccess: Observable<any> = this.actions.pipe(
@@ -83,8 +84,9 @@ export class AuthEffects {
     @Effect({ dispatch: false })
     public LogOut: Observable<any> = this.actions.pipe(
         ofType(AuthActionTypes.LOGOUT),
-        tap((user) => {
+        tap(() => {
             localStorage.removeItem('token');
+            location.href = "/"
         })
     );
 }

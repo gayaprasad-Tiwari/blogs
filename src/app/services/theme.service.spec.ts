@@ -14,16 +14,16 @@ describe('ThemeService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
-  it('should get available themes',()=>{
-    spyOn(service, 'getAvailableThemes').and.callThrough()
-    expect(service.getAvailableThemes()).toEqual([light,dark])
-  })
-  it('should get active themes',()=>{
+  it('should get available themes', () => {
+    spyOn(service, 'getAvailableThemes').and.callThrough();
+    expect(service.getAvailableThemes()).toEqual([light, dark]);
+  });
+  it('should get active themes', () => {
     spyOn(service, 'getActiveTheme').and.callThrough();
-    expect(service.getActiveTheme()).toEqual(light)
-  })
-  it('should return dark theme',()=>{
+    expect(service.getActiveTheme()).toEqual(light);
+  });
+  it('should return dark theme', () => {
     spyOn(service, 'isDarkTheme').and.callThrough();
-    expect(service.isDarkTheme()).toBeFalsy()
-  })
+    expect(service.isDarkTheme()).toBeFalsy();
+  });
 });

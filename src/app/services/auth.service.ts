@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
-import {environment} from '../../environments/environment'
+import {environment} from '../../environments/environment';
 import { IUser } from '../models/user';
 
 
@@ -10,7 +10,7 @@ import { IUser } from '../models/user';
 })
 
 export class AuthService {
-  private BASE_URL =environment.BASE_URL;
+  private BASE_URL = environment.BASE_URL;
 
   constructor(private http: HttpClient) {}
 
@@ -23,7 +23,7 @@ export class AuthService {
     return this.http.post<IUser>(url, {email, password});
   }
 
-  signUp(payload:IUser): Observable<IUser> {
+  signUp(payload: IUser): Observable<IUser> {
     const url = `${this.BASE_URL}register`;
     return this.http.post<IUser>(url, {...payload});
   }

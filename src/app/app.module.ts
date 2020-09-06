@@ -34,7 +34,7 @@ import { CanActivateAddEdit } from './canActivateAddEdit';
     HttpClientModule,
     ReactiveFormsModule,
     StoreModule.forRoot(reducers, { }),
-    EffectsModule.forRoot([AuthEffects,BlogEffects])
+    EffectsModule.forRoot([AuthEffects, BlogEffects])
   ],
   providers: [AuthService, CanActivateAddEdit],
   bootstrap: [AppComponent],
@@ -42,6 +42,6 @@ import { CanActivateAddEdit } from './canActivateAddEdit';
 })
 export class AppModule {
   ngDoBootstrap(){
-    customElements.define('login-element', LoginElement)
+    customElements.define('login-element', LoginElement);
   }
  }

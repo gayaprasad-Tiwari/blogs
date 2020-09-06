@@ -10,20 +10,19 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  theme="ligth" 
-  constructor( private store: Store<AppState>, private authService:AuthService, public themeService: ThemeService,) { }
-  isloggedin: boolean = false;
+  theme = 'ligth';
+  constructor( private store: Store<AppState>, private authService: AuthService, public themeService: ThemeService ) { }
+  isloggedin = false;
   ngOnInit(): void{
-    if(this.authService.getToken()){
-      this.isloggedin=true;
+    if (this.authService.getToken()){
+      this.isloggedin = true;
     }
   }
-
   logOut(): void {
-    this.store.dispatch(new LogOut);
+    this.store.dispatch(new LogOut());
   }
   changeTheme(){
-    if(this.theme=='ligth'){
+    if (this.theme === 'ligth'){
       this.themeService.setLightTheme();
     } else{
       this.themeService.setDarkTheme();

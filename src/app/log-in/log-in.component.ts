@@ -15,12 +15,5 @@ export class LogInComponent implements OnInit {
   login(data){
     this.store.dispatch(new LogIn(data.detail));
   }
-  ngOnInit(): void {
-    
-  }
-
-  ngAfterContentInit(){
-  }
-
-
+  ngOnInit(): void {}
 }

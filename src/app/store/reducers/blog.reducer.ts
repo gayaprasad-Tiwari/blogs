@@ -3,7 +3,7 @@ import { BlogState } from '../../models/blog-state';
 export const initialState: BlogState = {
   blog: [],
   Message: null
-}
+};
 export function blogReducer(blogState = initialState, action: All): BlogState {
   switch (action.type) {
     case blogActionType.INSERT: {
@@ -11,72 +11,72 @@ export function blogReducer(blogState = initialState, action: All): BlogState {
         ...blogState,
         blog: action.payload,
         Message: null
-      }
+      };
     }
+
     case blogActionType.Edit: {
-      let newBlog = action.payload.blog
+      const newBlog = action.payload.blog;
       return {
         ...blogState,
         blog: [newBlog],
         Message: null
-      }
+      };
     }
     case blogActionType.LOAD: {
       return {
         ...blogState,
-        Message:null
-      }
+        Message: null
+      };
     }
     case blogActionType.LOAD_SUCCESS: {
-      let newBlog = action.payload.blog
+      const newBlog = action.payload.blog;
       return {
         ...blogState,
         blog: [...newBlog],
         Message: null
-      }
+      };
     }
     case blogActionType.INSERT_SUCCESS: {
       return {
         ...blogState,
         blog: action.payload,
         Message: 'blog added successfully'
-      }
+      };
     }
     case blogActionType.EDIT_SUCCESS: {
       return {
         ...blogState,
         blog: action.payload,
         Message: 'blog Edited successfully'
-      }
+      };
     }
     case blogActionType.LOAD_SINGLE: {
-      let newBlog = action.payload
+      const newBlog = action.payload;
       return {
         ...blogState
-      }
+      };
     }
     case blogActionType.LOAD_SINGLE_SUCCESS: {
       return {
         ...blogState,
         blog: { ...action.payload },
         Message: 'single blog loaded'
-      }
+      };
     }
     case blogActionType.DELETE: {
       return {
         ...blogState,
-        Message:null
-      }
+        Message: null
+      };
     }
     case blogActionType.DELETE_SUCCESS: {
       return {
         ...blogState,
-        Message:'Succesfully deleted the blog'
-      }
+        Message: 'Succesfully deleted the blog'
+      };
     }
     default: {
       return blogState;
     }
   }
-
 }
