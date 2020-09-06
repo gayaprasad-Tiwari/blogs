@@ -1,3 +1,31 @@
 header{
     display: flex;
+    margin: 0 0 10px;
+    padding: 9px 15px;
+    border-bottom: 1px solid;
+    h1{
+        margin: 0;
+        font-size: 27px;
+        line-height: 36px;
+    }
+    nav{
+        width: 85%;
+        ul{
+            display: inline-flex;
+            justify-content: center;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            
+            li{
+                padding: 10px;
+                list-style: none;
+                a{
+                    text-decoration: none;
+                    color:black
+                }
+            }
+        }
+    }
+    .themes{width: 20%; font-size:16px;margin:10px;}
 }

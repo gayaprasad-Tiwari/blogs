@@ -1,0 +1,35 @@
+.blog-container{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    > li{
+        border-bottom: 1px solid;
+        margin: 10px 0;
+        padding: 5px;
+        > article {
+            > header{
+            h2{
+                font-size: 25px;
+                line-height: 40px;
+                }  
+            }
+            > section{
+                ul {
+                    li{
+                        display: flex;
+                        figure{
+                            width: 30%;
+                            img{
+                                max-width: 100%;
+                            }
+                        }
+                        section{
+                            width: 70%;
+                        }
+                    }
+                }
+            }
+        }
+      
+    }
+}

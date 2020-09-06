@@ -4,19 +4,19 @@
     </h1>
     <nav>
         <ul >
-            <li><a routerLink="/" routerLinkActive="active">list</a>
+            <li><a tabindex="1" routerLink="/" routerLinkActive="active">list</a>
             </li>
-            <li *ngIf="isloggedin"><a routerLink="/addEdit" routerLinkActive="active">add Blog</a>
+            <li  tabindex="1"  *ngIf="isloggedin"><a routerLink="/addEdit" routerLinkActive="active">add Blog</a>
             </li>
-            <li *ngIf="!isloggedin"><a routerLink="/log-in" routerLinkActive="active">log in</a>
+            <li  tabindex="1"  *ngIf="!isloggedin"><a routerLink="/log-in" routerLinkActive="active">log in</a>
             </li>
-            <li *ngIf="isloggedin"><a (click)='logOut()'>log out</a>
+            <li  tabindex="1"  *ngIf="isloggedin"><a (click)='logOut()'>log out</a>
             </li>
-            <li *ngIf="!isloggedin"> <a routerLink="/sign-up" routerLinkActive="active">registration</a>
+            <li  tabindex="1"  *ngIf="!isloggedin"> <a routerLink="/sign-up" routerLinkActive="active">registration</a>
             </li>
         </ul>
     </nav>
-    <div style="float:right; font-size:16px;margin:18px 10px 0 0">
+    <div class="themes">
         <label class="radio-inline">
         <input type="radio" value="ligth" name="theme"   [(ngModel)]="theme" (change)="changeTheme()"> ligth theme
         </label>

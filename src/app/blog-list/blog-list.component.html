@@ -1,5 +1,5 @@
 <main>
-    <ul *ngIf="bloglist">
+    <ul *ngIf="bloglist" class="blog-container">
         <li *ngFor="let blog of bloglist trackBy bloglist.id">
             <article>
                 <header>
@@ -7,21 +7,24 @@
                         {{blog.title}}
                     </h2>
                     <div>
-                        {{blog.date}} 
+                        {{blog.date | date}} 
                     </div>
                 </header>
                 <section>
                     <ul>
                         <li>
                             <figure>
-                                <img [src]="blog.imageUrl" title="">
+                                <img [src]="blog.imageUrl" [title]="blog.title">
                             </figure>
                             <section>
-                                    {{blog.description}}
-                           </section>
-                           <section>
+                            <p>
+                                    {{blog.description }}
+                            </p>
+                            <p>
                                 category: {{blog.category}}
-                           </section>
+                            </p>
+                            </section>
+                           
                         </li>
                         <li *ngIf="isloggedin">
                             <button type="button" (click)="editBlock(blog.id)">Edit Blog</button>
