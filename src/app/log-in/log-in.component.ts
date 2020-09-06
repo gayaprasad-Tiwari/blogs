@@ -12,7 +12,7 @@ import { LogIn } from '../store/actions/auth.actions';
 export class LogInComponent implements OnInit {
   myElement = document.querySelector('login-element');
   constructor(private store: Store<AppState>){}
-  hello(data){
+  login(data){
     this.store.dispatch(new LogIn(data.detail));
   }
   ngOnInit(): void {
