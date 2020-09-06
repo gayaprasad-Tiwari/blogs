@@ -86,7 +86,7 @@ export class AuthEffects {
         ofType(AuthActionTypes.LOGOUT),
         tap(() => {
             localStorage.removeItem('token');
-            location.href = "/"
+            location.href = '/';
         })
     );
 }
