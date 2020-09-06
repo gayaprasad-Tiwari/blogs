@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-
+import { Observable, from } from 'rxjs';
+import {environment} from '../../environments/environment'
 import { IUser } from '../models/user';
 
 
@@ -10,7 +10,7 @@ import { IUser } from '../models/user';
 })
 
 export class AuthService {
-  private BASE_URL = 'http://localhost:3000/';
+  private BASE_URL =environment.BASE_URL;
 
   constructor(private http: HttpClient) {}
 

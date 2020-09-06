@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IBlog } from '../models/blog';
 import { Observable } from 'rxjs';
+import {environment} from '../../environments/environment'
 
 @Injectable({
   providedIn: 'root'
 })
 export class BlogService {
-  private BASE_URL = 'http://localhost:3000/';
+  private BASE_URL = environment.BASE_URL;
   
   constructor(private http: HttpClient) {}
   blogList(): Observable<IBlog[]> {
