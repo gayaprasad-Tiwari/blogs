@@ -26,9 +26,9 @@ export class AddEditBlogListComponent implements OnInit {
     this.blogsObservable = this.store.select(state => state.blog);
     router.events.subscribe((val) => {
       if (val instanceof NavigationEnd){
-        if(val.url === "/addEdit"){
+        if (val.url === '/addEdit'){
           this.addeditblogForm.reset();
-          this.editId=null;
+          this.editId = null;
         }
       }
   });
