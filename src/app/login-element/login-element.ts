@@ -34,8 +34,8 @@ export class LoginElement extends LitElement {
          .form-container>div .input{
                   width: 70%;
                   padding: 10px;
-                }    
-              .form-button-outer{
+                }
+                .form-button-outer{
                 border-top: 1px solid;
                 margin: 25px 10px;
                 padding: 25px 0;
