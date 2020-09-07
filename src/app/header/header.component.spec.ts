@@ -4,8 +4,8 @@ import { HeaderComponent } from './header.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ThemeService } from '../services/theme.service';
 import { AuthService } from '../services/auth.service';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-import { provideMockStore,MockStore} from '@ngrx/store/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { provideMockStore, MockStore} from '@ngrx/store/testing';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -14,9 +14,9 @@ describe('HeaderComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ HeaderComponent ],
-      imports:[FormsModule,ReactiveFormsModule],
-      providers:[AuthService,ThemeService,provideMockStore() ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      imports: [ FormsModule, ReactiveFormsModule ],
+      providers: [ AuthService, ThemeService, provideMockStore() ],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
     })
     .compileComponents();
   }));

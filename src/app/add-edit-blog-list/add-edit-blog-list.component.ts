@@ -16,11 +16,11 @@ import { Observable } from 'rxjs';
 export class AddEditBlogListComponent implements OnInit {
   addeditblogForm;
   blogObj: IBlog;
-  addEditText="Add"
+  addEditText = 'Add';
   blogsObservable: Observable<any>;
   message: any;
   editId: any;
-  submitted =false;
+  submitted = false;
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private store: Store<AppState>) {
     this.editId = this.route.snapshot.paramMap.get('id');
     this.blogsObservable = this.store.select(state => state.blog);
@@ -36,13 +36,13 @@ export class AddEditBlogListComponent implements OnInit {
   ];
   ngOnInit(): void {
     this.addeditblogForm = this.fb.group({
-      title: ['',Validators.required],
-      imageUrl: ['',Validators.required],
-      description: ['',Validators.required],
-      category: ['',Validators.required]
+      title: ['', Validators.required],
+      imageUrl: ['', Validators.required],
+      description: ['', Validators.required],
+      category: ['', Validators.required]
     });
     if (this.editId) {
-      this.addEditText="Edit"
+      this.addEditText = 'Edit';
       this.blogsObservable.subscribe((data) => {
         if (data && data.Message === 'single blog loaded') {
           const dataObj = data.blog;
@@ -62,16 +62,16 @@ export class AddEditBlogListComponent implements OnInit {
   }
   get f() { return this.addeditblogForm.controls; }
   onSubmit() {
-    this.submitted=true;
-    if(this.addeditblogForm.invalid){
-      return
+    this.submitted = true;
+    if (this.addeditblogForm.invalid){
+      return;
     }
     this.blogObj = {
       title: this.addeditblogForm.controls.title.value,
-      imageUrl:this.addeditblogForm.controls.imageUrl.value,
+      imageUrl: this.addeditblogForm.controls.imageUrl.value,
       description: this.addeditblogForm.controls.description.value,
-      category:this.addeditblogForm.controls.category.value,
-      date:new Date()
+      category: this.addeditblogForm.controls.category.value,
+      date: new Date()
     };
     if (this.editId) {
       this.blogObj.id = this.editId;
@@ -79,12 +79,11 @@ export class AddEditBlogListComponent implements OnInit {
     } else {
       this.store.dispatch(new Insert(this.blogObj));
     }
-    this.submitted=false;
+    this.submitted = false;
     this.blogsObservable.subscribe((data) => {
       this.message = data.Message;
       if (this.message === 'blog Edited successfully') {
         setTimeout(() => {
-          
           this.router.navigateByUrl('/');
         }, 1000);
       }

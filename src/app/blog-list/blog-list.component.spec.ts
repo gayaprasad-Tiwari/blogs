@@ -12,7 +12,7 @@ describe('BlogListComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ BlogListComponent ],
-      providers:[provideMockStore,RouterTestingModule,AuthService],
+      providers: [provideMockStore, RouterTestingModule, AuthService],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();

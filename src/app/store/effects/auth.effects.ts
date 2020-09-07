@@ -44,7 +44,7 @@ export class AuthEffects {
         tap((user) => {
             localStorage.setItem('token', JSON.stringify(user.payload.token));
             this.authService.getToken();
-           this.router.navigateByUrl('/');
+            this.router.navigateByUrl('/');
         })
     );
     @Effect({ dispatch: false })
@@ -62,7 +62,7 @@ export class AuthEffects {
                     return new SignUpSuccess({ token: user.accessToken, email: payload.email });
                 }),
                 catchError((error) => {
-                    alert(error.error)
+                    alert(error.error);
                     return of(new SignUpFailure({ error }));
                 })
             );

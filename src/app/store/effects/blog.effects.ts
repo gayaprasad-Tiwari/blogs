@@ -28,7 +28,7 @@ export class BlogEffects {
                 }),
                 catchError((error) => {
                     alert(error.error);
-                    return of(error);  
+                    return of(error);
                 })
             );
         })
@@ -43,7 +43,7 @@ export class BlogEffects {
                 }),
                 catchError((error) => {
                     alert(error.error);
-                    return of(error);  
+                    return of(error);
                 })
             );
         })
@@ -59,9 +59,9 @@ export class BlogEffects {
                 }),
                 catchError((error) => {
                     alert(error.error);
-                    return of(error);  
+                    return of(error);
                 })
-            );
+                );
         })
     );
     @Effect()
@@ -74,7 +74,7 @@ export class BlogEffects {
                 }),
                 catchError((error) => {
                     alert(error.error);
-                    return of(error); 
+                    return of(error);
                 })
             );
         })
@@ -89,7 +89,7 @@ export class BlogEffects {
                 }),
                 catchError((error) => {
                     alert(error.error);
-                    return of(error); 
+                    return of(error);
                 })
             );
         })

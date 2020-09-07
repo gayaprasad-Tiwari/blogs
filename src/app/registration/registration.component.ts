@@ -12,7 +12,7 @@ import { SignUp } from '../store/actions/auth.actions';
 export class RegistrationComponent implements OnInit {
   registrationForm;
   registrationObj: IUser;
-  submitted =false;
+  submitted = false;
   constructor(private fb: FormBuilder, private store: Store<AppState>) { }
 
   ngOnInit(): void {
@@ -20,14 +20,14 @@ export class RegistrationComponent implements OnInit {
       userName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       phoneNo: ['', Validators.minLength(10)],
-      password: ['', [Validators.required,Validators.minLength(6)]]
+      password: ['', [ Validators.required, Validators.minLength(6)]]
     });
   }
   get f() { return this.registrationForm.controls; }
   onSubmit() {
-    this.submitted=true;
-    if(this.registrationForm.invalid){
-      return
+    this.submitted = true;
+    if (this.registrationForm.invalid){
+      return;
     }
     const payload = {
       name: this.registrationForm.controls.userName.value,
@@ -36,7 +36,7 @@ export class RegistrationComponent implements OnInit {
       password: this.registrationForm.controls.password.value
     };
     this.store.dispatch(new SignUp(payload));
-    this.submitted=false;
+    this.submitted = false;
     this.registrationForm.reset();
   }
 }
