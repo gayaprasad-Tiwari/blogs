@@ -7,6 +7,7 @@ header{
         margin: 0;
         font-size: 27px;
         line-height: 36px;
+        text-transform: uppercase;
     }
     nav{
         width: 85%;
@@ -22,7 +23,8 @@ header{
                 list-style: none;
                 a{
                     text-decoration: none;
-                    color:black
+                    color:black;
+                    text-transform: uppercase;
                 }
                 a.active{
                     text-decoration: underline;

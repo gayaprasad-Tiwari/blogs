@@ -4,24 +4,24 @@
     </h1>
     <nav>
         <ul >
-            <li><a tabindex="1" routerLink="/"  >list</a>
+            <li><a tabindex="1" routerLink="/"  >List</a>
             </li>
-            <li  tabindex="1"  *ngIf="isloggedin"><a routerLink="/addEdit" routerLinkActive="active">add Blog</a>
+            <li  tabindex="1"  *ngIf="isloggedin"><a routerLink="/addEdit" routerLinkActive="active">Add Blog</a>
             </li>
-            <li  tabindex="1"  *ngIf="!isloggedin"><a routerLink="/log-in" routerLinkActive="active">log in</a>
+            <li  tabindex="1"  *ngIf="!isloggedin"><a routerLink="/log-in" routerLinkActive="active">Log in</a>
             </li>
-            <li  tabindex="1"  *ngIf="isloggedin"><a (click)='logOut()'>log out</a>
+            <li  tabindex="1"  *ngIf="isloggedin"><a (click)='logOut()'>Log out</a>
             </li>
-            <li  tabindex="1"  *ngIf="!isloggedin"> <a routerLink="/sign-up" routerLinkActive="active">registration</a>
+            <li  tabindex="1"  *ngIf="!isloggedin"> <a routerLink="/sign-up" routerLinkActive="active">Registration</a>
             </li>
         </ul>
     </nav>
     <div class="themes">
         <label class="radio-inline">
-        <input type="radio" value="ligth" name="theme"   [(ngModel)]="theme" (change)="changeTheme()"> ligth theme
+        <input type="radio" value="ligth" name="theme"   [(ngModel)]="theme" (change)="changeTheme()"> Ligth theme
         </label>
         <label class="radio-inline">
-        <input type="radio" value="dark" name="theme"  [(ngModel)]="theme"  (change)="changeTheme()"> dark theme
+        <input type="radio" value="dark" name="theme"  [(ngModel)]="theme"  (change)="changeTheme()"> Dark theme
         </label>
     </div>
 </header>
