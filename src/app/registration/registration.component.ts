@@ -12,28 +12,31 @@ import { SignUp } from '../store/actions/auth.actions';
 export class RegistrationComponent implements OnInit {
   registrationForm;
   registrationObj: IUser;
+  submitted =false;
   constructor(private fb: FormBuilder, private store: Store<AppState>) { }
 
   ngOnInit(): void {
     this.registrationForm = this.fb.group({
       userName: ['', Validators.required],
-      email: ['', Validators.required],
-      phoneNo: [''],
-      password: ['', Validators.required]
+      email: ['', [Validators.required, Validators.email]],
+      phoneNo: ['', Validators.minLength(10)],
+      password: ['', [Validators.required,Validators.minLength(6)]]
     });
   }
+  get f() { return this.registrationForm.controls; }
   onSubmit() {
-    const name = this.registrationForm.controls.userName.value;
-    const email = this.registrationForm.controls.emai.value;
-    const phoneNo = this.registrationForm.controls.phoneNo.value;
-    const password = this.registrationForm.controls.password.value;
+    this.submitted=true;
+    if(this.registrationForm.invalid){
+      return
+    }
     const payload = {
-      name,
-      email,
-      phoneNo,
-      password
+      name: this.registrationForm.controls.userName.value,
+      email: this.registrationForm.controls.email.value,
+      phoneNo: this.registrationForm.controls.phoneNo.value,
+      password: this.registrationForm.controls.password.value
     };
     this.store.dispatch(new SignUp(payload));
+    this.submitted=false;
     this.registrationForm.reset();
   }
 }

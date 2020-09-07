@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IBlog } from '../models/blog';
 import { Store } from '@ngrx/store';
 import { AppState } from '../models/store/app.state';
@@ -16,9 +16,11 @@ import { Observable } from 'rxjs';
 export class AddEditBlogListComponent implements OnInit {
   addeditblogForm;
   blogObj: IBlog;
+  addEditText="Add"
   blogsObservable: Observable<any>;
   message: any;
   editId: any;
+  submitted =false;
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private store: Store<AppState>) {
     this.editId = this.route.snapshot.paramMap.get('id');
     this.blogsObservable = this.store.select(state => state.blog);
@@ -34,12 +36,13 @@ export class AddEditBlogListComponent implements OnInit {
   ];
   ngOnInit(): void {
     this.addeditblogForm = this.fb.group({
-      title: [''],
-      imageUrl: [''],
-      description: [''],
-      category: ['']
+      title: ['',Validators.required],
+      imageUrl: ['',Validators.required],
+      description: ['',Validators.required],
+      category: ['',Validators.required]
     });
     if (this.editId) {
+      this.addEditText="Edit"
       this.blogsObservable.subscribe((data) => {
         if (data && data.Message === 'single blog loaded') {
           const dataObj = data.blog;
@@ -57,18 +60,18 @@ export class AddEditBlogListComponent implements OnInit {
   getEditBlog(id) {
     this.store.dispatch(new LoadSingle(id));
   }
+  get f() { return this.addeditblogForm.controls; }
   onSubmit() {
-    const title = this.addeditblogForm.controls.title.value;
-    const imageUrl = this.addeditblogForm.controls.imageUrl.value;
-    const description = this.addeditblogForm.controls.description.value;
-    const category = this.addeditblogForm.controls.category.value;
-    const date = new Date();
+    this.submitted=true;
+    if(this.addeditblogForm.invalid){
+      return
+    }
     this.blogObj = {
-      title,
-      imageUrl,
-      description,
-      category,
-      date
+      title: this.addeditblogForm.controls.title.value,
+      imageUrl:this.addeditblogForm.controls.imageUrl.value,
+      description: this.addeditblogForm.controls.description.value,
+      category:this.addeditblogForm.controls.category.value,
+      date:new Date()
     };
     if (this.editId) {
       this.blogObj.id = this.editId;
@@ -76,11 +79,12 @@ export class AddEditBlogListComponent implements OnInit {
     } else {
       this.store.dispatch(new Insert(this.blogObj));
     }
-
+    this.submitted=false;
     this.blogsObservable.subscribe((data) => {
       this.message = data.Message;
       if (this.message === 'blog Edited successfully') {
         setTimeout(() => {
+          
           this.router.navigateByUrl('/');
         }, 1000);
       }

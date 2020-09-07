@@ -1,38 +1,39 @@
-<main>
-    <ul *ngIf="bloglist" class="blog-container">
-        <li *ngFor="let blog of bloglist trackBy bloglist.id">
-            <article>
-                <header>
-                    <h2>
-                        {{blog.title}}
-                    </h2>
-                    <div>
-                        {{blog.date | date}} 
-                    </div>
-                </header>
-                <section>
-                    <ul>
-                        <li>
-                            <figure>
-                                <img [src]="blog.imageUrl" [title]="blog.title">
-                            </figure>
-                            <section>
-                            <p>
-                                    {{blog.description }}
+<ul *ngIf="bloglist" class="blog-container" aria-label="blog list container">
+    <li *ngFor="let blog of bloglist trackBy bloglist.id" aria-label="blog">
+        <article>
+            <header>
+                <h2 aria-label="blog title">
+                    {{blog.title}}
+                </h2>
+                <div aria-label="blog date">
+                    {{blog.date | date}}
+                </div>
+            </header>
+            <section>
+                <ul>
+                    <li>
+                        <figure>
+                            <img [src]="blog.imageUrl" aria-label="blog image" [title]="blog.title">
+                        </figure>
+                        <section>
+                            <p aria-label="blog description">
+                                {{blog.description }}
                             </p>
-                            <p>
+                            <p aria-label="blog category">
                                 category: {{blog.category}}
                             </p>
+                            <section *ngIf="isloggedin" class="add-delete-button-outer">
+                                <button type="button" class="button editButton" (keyup.enter)="editBlock(blog.id)"
+                                    (click)="editBlock(blog.id)">Edit Blog</button>
+                                <button type="button" class="button" (keyup.enter)="DeleteBlog(blog.id)"
+                                    (click)="DeleteBlog(blog.id)">Delete Blog</button>
                             </section>
-                           
-                        </li>
-                        <li *ngIf="isloggedin">
-                            <button type="button" (click)="editBlock(blog.id)">Edit Blog</button>
-                            <button type="button" (click)="DeleteBlog(blog.id)">Delete Blog</button>
-                        </li>
-                    </ul>
-                </section>
-            </article>
-        </li>
-    </ul>
-</main>
+                        </section>
+
+                    </li>
+
+                </ul>
+            </section>
+        </article>
+    </li>
+</ul>

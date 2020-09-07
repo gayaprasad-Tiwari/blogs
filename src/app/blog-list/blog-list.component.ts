@@ -23,9 +23,16 @@ export class BlogListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.authService.getToken()) {
-      this.isloggedin = true;
-    }
+   this.authService.token.subscribe((value)=>{
+     if(value){
+         this.isloggedin = true;
+     } else{
+      this.isloggedin = false;
+     }
+  
+   }) 
+    
+    
     this.blogsObservable.subscribe((data) => {
       if (data) {
         this.bloglist = data.blog;

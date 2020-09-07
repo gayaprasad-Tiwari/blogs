@@ -27,8 +27,8 @@ export class BlogEffects {
                     return new LoadSuccess({ blog });
                 }),
                 catchError((error) => {
-                    console.log(error);
-                    return error;  // of(new SignUpFailure({ error: error }));
+                    alert(error.error);
+                    return of(error);  
                 })
             );
         })
@@ -42,8 +42,8 @@ export class BlogEffects {
                     return new LoadSingleSuccess(blog);
                 }),
                 catchError((error) => {
-                    console.log(error);
-                    return error;  // of(new SignUpFailure({ error: error }));
+                    alert(error.error);
+                    return of(error);  
                 })
             );
         })
@@ -55,12 +55,11 @@ export class BlogEffects {
         switchMap((payload) => {
             return this.blogService.addList(payload).pipe(
                 map((blog: IBlog[]) => {
-                    console.log(blog);
                     return new InsertSuccess(blog);
                 }),
                 catchError((error) => {
-                    console.log(error);
-                    return error;  // of(new SignUpFailure({ error: error }));
+                    alert(error.error);
+                    return of(error);  
                 })
             );
         })
@@ -71,12 +70,11 @@ export class BlogEffects {
         switchMap((payload) => {
             return this.blogService.editList(payload).pipe(
                 map((blog: IBlog[]) => {
-                    console.log(blog);
                     return new EditSuccess(blog);
                 }),
                 catchError((error) => {
-                    console.log(error);
-                    return error; // of(new SignUpFailure({ error: error }));
+                    alert(error.error);
+                    return of(error); 
                 })
             );
         })
@@ -87,12 +85,11 @@ export class BlogEffects {
         switchMap((payload) => {
             return this.blogService.deleteBlog(payload).pipe(
                 map((blog) => {
-                    console.log(blog);
                     return new DeleteSuccess(blog);
                 }),
                 catchError((error) => {
-                    console.log(error);
-                    return error; // of(new SignUpFailure({ error: error }));
+                    alert(error.error);
+                    return of(error); 
                 })
             );
         })

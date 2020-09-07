@@ -8,7 +8,8 @@ export const light: Theme = {
   properties: {
     '--background-default': '#F4FAFF',
     '--primary-default': '#000000',
-    '--popup-default': '#000000',
+    '--popup-button': '#0cfdba',
+    '--popup-button-color': '#000000',
   }
 };
 
@@ -17,6 +18,7 @@ export const dark: Theme = {
   properties: {
     '--background-default': '#797C80',
     '--primary-default': '#ffffff',
-    '--popup-default': '#000000',
+    '--primary-button' : '#046147',
+    '--popup-button-color': '#ffffff',
   }
 };

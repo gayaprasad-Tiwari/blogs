@@ -28,11 +28,10 @@ export class AuthEffects {
         switchMap(payload => {
             return this.authService.logIn(payload.email, payload.password).pipe(
                 map((user) => {
-                    console.log(user);
                     return new LogInSuccess({ token: user.accessToken, email: payload.email });
                 }),
                 catchError((error) => {
-                    console.log(error);
+                    alert(error.error);
                     return of(new LogInFailure({ error }));
                 })
             );
@@ -43,9 +42,9 @@ export class AuthEffects {
     LogInSuccess: Observable<any> = this.actions.pipe(
         ofType(AuthActionTypes.LOGIN_SUCCESS),
         tap((user) => {
-            localStorage.setItem('token', user.payload.token);
-           // this.router.navigateByUrl('/');
-            window.location.href = '/';
+            localStorage.setItem('token', JSON.stringify(user.payload.token));
+            this.authService.getToken();
+           this.router.navigateByUrl('/');
         })
     );
     @Effect({ dispatch: false })
@@ -62,7 +61,8 @@ export class AuthEffects {
                 map((user) => {
                     return new SignUpSuccess({ token: user.accessToken, email: payload.email });
                 }),
-            catchError((error) => {
+                catchError((error) => {
+                    alert(error.error)
                     return of(new SignUpFailure({ error }));
                 })
             );
@@ -73,7 +73,8 @@ export class AuthEffects {
     SignUpSuccess: Observable<any> = this.actions.pipe(
         ofType(AuthActionTypes.SIGNUP_SUCCESS),
         tap((user) => {
-            localStorage.setItem('token', user.payload.token);
+            localStorage.setItem('token', JSON.stringify(user.payload.token));
+            this.authService.getToken();
             this.router.navigateByUrl('/');
         })
     );
@@ -86,6 +87,7 @@ export class AuthEffects {
         ofType(AuthActionTypes.LOGOUT),
         tap(() => {
             localStorage.removeItem('token');
+            this.authService.getToken();
             location.href = '/';
         })
     );

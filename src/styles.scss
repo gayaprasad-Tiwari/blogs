@@ -3,6 +3,8 @@
     /* Colors */
     --background-default: #f4faff;
     --primary-default: #000000;
+    --popup-button: #0cfdba;
+    --popup-button-color: #000000;
   }
   
   body {
@@ -17,6 +19,8 @@
     h2{
       font-size: 25px;
       margin: 10px 0;
+      border-bottom: 1px solid;
+      padding: 25px 0;
     }
     >.form-container{
       padding: 10px 0;
@@ -31,15 +35,32 @@
             width: 70%;
             padding: 10px;
           }
-          .form-button-outer{
-            border-top:1px solid;
-            .button{
-              width: auto;
-              padding: 5px 20px;
-            }
-          }
+          
+        }
+        .form-button-outer{
+          border-top: 1px solid;
+          margin: 25px 10px;
+          padding: 25px 0;
+         
         }
     }
   }
-  
-  
+ .button{
+    background: var(--popup-button);
+    width: auto;
+    padding: 10px 40px;
+    font-size: 18px;
+    text-transform: uppercase;
+    border: 0 none;
+    color: var(--popup-button-color);
+  }
+  .error{
+    display: block;
+    clear: both;
+    color: red
+  }
+  @media screen and (max-width: 680px) {
+    .form-outer {
+      padding: 10px 2%;
+  }
+  }

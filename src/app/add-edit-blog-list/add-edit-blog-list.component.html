@@ -1,22 +1,39 @@
+<section class="form-outer">
+<h2> {{addEditText}} Blog</h2>
 <div>{{message}}</div>
-<form [formGroup]="addeditblogForm">
+<form [formGroup]="addeditblogForm" class="form-container">
         <div>
-            <label>Title</label>
-            <input type="text" name="title"  formControlName="title">
+            <label>Title *</label>
+            <input type="text" name="title"  class="input"  formControlName="title">
+        </div>
+        <div *ngIf="submitted && f.title.errors" class="error">
+                <div *ngIf="f.title.errors.required">title is required</div>
         </div>
         <div>
             <label>Image Url</label>
-            <input type="url" name="imageUrl" formControlName="imageUrl">
+            <input type="url" name="imageUrl"  class="input"  formControlName="imageUrl">
+        </div>
+        <div *ngIf="submitted && f.imageUrl.errors" class="error">
+                <div *ngIf="f.imageUrl.errors.required">Image Url is required</div>
         </div>
         <div>
             <label>Description</label>
-            <textarea name="description" formControlName="description"></textarea>
+            <textarea name="description"  class="input"  formControlName="description"></textarea>
+        </div>
+        <div *ngIf="submitted && f.description.errors" class="error">
+                <div *ngIf="f.description.errors.required">descriptionis required</div>
         </div>
         <div>
             <label>Category</label>
-            <select  name="password" formControlName="category">
+            <select  name="password"  class="input"  formControlName="category">
                 <option *ngFor='let category of categoryList'>{{category}}</option>
             </select>
         </div>
-        <input type="button" value="submit" (click)="onSubmit()" />
+        <div *ngIf="submitted && f.category.errors" class="error">
+                <div *ngIf="f.category.errors.required">category is required</div>
+        </div>
+        <div class="form-button-outer">
+        <input type="submit" value="submit" class="button" (click)="onSubmit()" />
+        </div>
     </form>
+</section>

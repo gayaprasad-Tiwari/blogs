@@ -54,6 +54,62 @@
       "name": "naman tiwari",
       "phoneNo": "2",
       "id": 9
+    },
+    {
+      "email": "dinesh0112gwwwwa@gmail.com",
+      "password": "$2a$10$mrEQxuWP2/vv8kSxN6DjTOQQhVJgnvPafrjqLHUQwHHmay.J9kWTS",
+      "name": "naman tiwari",
+      "phoneNo": "9866666666",
+      "id": 10
+    },
+    {
+      "email": "dinesh0112gass@gmail.com",
+      "password": "$2a$10$qovHvSclPGD9xFQzYhCffugSgS1TaxwPp3.ax5SUE4wY.lRsbf1DW",
+      "name": "naman tiwari",
+      "phoneNo": "9866666666",
+      "id": 11
+    },
+    {
+      "email": "dinesh0112gasssssssd@gmail.com",
+      "password": "$2a$10$0SCNQ8rLEkVmRs9wPl/.eeb892z/qhpuyBmOPXsusIUaO7lPaRAJS",
+      "name": "naman tiwari",
+      "phoneNo": "dinesh0112gasssssssd@gmail.com",
+      "id": 12
+    },
+    {
+      "email": "dinesh0112gassss@gmail.com",
+      "password": "$2a$10$bg3CpXVnL5ejrudXx5vKxuZ5KpH5Sv/bD93Qkf8B8mUMzi7Nn8Gre",
+      "name": "naman tiwari",
+      "phoneNo": "dinesh0112gassss@gmail.com",
+      "id": 13
+    },
+    {
+      "email": "dinesh0112gadddd@gmail.com",
+      "password": "$2a$10$7KWkke4svmz9BU80.2.wMeWfluPCL.qfV58Ef5.mB9Ue3lvgehtaq",
+      "name": "naman tiwari",
+      "phoneNo": "dinesh0112gadddd@gmail.com",
+      "id": 14
+    },
+    {
+      "email": "dinesh0112gsssswwa@gmail.com",
+      "password": "$2a$10$AzuvCduA80b.JeR37qGjy.vgubfx7EOwfB55fecghZSfMMjjWYr6a",
+      "name": "naman tiwari",
+      "phoneNo": "dinesh0112gsssswwa@gmail.com",
+      "id": 15
+    },
+    {
+      "email": "dinesh0112ssssga@gmail.com",
+      "password": "$2a$10$7Rv/nxa0rWUiX3L5rQ7mo.9KvrqrjF980XmtE7koQbqoktQ/iBa3y",
+      "name": "gaya",
+      "phoneNo": "",
+      "id": 16
+    },
+    {
+      "email": "dinesh0112gaddd@gmail.com",
+      "password": "$2a$10$QgupCdnTmKy6Ur6rfk0q0.ON.Z/t4gVvL7eWCOSXmy.jTWkpJh8oK",
+      "name": "gaya",
+      "phoneNo": "9866666666",
+      "id": 17
     }
   ],
   "blogList": [
@@ -61,25 +117,9 @@
       "id": 1,
       "title": "Rental: $20dsssds0ak in Profit Without Owning Any Property",
       "imageUrl": "https://www.sidehustlenation.com/wp-content/uploads/2020/08/rental-arbitrage.jpg",
-      "description": "Rental sarbitrage gives you a way to make money with Airbnb — without owning any prop.Traditionally, building a real estate side hustle takes big bucks for down payments, closing costs, and renovation projects. But enterprising short-term rental moguls are questioning if owning the property is even necessary. These rental arbitrage entrepreneurs sign long-term leases, and then turn around and sub-let the property on a short-term basis — profiting on the spread.",
-      "category": "others",
-      "date": "2020-09-05T18:06:53.607Z"
-    },
-    {
-      "title": "Bar with negative stack",
-      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
-      "description": "INSERT_SUCCESSaaa",
-      "category": "Car",
-      "date": "2020-09-06T03:26:31.321Z",
-      "id": 12
-    },
-    {
-      "title": "Bar with negative stack",
-      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
-      "description": "sdhse",
-      "category": "",
-      "date": "2020-09-05T05:37:57.175Z",
-      "id": 13
+      "description": "Rental sarbitrage gives you a sway to make money with Airbnb — without owning any prop.Traditionally, building a real estate side hustle takes big bucks for down payments, closing costs, and renovation projects. But enterprising short-term rental moguls are questioning if owning the property is even necessary. These rental arbitrage entrepreneurs sign long-term leases, and then turn around and sub-let the property on a short-term basis — profiting on the spread.",
+      "category": "Fashion",
+      "date": "2020-09-06T23:52:47.709Z"
     },
     {
       "title": "Bar with negative stack",
@@ -90,11 +130,11 @@
       "id": 14
     },
     {
-      "title": "Bar with negative stack",
+      "title": "awgzdg",
       "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
-      "description": "awgwsga",
-      "category": "",
-      "date": "2020-09-05T07:18:21.378Z",
+      "description": "dasfsa",
+      "category": "Fashion",
+      "date": "2020-09-06T22:56:55.318Z",
       "id": 15
     },
     {
@@ -336,6 +376,14 @@
       "category": "",
       "date": "2020-09-06T03:26:55.849Z",
       "id": 45
+    },
+    {
+      "title": "Bar with negative stack",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "afas",
+      "category": "Car",
+      "date": "2020-09-07T02:49:23.027Z",
+      "id": 46
     }
   ]
 }

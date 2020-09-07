@@ -29,3 +29,22 @@ header{
     }
     .themes{width: 20%; font-size:16px;margin:10px;}
 }
+
+
+@media screen and (max-width: 680px) {
+    header{
+        display: flex;
+        flex-direction: column;
+        nav{
+            width: 100%;
+            ul{
+                display: flex;
+                flex-direction: column;
+               li{
+                   border-bottom: 1px solid;
+               }
+            }
+        }
+        .themes{width: 100%;}
+    }
+  }

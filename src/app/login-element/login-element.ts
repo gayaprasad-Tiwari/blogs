@@ -13,24 +13,68 @@ export class LoginElement extends LitElement {
     onEmail({ target: { value } }) { this.email = value; }
 
     render() {
-        return html`<div>
+        return html`
+        <style>
+        h2{
+            border-bottom:1px solid #000000;
+            padding-bottom: 10px;
+        }
+        .form-container{
+            padding: 10px 0;
+            }
+         .form-container>div{
+                display: flex;
+                margin: 10px;
+         }
+         .form-container>div label{
+                  width: 20%;
+                  line-height: 38px;
+                }
+
+         .form-container>div .input{
+                  width: 70%;
+                  padding: 10px;
+                }
+                
+              
+              .form-button-outer{
+                border-top: 1px solid;
+                margin: 25px 10px;
+                padding: 25px 0;
+               
+              }
+              .button{
+                background:#0cfdba ;
+                width: auto;
+                padding: 10px 40px;
+                font-size: 18px;
+                text-transform: uppercase;
+                border: 0 none;
+                color: #000000;
+              }
+              #message{
+                  color:red;
+              }
+          
+        </style>
+        <div>
         <h2>Log in Form</h2>
     <form>
-        <div>
+        <div class="form-container">
             <div>
-                <label> User Name</label>
-                <input type='email' name="email" .value="${this.email}"
+                <label> Email *</label>
+                <input type='email' class="input" name="email" .value="${this.email}"
                 @change="${this.onEmail}" >
             </div>
             <div>
-                <label> Password</label>
-                <input type='password' name="password" .value="${this.password}"
+                <label> Password *</label>
+                <input type='password'  class="input"  name="password" .value="${this.password}"
                 @change="${this.onPassword}" >
             </div>
             <div id="message">
             </div>
-            <div>
-            <button type='button' @click="${this.submitForm}" >Login</button>
+            <div class="form-button-outer">
+            <button type='button' class="button"  @keyup.enter="${this.submitForm}" @click="${this.submitForm}" >Login</button>
             </div>
         </div>
     </form>
@@ -51,18 +95,6 @@ export class LoginElement extends LitElement {
             email: this.email,
             password: this.password
         };
-        //   redirectTo:'http://localhost:3000'
-        // fetch(this.conf.url, {
-        //     'method':'POST',
-        //     body: JSON.stringify(payload)
-        // }).then((data)=>{
-
-        //     message.innerHTML = 'logged in successfully'
-        //    // location.href = this.conf.redirectTo
-        // },(data)=>{
-        //     message.innerHTML = data
-        // }
-        // )
 
         const myEvent = new CustomEvent('my-event', {
             detail: payload,

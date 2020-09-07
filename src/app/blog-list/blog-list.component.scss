@@ -24,7 +24,7 @@
                                 max-width: 100%;
                             }
                         }
-                        section{
+                        >section{
                             width: 70%;
                             padding: 0 2% 10px;
                             p{
@@ -36,4 +36,35 @@
             }
         }
     }
+    .add-delete-button-outer{
+        margin: 20px 0;
+        .editButton{
+            margin-right: 25px;
+        }
+    }
 }
+@media screen and (max-width: 680px) {
+    .blog-container{
+        > li{
+            > article {
+                > section{
+                    ul {
+                        li{
+                            flex-direction: column;
+                            figure{
+                                width: 100%;
+                               
+                            }
+                            >section{
+                                width: 100%;
+                               
+                            }
+                        }
+                    }
+                }
+            }
+        }
+      
+    }
+}
+
