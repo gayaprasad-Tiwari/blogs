@@ -6,13 +6,13 @@
         <ul >
             <li><a tabindex="1" routerLink="/"  >List</a>
             </li>
-            <li  tabindex="1"  *ngIf="isloggedin"><a routerLink="/addEdit" routerLinkActive="active">Add Blog</a>
+            <li *ngIf="isloggedin"><a routerLink="/addEdit" tabindex="1"  routerLinkActive="active">Add Blog</a>
             </li>
-            <li  tabindex="1"  *ngIf="!isloggedin"><a routerLink="/log-in" routerLinkActive="active">Log in</a>
+            <li  *ngIf="!isloggedin"><a routerLink="/log-in" tabindex="1" routerLinkActive="active">Log in</a>
             </li>
-            <li  tabindex="1"  *ngIf="isloggedin"><a (click)='logOut()'>Log out</a>
+            <li  *ngIf="isloggedin"><a tabindex="1"  (click)='logOut()'>Log out</a>
             </li>
-            <li  tabindex="1"  *ngIf="!isloggedin"> <a routerLink="/sign-up" routerLinkActive="active">Registration</a>
+            <li  *ngIf="!isloggedin"> <a tabindex="1"  routerLink="/sign-up" routerLinkActive="active">Registration</a>
             </li>
         </ul>
     </nav>
