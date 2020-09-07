@@ -51,6 +51,7 @@ export class LoginElement extends LitElement {
               }
               #message{
                   color:red;
+                  margin-left: 21%;
               }
         </style>
         <div>

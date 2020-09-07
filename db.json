@@ -384,6 +384,14 @@
       "category": "Car",
       "date": "2020-09-07T02:49:23.027Z",
       "id": 46
+    },
+    {
+      "title": "Bar with negative stack",
+      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
+      "description": "asfsawr",
+      "category": "Fashion",
+      "date": "2020-09-07T14:40:41.354Z",
+      "id": 47
     }
   ]
 }

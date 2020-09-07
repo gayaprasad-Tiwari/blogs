@@ -57,7 +57,10 @@
   .error{
     display: block;
     clear: both;
-    color: red
+    color: red;
+    div{
+      margin-left:20% ;
+    }
   }
   @media screen and (max-width: 680px) {
     .form-outer {
