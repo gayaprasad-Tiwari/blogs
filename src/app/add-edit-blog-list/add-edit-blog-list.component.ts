@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../models/store/app.state';
 import { Insert, LoadSingle, Edit } from '../store/actions/blog.action';
 import { map } from 'rxjs/operators';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -24,6 +24,14 @@ export class AddEditBlogListComponent implements OnInit {
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private store: Store<AppState>) {
     this.editId = this.route.snapshot.paramMap.get('id');
     this.blogsObservable = this.store.select(state => state.blog);
+    router.events.subscribe((val) => {
+      if (val instanceof NavigationEnd){
+        if(val.url === "/addEdit"){
+          this.addeditblogForm.reset();
+          this.editId=null;
+        }
+      }
+  });
   }
   categoryList = [
     'Music',
