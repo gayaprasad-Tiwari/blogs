@@ -6,16 +6,22 @@ import { AuthService } from '../services/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideMockStore, MockStore} from '@ngrx/store/testing';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import { LogOut } from '../store/actions/auth.actions';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
-
+  let mockStore: MockStore;
+  const initialState = {
+    isAuthenticated: false,
+    user: null,
+    errorMessage: null
+  };
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ HeaderComponent ],
-      imports: [ FormsModule, ReactiveFormsModule ],
-      providers: [ AuthService, ThemeService, HttpClientTestingModule, provideMockStore() ],
+      imports: [ FormsModule, ReactiveFormsModule, HttpClientTestingModule ],
+      providers: [ AuthService, ThemeService, provideMockStore({initialState}) ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
     })
     .compileComponents();
@@ -25,6 +31,7 @@ describe('HeaderComponent', () => {
     const theme = 'ligth';
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
+    mockStore = TestBed.inject(MockStore);
     fixture.detectChanges();
   });
 
