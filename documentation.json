@@ -196,10 +196,10 @@
         },
         {
             "name": "Theme",
-            "id": "interface-Theme-7ace2b500707729d2995f4cef124829b",
+            "id": "interface-Theme-95297ecf97d009855352c8f15015e6d0",
             "file": "src/app/theme.ts",
             "type": "interface",
-            "sourceCode": "export interface Theme {\r\n  name: string;\r\n  properties: any;\r\n}\r\n\r\nexport const light: Theme = {\r\n  name: 'light',\r\n  properties: {\r\n    '--background-default': '#F4FAFF',\r\n    '--primary-default': '#000000',\r\n    '--popup-default': '#000000',\r\n  }\r\n};\r\n\r\nexport const dark: Theme = {\r\n  name: 'dark',\r\n  properties: {\r\n    '--background-default': '#797C80',\r\n    '--primary-default': '#ffffff',\r\n    '--popup-default': '#000000',\r\n  }\r\n};\r\n",
+            "sourceCode": "export interface Theme {\r\n  name: string;\r\n  properties: any;\r\n}\r\n\r\nexport const light: Theme = {\r\n  name: 'light',\r\n  properties: {\r\n    '--background-default': '#F4FAFF',\r\n    '--primary-default': '#000000',\r\n    '--popup-button': '#0cfdba',\r\n    '--popup-button-color': '#000000',\r\n  }\r\n};\r\n\r\nexport const dark: Theme = {\r\n  name: 'dark',\r\n  properties: {\r\n    '--background-default': '#797C80',\r\n    '--primary-default': '#ffffff',\r\n    '--primary-button' : '#046147',\r\n    '--popup-button-color': '#ffffff',\r\n  }\r\n};\r\n",
             "properties": [
                 {
                     "name": "name",
@@ -224,12 +224,12 @@
     "injectables": [
         {
             "name": "AuthEffects",
-            "id": "injectable-AuthEffects-2a8ffafeba72506dc62834ad8e22d0b4",
+            "id": "injectable-AuthEffects-441afca3c06faca0f1ea35f078bfa2c1",
             "file": "src/app/store/effects/auth.effects.ts",
             "properties": [
                 {
                     "name": "LogIn",
-                    "defaultValue": "this.actions.pipe(\r\n        ofType(AuthActionTypes.LOGIN),\r\n        map((action: LogIn) => action.payload),\r\n        switchMap(payload => {\r\n            return this.authService.logIn(payload.email, payload.password).pipe(\r\n                map((user) => {\r\n                    console.log(user);\r\n                    return new LogInSuccess({ token: user.accessToken, email: payload.email });\r\n                }),\r\n                catchError((error) => {\r\n                    console.log(error);\r\n                    return of(new LogInFailure({ error }));\r\n                })\r\n            );\r\n        })\r\n    )",
+                    "defaultValue": "this.actions.pipe(\r\n        ofType(AuthActionTypes.LOGIN),\r\n        map((action: LogIn) => action.payload),\r\n        switchMap(payload => {\r\n            return this.authService.logIn(payload.email, payload.password).pipe(\r\n                map((user) => {\r\n                    return new LogInSuccess({ token: user.accessToken, email: payload.email });\r\n                }),\r\n                catchError((error) => {\r\n                    alert(error.error);\r\n                    return of(new LogInFailure({ error }));\r\n                })\r\n            );\r\n        })\r\n    )",
                     "type": "Observable<any>",
                     "optional": false,
                     "description": "",
@@ -247,7 +247,7 @@
                     "type": "Observable<any>",
                     "optional": false,
                     "description": "",
-                    "line": 52,
+                    "line": 51,
                     "decorators": [
                         {
                             "name": "Effect",
@@ -257,11 +257,11 @@
                 },
                 {
                     "name": "LogInSuccess",
-                    "defaultValue": "this.actions.pipe(\r\n        ofType(AuthActionTypes.LOGIN_SUCCESS),\r\n        tap((user) => {\r\n            localStorage.setItem('token', user.payload.token);\r\n           // this.router.navigateByUrl('/');\r\n            window.location.href = '/';\r\n        })\r\n    )",
+                    "defaultValue": "this.actions.pipe(\r\n        ofType(AuthActionTypes.LOGIN_SUCCESS),\r\n        tap((user) => {\r\n            localStorage.setItem('token', JSON.stringify(user.payload.token));\r\n            this.authService.getToken();\r\n            this.router.navigateByUrl('/');\r\n        })\r\n    )",
                     "type": "Observable<any>",
                     "optional": false,
                     "description": "",
-                    "line": 43,
+                    "line": 42,
                     "decorators": [
                         {
                             "name": "Effect",
@@ -271,11 +271,11 @@
                 },
                 {
                     "name": "LogOut",
-                    "defaultValue": "this.actions.pipe(\r\n        ofType(AuthActionTypes.LOGOUT),\r\n        tap(() => {\r\n            localStorage.removeItem('token');\r\n            location.href = '/';\r\n        })\r\n    )",
+                    "defaultValue": "this.actions.pipe(\r\n        ofType(AuthActionTypes.LOGOUT),\r\n        tap(() => {\r\n            localStorage.removeItem('token');\r\n            this.authService.getToken();\r\n            location.href = '/';\r\n        })\r\n    )",
                     "type": "Observable<any>",
                     "optional": false,
                     "description": "",
-                    "line": 85,
+                    "line": 86,
                     "decorators": [
                         {
                             "name": "Effect",
@@ -288,11 +288,11 @@
                 },
                 {
                     "name": "SignUp",
-                    "defaultValue": "this.actions.pipe(\r\n        ofType(AuthActionTypes.SIGNUP),\r\n        map((action: SignUp) => action.payload),\r\n        switchMap(payload => {\r\n            return this.authService.signUp(payload).pipe(\r\n                map((user) => {\r\n                    return new SignUpSuccess({ token: user.accessToken, email: payload.email });\r\n                }),\r\n            catchError((error) => {\r\n                    return of(new SignUpFailure({ error }));\r\n                })\r\n            );\r\n        })\r\n    )",
+                    "defaultValue": "this.actions.pipe(\r\n        ofType(AuthActionTypes.SIGNUP),\r\n        map((action: SignUp) => action.payload),\r\n        switchMap(payload => {\r\n            return this.authService.signUp(payload).pipe(\r\n                map((user) => {\r\n                    return new SignUpSuccess({ token: user.accessToken, email: payload.email });\r\n                }),\r\n                catchError((error) => {\r\n                    alert(error.error);\r\n                    return of(new SignUpFailure({ error }));\r\n                })\r\n            );\r\n        })\r\n    )",
                     "type": "Observable<any>",
                     "optional": false,
                     "description": "",
-                    "line": 57,
+                    "line": 56,
                     "decorators": [
                         {
                             "name": "Effect",
@@ -306,7 +306,7 @@
                     "type": "Observable<any>",
                     "optional": false,
                     "description": "",
-                    "line": 81,
+                    "line": 82,
                     "decorators": [
                         {
                             "name": "Effect",
@@ -316,7 +316,7 @@
                 },
                 {
                     "name": "SignUpSuccess",
-                    "defaultValue": "this.actions.pipe(\r\n        ofType(AuthActionTypes.SIGNUP_SUCCESS),\r\n        tap((user) => {\r\n            localStorage.setItem('token', user.payload.token);\r\n            this.router.navigateByUrl('/');\r\n        })\r\n    )",
+                    "defaultValue": "this.actions.pipe(\r\n        ofType(AuthActionTypes.SIGNUP_SUCCESS),\r\n        tap((user) => {\r\n            localStorage.setItem('token', JSON.stringify(user.payload.token));\r\n            this.authService.getToken();\r\n            this.router.navigateByUrl('/');\r\n        })\r\n    )",
                     "type": "Observable<any>",
                     "optional": false,
                     "description": "",
@@ -331,7 +331,7 @@
             ],
             "methods": [],
             "description": "",
-            "sourceCode": "import { Injectable } from '@angular/core';\r\nimport { Action } from '@ngrx/store';\r\nimport { Router } from '@angular/router';\r\nimport { Actions, Effect, ofType } from '@ngrx/effects';\r\nimport { Observable, of } from 'rxjs';\r\nimport { tap, map, switchMap, catchError } from 'rxjs/operators';\r\n\r\nimport { AuthService } from '../../services/auth.service';\r\nimport {\r\n    AuthActionTypes,\r\n    LogIn, LogInSuccess, LogInFailure, SignUp, SignUpSuccess, SignUpFailure,\r\n    LogOut\r\n\r\n} from '../actions/auth.actions';\r\n\r\n@Injectable()\r\nexport class AuthEffects {\r\n\r\n    constructor(\r\n        private actions: Actions,\r\n        private authService: AuthService,\r\n        private router: Router,\r\n    ) { }\r\n    @Effect()\r\n    LogIn: Observable<any> = this.actions.pipe(\r\n        ofType(AuthActionTypes.LOGIN),\r\n        map((action: LogIn) => action.payload),\r\n        switchMap(payload => {\r\n            return this.authService.logIn(payload.email, payload.password).pipe(\r\n                map((user) => {\r\n                    console.log(user);\r\n                    return new LogInSuccess({ token: user.accessToken, email: payload.email });\r\n                }),\r\n                catchError((error) => {\r\n                    console.log(error);\r\n                    return of(new LogInFailure({ error }));\r\n                })\r\n            );\r\n        })\r\n    );\r\n\r\n    @Effect({ dispatch: false })\r\n    LogInSuccess: Observable<any> = this.actions.pipe(\r\n        ofType(AuthActionTypes.LOGIN_SUCCESS),\r\n        tap((user) => {\r\n            localStorage.setItem('token', user.payload.token);\r\n           // this.router.navigateByUrl('/');\r\n            window.location.href = '/';\r\n        })\r\n    );\r\n    @Effect({ dispatch: false })\r\n    LogInFailure: Observable<any> = this.actions.pipe(\r\n        ofType(AuthActionTypes.LOGIN_FAILURE)\r\n    );\r\n\r\n    @Effect()\r\n    SignUp: Observable<any> = this.actions.pipe(\r\n        ofType(AuthActionTypes.SIGNUP),\r\n        map((action: SignUp) => action.payload),\r\n        switchMap(payload => {\r\n            return this.authService.signUp(payload).pipe(\r\n                map((user) => {\r\n                    return new SignUpSuccess({ token: user.accessToken, email: payload.email });\r\n                }),\r\n            catchError((error) => {\r\n                    return of(new SignUpFailure({ error }));\r\n                })\r\n            );\r\n        })\r\n    );\r\n\r\n    @Effect({ dispatch: false })\r\n    SignUpSuccess: Observable<any> = this.actions.pipe(\r\n        ofType(AuthActionTypes.SIGNUP_SUCCESS),\r\n        tap((user) => {\r\n            localStorage.setItem('token', user.payload.token);\r\n            this.router.navigateByUrl('/');\r\n        })\r\n    );\r\n    @Effect({ dispatch: false })\r\n    SignUpFailure: Observable<any> = this.actions.pipe(\r\n        ofType(AuthActionTypes.SIGNUP_FAILURE)\r\n    );\r\n    @Effect({ dispatch: false })\r\n    public LogOut: Observable<any> = this.actions.pipe(\r\n        ofType(AuthActionTypes.LOGOUT),\r\n        tap(() => {\r\n            localStorage.removeItem('token');\r\n            location.href = '/';\r\n        })\r\n    );\r\n}\r\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\r\nimport { Action } from '@ngrx/store';\r\nimport { Router } from '@angular/router';\r\nimport { Actions, Effect, ofType } from '@ngrx/effects';\r\nimport { Observable, of } from 'rxjs';\r\nimport { tap, map, switchMap, catchError } from 'rxjs/operators';\r\n\r\nimport { AuthService } from '../../services/auth.service';\r\nimport {\r\n    AuthActionTypes,\r\n    LogIn, LogInSuccess, LogInFailure, SignUp, SignUpSuccess, SignUpFailure,\r\n    LogOut\r\n\r\n} from '../actions/auth.actions';\r\n\r\n@Injectable()\r\nexport class AuthEffects {\r\n\r\n    constructor(\r\n        private actions: Actions,\r\n        private authService: AuthService,\r\n        private router: Router,\r\n    ) { }\r\n    @Effect()\r\n    LogIn: Observable<any> = this.actions.pipe(\r\n        ofType(AuthActionTypes.LOGIN),\r\n        map((action: LogIn) => action.payload),\r\n        switchMap(payload => {\r\n            return this.authService.logIn(payload.email, payload.password).pipe(\r\n                map((user) => {\r\n                    return new LogInSuccess({ token: user.accessToken, email: payload.email });\r\n                }),\r\n                catchError((error) => {\r\n                    alert(error.error);\r\n                    return of(new LogInFailure({ error }));\r\n                })\r\n            );\r\n        })\r\n    );\r\n\r\n    @Effect({ dispatch: false })\r\n    LogInSuccess: Observable<any> = this.actions.pipe(\r\n        ofType(AuthActionTypes.LOGIN_SUCCESS),\r\n        tap((user) => {\r\n            localStorage.setItem('token', JSON.stringify(user.payload.token));\r\n            this.authService.getToken();\r\n            this.router.navigateByUrl('/');\r\n        })\r\n    );\r\n    @Effect({ dispatch: false })\r\n    LogInFailure: Observable<any> = this.actions.pipe(\r\n        ofType(AuthActionTypes.LOGIN_FAILURE)\r\n    );\r\n\r\n    @Effect()\r\n    SignUp: Observable<any> = this.actions.pipe(\r\n        ofType(AuthActionTypes.SIGNUP),\r\n        map((action: SignUp) => action.payload),\r\n        switchMap(payload => {\r\n            return this.authService.signUp(payload).pipe(\r\n                map((user) => {\r\n                    return new SignUpSuccess({ token: user.accessToken, email: payload.email });\r\n                }),\r\n                catchError((error) => {\r\n                    alert(error.error);\r\n                    return of(new SignUpFailure({ error }));\r\n                })\r\n            );\r\n        })\r\n    );\r\n\r\n    @Effect({ dispatch: false })\r\n    SignUpSuccess: Observable<any> = this.actions.pipe(\r\n        ofType(AuthActionTypes.SIGNUP_SUCCESS),\r\n        tap((user) => {\r\n            localStorage.setItem('token', JSON.stringify(user.payload.token));\r\n            this.authService.getToken();\r\n            this.router.navigateByUrl('/');\r\n        })\r\n    );\r\n    @Effect({ dispatch: false })\r\n    SignUpFailure: Observable<any> = this.actions.pipe(\r\n        ofType(AuthActionTypes.SIGNUP_FAILURE)\r\n    );\r\n    @Effect({ dispatch: false })\r\n    public LogOut: Observable<any> = this.actions.pipe(\r\n        ofType(AuthActionTypes.LOGOUT),\r\n        tap(() => {\r\n            localStorage.removeItem('token');\r\n            this.authService.getToken();\r\n            location.href = '/';\r\n        })\r\n    );\r\n}\r\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -378,7 +378,7 @@
         },
         {
             "name": "AuthService",
-            "id": "injectable-AuthService-3492cf4cdcd6114203223fd3c4349a15",
+            "id": "injectable-AuthService-23af06ad939baa2c450b3b9e90f55d5e",
             "file": "src/app/services/auth.service.ts",
             "properties": [
                 {
@@ -391,6 +391,17 @@
                     "modifierKind": [
                         112
                     ]
+                },
+                {
+                    "name": "token",
+                    "defaultValue": "new BehaviorSubject<string>(null)",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 16,
+                    "modifierKind": [
+                        114
+                    ]
                 }
             ],
             "methods": [
@@ -398,7 +409,7 @@
                     "name": "getToken",
                     "args": [],
                     "optional": false,
-                    "returnType": "string",
+                    "returnType": "void",
                     "typeParameters": [],
                     "line": 17
                 },
@@ -459,7 +470,7 @@
                 }
             ],
             "description": "",
-            "sourceCode": "import { HttpClient } from '@angular/common/http';\nimport { Injectable } from '@angular/core';\nimport { Observable, from } from 'rxjs';\nimport {environment} from '../../environments/environment';\nimport { IUser } from '../models/user';\n\n\n@Injectable({\n  providedIn: 'root'\n})\n\nexport class AuthService {\n  private BASE_URL = environment.BASE_URL;\n\n  constructor(private http: HttpClient) {}\n\n  getToken(): string {\n    return localStorage.getItem('token');\n  }\n\n  logIn(email: string, password: string): Observable<IUser> {\n    const url = `${this.BASE_URL}login`;\n    return this.http.post<IUser>(url, {email, password});\n  }\n\n  signUp(payload: IUser): Observable<IUser> {\n    const url = `${this.BASE_URL}register`;\n    return this.http.post<IUser>(url, {...payload});\n  }\n}\n",
+            "sourceCode": "import { HttpClient } from '@angular/common/http';\nimport { Injectable } from '@angular/core';\nimport { Observable, from, of } from 'rxjs';\nimport {environment} from '../../environments/environment';\nimport { IUser } from '../models/user';\nimport { BehaviorSubject } from 'rxjs';\n\n@Injectable({\n  providedIn: 'root'\n})\n\nexport class AuthService {\n  private BASE_URL = environment.BASE_URL;\n\n  constructor(private http: HttpClient) {}\n  public token = new BehaviorSubject<string>(null);\n  getToken(): void {\n    this.token.next(localStorage.getItem('token'));\n  }\n\n  logIn(email: string, password: string): Observable<IUser> {\n    const url = `${this.BASE_URL}login`;\n    return this.http.post<IUser>(url, {email, password});\n  }\n\n  signUp(payload: IUser): Observable<IUser> {\n    const url = `${this.BASE_URL}register`;\n    return this.http.post<IUser>(url, {...payload});\n  }\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -484,16 +495,16 @@
         },
         {
             "name": "BlogEffects",
-            "id": "injectable-BlogEffects-ff58a64007e13342819188f160f85b6d",
+            "id": "injectable-BlogEffects-4cced5df962e393cba4ea12cadc16241",
             "file": "src/app/store/effects/blog.effects.ts",
             "properties": [
                 {
                     "name": "deleteBlog",
-                    "defaultValue": "this.actions.pipe(\r\n        ofType(blogActionType.DELETE),\r\n        switchMap((payload) => {\r\n            return this.blogService.deleteBlog(payload).pipe(\r\n                map((blog) => {\r\n                    console.log(blog);\r\n                    return new DeleteSuccess(blog);\r\n                }),\r\n                catchError((error) => {\r\n                    console.log(error);\r\n                    return error; // of(new SignUpFailure({ error: error }));\r\n                })\r\n            );\r\n        })\r\n    )",
+                    "defaultValue": "this.actions.pipe(\r\n        ofType(blogActionType.DELETE),\r\n        switchMap((payload) => {\r\n            return this.blogService.deleteBlog(payload).pipe(\r\n                map((blog) => {\r\n                    return new DeleteSuccess(blog);\r\n                }),\r\n                catchError((error) => {\r\n                    alert(error.error);\r\n                    return of(error);\r\n                })\r\n            );\r\n        })\r\n    )",
                     "type": "Observable<any>",
                     "optional": false,
                     "description": "",
-                    "line": 85,
+                    "line": 83,
                     "decorators": [
                         {
                             "name": "Effect",
@@ -503,11 +514,11 @@
                 },
                 {
                     "name": "edit",
-                    "defaultValue": "this.actions.pipe(\r\n        ofType(blogActionType.Edit),\r\n        switchMap((payload) => {\r\n            return this.blogService.editList(payload).pipe(\r\n                map((blog: IBlog[]) => {\r\n                    console.log(blog);\r\n                    return new EditSuccess(blog);\r\n                }),\r\n                catchError((error) => {\r\n                    console.log(error);\r\n                    return error; // of(new SignUpFailure({ error: error }));\r\n                })\r\n            );\r\n        })\r\n    )",
+                    "defaultValue": "this.actions.pipe(\r\n        ofType(blogActionType.Edit),\r\n        switchMap((payload) => {\r\n            return this.blogService.editList(payload).pipe(\r\n                map((blog: IBlog[]) => {\r\n                    return new EditSuccess(blog);\r\n                }),\r\n                catchError((error) => {\r\n                    alert(error.error);\r\n                    return of(error);\r\n                })\r\n            );\r\n        })\r\n    )",
                     "type": "Observable<any>",
                     "optional": false,
                     "description": "",
-                    "line": 69,
+                    "line": 68,
                     "decorators": [
                         {
                             "name": "Effect",
@@ -517,7 +528,7 @@
                 },
                 {
                     "name": "insert",
-                    "defaultValue": "this.actions.pipe(\r\n        ofType(blogActionType.INSERT),\r\n        switchMap((payload) => {\r\n            return this.blogService.addList(payload).pipe(\r\n                map((blog: IBlog[]) => {\r\n                    console.log(blog);\r\n                    return new InsertSuccess(blog);\r\n                }),\r\n                catchError((error) => {\r\n                    console.log(error);\r\n                    return error;  // of(new SignUpFailure({ error: error }));\r\n                })\r\n            );\r\n        })\r\n    )",
+                    "defaultValue": "this.actions.pipe(\r\n        ofType(blogActionType.INSERT),\r\n        switchMap((payload) => {\r\n            return this.blogService.addList(payload).pipe(\r\n                map((blog: IBlog[]) => {\r\n                    return new InsertSuccess(blog);\r\n                }),\r\n                catchError((error) => {\r\n                    alert(error.error);\r\n                    return of(error);\r\n                })\r\n                );\r\n        })\r\n    )",
                     "type": "Observable<any>",
                     "optional": false,
                     "description": "",
@@ -531,7 +542,7 @@
                 },
                 {
                     "name": "Load",
-                    "defaultValue": "this.actions.pipe(\r\n        ofType(blogActionType.LOAD),\r\n        switchMap(() => {\r\n            return this.blogService.blogList().pipe(\r\n                map((blog: IBlog[]) => {\r\n                    return new LoadSuccess({ blog });\r\n                }),\r\n                catchError((error) => {\r\n                    console.log(error);\r\n                    return error;  // of(new SignUpFailure({ error: error }));\r\n                })\r\n            );\r\n        })\r\n    )",
+                    "defaultValue": "this.actions.pipe(\r\n        ofType(blogActionType.LOAD),\r\n        switchMap(() => {\r\n            return this.blogService.blogList().pipe(\r\n                map((blog: IBlog[]) => {\r\n                    return new LoadSuccess({ blog });\r\n                }),\r\n                catchError((error) => {\r\n                    alert(error.error);\r\n                    return of(error);\r\n                })\r\n            );\r\n        })\r\n    )",
                     "type": "Observable<any>",
                     "optional": false,
                     "description": "",
@@ -545,7 +556,7 @@
                 },
                 {
                     "name": "LoadSingle",
-                    "defaultValue": "this.actions.pipe(\r\n        ofType(blogActionType.LOAD_SINGLE),\r\n        switchMap((id) => {\r\n            return this.blogService.blog(id).pipe(\r\n                map((blog) => {\r\n                    return new LoadSingleSuccess(blog);\r\n                }),\r\n                catchError((error) => {\r\n                    console.log(error);\r\n                    return error;  // of(new SignUpFailure({ error: error }));\r\n                })\r\n            );\r\n        })\r\n    )",
+                    "defaultValue": "this.actions.pipe(\r\n        ofType(blogActionType.LOAD_SINGLE),\r\n        switchMap((id) => {\r\n            return this.blogService.blog(id).pipe(\r\n                map((blog) => {\r\n                    return new LoadSingleSuccess(blog);\r\n                }),\r\n                catchError((error) => {\r\n                    alert(error.error);\r\n                    return of(error);\r\n                })\r\n            );\r\n        })\r\n    )",
                     "type": "Observable<any>",
                     "optional": false,
                     "description": "",
@@ -560,7 +571,7 @@
             ],
             "methods": [],
             "description": "",
-            "sourceCode": "import { Injectable } from '@angular/core';\r\nimport { Action } from '@ngrx/store';\r\nimport { Router } from '@angular/router';\r\nimport { Actions, Effect, ofType } from '@ngrx/effects';\r\nimport { Observable, of } from 'rxjs';\r\nimport { tap, map, switchMap, catchError } from 'rxjs/operators';\r\nimport {\r\n    blogActionType, Load, Insert, LoadSuccess, InsertSuccess, LoadSingleSuccess, EditSuccess, DeleteSuccess\r\n} from '../actions/blog.action';\r\nimport { IBlog } from 'src/app/models/blog';\r\nimport { BlogService } from 'src/app/services/blog-service.service';\r\n\r\n@Injectable()\r\nexport class BlogEffects {\r\n    constructor(\r\n        private actions: Actions,\r\n        private router: Router,\r\n        private blogService: BlogService\r\n    ) { }\r\n\r\n    @Effect()\r\n    Load: Observable<any> = this.actions.pipe(\r\n        ofType(blogActionType.LOAD),\r\n        switchMap(() => {\r\n            return this.blogService.blogList().pipe(\r\n                map((blog: IBlog[]) => {\r\n                    return new LoadSuccess({ blog });\r\n                }),\r\n                catchError((error) => {\r\n                    console.log(error);\r\n                    return error;  // of(new SignUpFailure({ error: error }));\r\n                })\r\n            );\r\n        })\r\n    );\r\n    @Effect()\r\n    LoadSingle: Observable<any> = this.actions.pipe(\r\n        ofType(blogActionType.LOAD_SINGLE),\r\n        switchMap((id) => {\r\n            return this.blogService.blog(id).pipe(\r\n                map((blog) => {\r\n                    return new LoadSingleSuccess(blog);\r\n                }),\r\n                catchError((error) => {\r\n                    console.log(error);\r\n                    return error;  // of(new SignUpFailure({ error: error }));\r\n                })\r\n            );\r\n        })\r\n    );\r\n\r\n    @Effect()\r\n    insert: Observable<any> = this.actions.pipe(\r\n        ofType(blogActionType.INSERT),\r\n        switchMap((payload) => {\r\n            return this.blogService.addList(payload).pipe(\r\n                map((blog: IBlog[]) => {\r\n                    console.log(blog);\r\n                    return new InsertSuccess(blog);\r\n                }),\r\n                catchError((error) => {\r\n                    console.log(error);\r\n                    return error;  // of(new SignUpFailure({ error: error }));\r\n                })\r\n            );\r\n        })\r\n    );\r\n    @Effect()\r\n    edit: Observable<any> = this.actions.pipe(\r\n        ofType(blogActionType.Edit),\r\n        switchMap((payload) => {\r\n            return this.blogService.editList(payload).pipe(\r\n                map((blog: IBlog[]) => {\r\n                    console.log(blog);\r\n                    return new EditSuccess(blog);\r\n                }),\r\n                catchError((error) => {\r\n                    console.log(error);\r\n                    return error; // of(new SignUpFailure({ error: error }));\r\n                })\r\n            );\r\n        })\r\n    );\r\n    @Effect()\r\n    deleteBlog: Observable<any> = this.actions.pipe(\r\n        ofType(blogActionType.DELETE),\r\n        switchMap((payload) => {\r\n            return this.blogService.deleteBlog(payload).pipe(\r\n                map((blog) => {\r\n                    console.log(blog);\r\n                    return new DeleteSuccess(blog);\r\n                }),\r\n                catchError((error) => {\r\n                    console.log(error);\r\n                    return error; // of(new SignUpFailure({ error: error }));\r\n                })\r\n            );\r\n        })\r\n    );\r\n}\r\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\r\nimport { Action } from '@ngrx/store';\r\nimport { Router } from '@angular/router';\r\nimport { Actions, Effect, ofType } from '@ngrx/effects';\r\nimport { Observable, of } from 'rxjs';\r\nimport { tap, map, switchMap, catchError } from 'rxjs/operators';\r\nimport {\r\n    blogActionType, Load, Insert, LoadSuccess, InsertSuccess, LoadSingleSuccess, EditSuccess, DeleteSuccess\r\n} from '../actions/blog.action';\r\nimport { IBlog } from 'src/app/models/blog';\r\nimport { BlogService } from 'src/app/services/blog-service.service';\r\n\r\n@Injectable()\r\nexport class BlogEffects {\r\n    constructor(\r\n        private actions: Actions,\r\n        private router: Router,\r\n        private blogService: BlogService\r\n    ) { }\r\n\r\n    @Effect()\r\n    Load: Observable<any> = this.actions.pipe(\r\n        ofType(blogActionType.LOAD),\r\n        switchMap(() => {\r\n            return this.blogService.blogList().pipe(\r\n                map((blog: IBlog[]) => {\r\n                    return new LoadSuccess({ blog });\r\n                }),\r\n                catchError((error) => {\r\n                    alert(error.error);\r\n                    return of(error);\r\n                })\r\n            );\r\n        })\r\n    );\r\n    @Effect()\r\n    LoadSingle: Observable<any> = this.actions.pipe(\r\n        ofType(blogActionType.LOAD_SINGLE),\r\n        switchMap((id) => {\r\n            return this.blogService.blog(id).pipe(\r\n                map((blog) => {\r\n                    return new LoadSingleSuccess(blog);\r\n                }),\r\n                catchError((error) => {\r\n                    alert(error.error);\r\n                    return of(error);\r\n                })\r\n            );\r\n        })\r\n    );\r\n\r\n    @Effect()\r\n    insert: Observable<any> = this.actions.pipe(\r\n        ofType(blogActionType.INSERT),\r\n        switchMap((payload) => {\r\n            return this.blogService.addList(payload).pipe(\r\n                map((blog: IBlog[]) => {\r\n                    return new InsertSuccess(blog);\r\n                }),\r\n                catchError((error) => {\r\n                    alert(error.error);\r\n                    return of(error);\r\n                })\r\n                );\r\n        })\r\n    );\r\n    @Effect()\r\n    edit: Observable<any> = this.actions.pipe(\r\n        ofType(blogActionType.Edit),\r\n        switchMap((payload) => {\r\n            return this.blogService.editList(payload).pipe(\r\n                map((blog: IBlog[]) => {\r\n                    return new EditSuccess(blog);\r\n                }),\r\n                catchError((error) => {\r\n                    alert(error.error);\r\n                    return of(error);\r\n                })\r\n            );\r\n        })\r\n    );\r\n    @Effect()\r\n    deleteBlog: Observable<any> = this.actions.pipe(\r\n        ofType(blogActionType.DELETE),\r\n        switchMap((payload) => {\r\n            return this.blogService.deleteBlog(payload).pipe(\r\n                map((blog) => {\r\n                    return new DeleteSuccess(blog);\r\n                }),\r\n                catchError((error) => {\r\n                    alert(error.error);\r\n                    return of(error);\r\n                })\r\n            );\r\n        })\r\n    );\r\n}\r\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -1506,10 +1517,10 @@
         },
         {
             "name": "LoginElement",
-            "id": "class-LoginElement-a4b0c6acff7c1a96cfb7c6142bc2dedb",
+            "id": "class-LoginElement-ec6c1bd957e6486210be4c234d1ac458",
             "file": "src/app/login-element/login-element.ts",
             "type": "class",
-            "sourceCode": "import { LitElement, html, customElement } from 'lit-element';\r\n\r\n\r\n@customElement('login-element')\r\nexport class LoginElement extends LitElement {\r\n    userDetails: any = {};\r\n    password = '';\r\n    email = '';\r\n    constructor() {\r\n        super();\r\n    }\r\n    onPassword({ target: { value } }) { this.password = value; }\r\n    onEmail({ target: { value } }) { this.email = value; }\r\n\r\n    render() {\r\n        return html`<div>\r\n    <form>\r\n        <div>\r\n            <div>\r\n                <label> User Name</label>\r\n                <input type='email' name=\"email\" .value=\"${this.email}\"\r\n                @change=\"${this.onEmail}\" >\r\n            </div>\r\n            <div>\r\n                <label> Password</label>\r\n                <input type='password' name=\"password\" .value=\"${this.password}\"\r\n                @change=\"${this.onPassword}\" >\r\n            </div>\r\n            <div id=\"message\">\r\n            </div>\r\n            <div>\r\n            <button type='button' @click=\"${this.submitForm}\" >Login</button>\r\n            </div>\r\n        </div>\r\n    </form>\r\n    </div>`;\r\n    }\r\n    submitForm() {\r\n        const message = this.shadowRoot.getElementById('message') as HTMLElement;\r\n        message.innerHTML = '';\r\n        if (!this.email) {\r\n            message.innerHTML = 'user name require';\r\n            return;\r\n        }\r\n        if (!this.password) {\r\n            message.innerHTML = 'password require';\r\n            return;\r\n        }\r\n        const payload = {\r\n            email: this.email,\r\n            password: this.password\r\n        };\r\n        //   redirectTo:'http://localhost:3000'\r\n        // fetch(this.conf.url, {\r\n        //     'method':'POST',\r\n        //     body: JSON.stringify(payload)\r\n        // }).then((data)=>{\r\n\r\n        //     message.innerHTML = 'logged in successfully'\r\n        //    // location.href = this.conf.redirectTo\r\n        // },(data)=>{\r\n        //     message.innerHTML = data\r\n        // }\r\n        // )\r\n\r\n        const myEvent = new CustomEvent('my-event', {\r\n            detail: payload,\r\n            bubbles: true,\r\n            composed: true\r\n        });\r\n        this.dispatchEvent(myEvent);\r\n    }\r\n\r\n}\r\n",
+            "sourceCode": "import { LitElement, html, customElement } from 'lit-element';\r\n\r\n\r\n@customElement('login-element')\r\nexport class LoginElement extends LitElement {\r\n    userDetails: any = {};\r\n    password = '';\r\n    email = '';\r\n    constructor() {\r\n        super();\r\n    }\r\n    onPassword({ target: { value } }) { this.password = value; }\r\n    onEmail({ target: { value } }) { this.email = value; }\r\n\r\n    render() {\r\n        return html`\r\n        <style>\r\n        h2{\r\n            border-bottom:1px solid #000000;\r\n            padding-bottom: 10px;\r\n        }\r\n        .form-container{\r\n            padding: 10px 0;\r\n            }\r\n         .form-container>div{\r\n                display: flex;\r\n                margin: 10px;\r\n         }\r\n         .form-container>div label{\r\n                  width: 20%;\r\n                  line-height: 38px;\r\n                }\r\n\r\n         .form-container>div .input{\r\n                  width: 70%;\r\n                  padding: 10px;\r\n                }\r\n                .form-button-outer{\r\n                border-top: 1px solid;\r\n                margin: 25px 10px;\r\n                padding: 25px 0;\r\n            }\r\n            .button{\r\n                background:#0cfdba ;\r\n                width: auto;\r\n                padding: 10px 40px;\r\n                font-size: 18px;\r\n                text-transform: uppercase;\r\n                border: 0 none;\r\n                color: #000000;\r\n              }\r\n              #message{\r\n                  color:red;\r\n                  margin-left: 21%;\r\n              }\r\n        </style>\r\n        <div>\r\n        <h2>Log in Form</h2>\r\n    <form>\r\n        <div class=\"form-container\">\r\n            <div>\r\n                <label> Email *</label>\r\n                <input type='email' class=\"input\" name=\"email\" .value=\"${this.email}\"\r\n                @change=\"${this.onEmail}\" >\r\n            </div>\r\n            <div>\r\n                <label> Password *</label>\r\n                <input type='password'  class=\"input\"  name=\"password\" .value=\"${this.password}\"\r\n                @change=\"${this.onPassword}\" >\r\n            </div>\r\n            <div id=\"message\">\r\n            </div>\r\n            <div class=\"form-button-outer\">\r\n            <button type='button' class=\"button\"  @keyup.enter=\"${this.submitForm}\" @click=\"${this.submitForm}\" >Login</button>\r\n            </div>\r\n        </div>\r\n    </form>\r\n    </div>`;\r\n    }\r\n    submitForm() {\r\n        const message = this.shadowRoot.getElementById('message') as HTMLElement;\r\n        message.innerHTML = '';\r\n        if (!this.email) {\r\n            message.innerHTML = 'user name require';\r\n            return;\r\n        }\r\n        if (!this.password) {\r\n            message.innerHTML = 'password require';\r\n            return;\r\n        }\r\n        const payload = {\r\n            email: this.email,\r\n            password: this.password\r\n        };\r\n\r\n        const myEvent = new CustomEvent('my-event', {\r\n            detail: payload,\r\n            bubbles: true,\r\n            composed: true\r\n        });\r\n        this.dispatchEvent(myEvent);\r\n    }\r\n\r\n}\r\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -1597,7 +1608,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 38
+                    "line": 80
                 }
             ],
             "indexSignatures": [],
@@ -1938,7 +1949,7 @@
     "components": [
         {
             "name": "AddEditBlogListComponent",
-            "id": "component-AddEditBlogListComponent-54f0eda706b1221c3dee7cb2a5756640",
+            "id": "component-AddEditBlogListComponent-9feb6260466a4baa1f12030f3e13f741",
             "file": "src/app/add-edit-blog-list/add-edit-blog-list.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1962,14 +1973,22 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 17
+                    "line": 16
+                },
+                {
+                    "name": "addEditText",
+                    "defaultValue": "'Add'",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 18
                 },
                 {
                     "name": "blogObj",
                     "type": "IBlog",
                     "optional": false,
                     "description": "",
-                    "line": 18
+                    "line": 17
                 },
                 {
                     "name": "blogsObservable",
@@ -1984,7 +2003,7 @@
                     "type": "[]",
                     "optional": false,
                     "description": "",
-                    "line": 26
+                    "line": 35
                 },
                 {
                     "name": "editId",
@@ -1999,6 +2018,14 @@
                     "optional": false,
                     "description": "",
                     "line": 20
+                },
+                {
+                    "name": "submitted",
+                    "defaultValue": "false",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 22
                 }
             ],
             "methodsClass": [
@@ -2013,7 +2040,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 57,
+                    "line": 67,
                     "jsdoctags": [
                         {
                             "name": "id",
@@ -2030,7 +2057,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 35
+                    "line": 44
                 },
                 {
                     "name": "onSubmit",
@@ -2038,7 +2065,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 60
+                    "line": 71
                 }
             ],
             "hostBindings": [],
@@ -2046,7 +2073,7 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormBuilder, FormGroup } from '@angular/forms';\nimport { IBlog } from '../models/blog';\nimport { Store } from '@ngrx/store';\nimport { AppState } from '../models/store/app.state';\nimport { Insert, LoadSingle, Edit } from '../store/actions/blog.action';\nimport { map } from 'rxjs/operators';\nimport { ActivatedRoute, Router } from '@angular/router';\nimport { Observable } from 'rxjs';\n\n@Component({\n  selector: 'app-add-edit-blog-list',\n  templateUrl: './add-edit-blog-list.component.html',\n  styleUrls: ['./add-edit-blog-list.component.scss']\n})\nexport class AddEditBlogListComponent implements OnInit {\n  addeditblogForm;\n  blogObj: IBlog;\n  blogsObservable: Observable<any>;\n  message: any;\n  editId: any;\n  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private store: Store<AppState>) {\n    this.editId = this.route.snapshot.paramMap.get('id');\n    this.blogsObservable = this.store.select(state => state.blog);\n  }\n  categoryList = [\n    'Music',\n    'Fashion',\n    'Car',\n    'Real State',\n    'Beauty',\n    'Travel',\n    'others'\n  ];\n  ngOnInit(): void {\n    this.addeditblogForm = this.fb.group({\n      title: [''],\n      imageUrl: [''],\n      description: [''],\n      category: ['']\n    });\n    if (this.editId) {\n      this.blogsObservable.subscribe((data) => {\n        if (data && data.Message === 'single blog loaded') {\n          const dataObj = data.blog;\n          this.addeditblogForm.patchValue({\n            title: dataObj.title,\n            imageUrl: dataObj.imageUrl,\n            description: dataObj.description,\n            category: dataObj.category\n          });\n        }\n      });\n      this.getEditBlog(this.editId);\n    }\n  }\n  getEditBlog(id) {\n    this.store.dispatch(new LoadSingle(id));\n  }\n  onSubmit() {\n    const title = this.addeditblogForm.controls.title.value;\n    const imageUrl = this.addeditblogForm.controls.imageUrl.value;\n    const description = this.addeditblogForm.controls.description.value;\n    const category = this.addeditblogForm.controls.category.value;\n    const date = new Date();\n    this.blogObj = {\n      title,\n      imageUrl,\n      description,\n      category,\n      date\n    };\n    if (this.editId) {\n      this.blogObj.id = this.editId;\n      this.store.dispatch(new Edit(this.blogObj));\n    } else {\n      this.store.dispatch(new Insert(this.blogObj));\n    }\n\n    this.blogsObservable.subscribe((data) => {\n      this.message = data.Message;\n      if (this.message === 'blog Edited successfully') {\n        setTimeout(() => {\n          this.router.navigateByUrl('/');\n        }, 1000);\n      }\n      if (this.message === 'blog added successfully') {\n        setTimeout(() => {\n          this.message = null;\n        }, 1000);\n      }\n      this.addeditblogForm.reset();\n    });\n  }\n}\n\n\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormBuilder, FormGroup, Validators } from '@angular/forms';\nimport { IBlog } from '../models/blog';\nimport { Store } from '@ngrx/store';\nimport { AppState } from '../models/store/app.state';\nimport { Insert, LoadSingle, Edit } from '../store/actions/blog.action';\nimport { ActivatedRoute, Router, NavigationEnd } from '@angular/router';\nimport { Observable } from 'rxjs';\n\n@Component({\n  selector: 'app-add-edit-blog-list',\n  templateUrl: './add-edit-blog-list.component.html',\n  styleUrls: ['./add-edit-blog-list.component.scss']\n})\nexport class AddEditBlogListComponent implements OnInit {\n  addeditblogForm;\n  blogObj: IBlog;\n  addEditText = 'Add';\n  blogsObservable: Observable<any>;\n  message: any;\n  editId: any;\n  submitted = false;\n  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private store: Store<AppState>) {\n    this.editId = this.route.snapshot.paramMap.get('id');\n    this.blogsObservable = this.store.select(state => state.blog);\n    router.events.subscribe((val) => {\n      if (val instanceof NavigationEnd){\n        if (val.url === '/addEdit'){\n          this.addeditblogForm.reset();\n          this.editId = null;\n        }\n      }\n  });\n  }\n  categoryList = [\n    'Music',\n    'Fashion',\n    'Car',\n    'Real State',\n    'Beauty',\n    'Travel',\n    'others'\n  ];\n  ngOnInit(): void {\n    this.addeditblogForm = this.fb.group({\n      title: ['', Validators.required],\n      imageUrl: ['', Validators.required],\n      description: ['', Validators.required],\n      category: ['', Validators.required]\n    });\n    if (this.editId) {\n      this.addEditText = 'Edit';\n      this.blogsObservable.subscribe((data) => {\n        if (data && data.Message === 'single blog loaded') {\n          const dataObj = data.blog;\n          this.addeditblogForm.patchValue({\n            title: dataObj.title,\n            imageUrl: dataObj.imageUrl,\n            description: dataObj.description,\n            category: dataObj.category\n          });\n        }\n      });\n      this.getEditBlog(this.editId);\n    }\n  }\n  getEditBlog(id) {\n    this.store.dispatch(new LoadSingle(id));\n  }\n  get f() { return this.addeditblogForm.controls; }\n  onSubmit() {\n    this.submitted = true;\n    if (this.addeditblogForm.invalid){\n      return;\n    }\n    this.blogObj = {\n      title: this.addeditblogForm.controls.title.value,\n      imageUrl: this.addeditblogForm.controls.imageUrl.value,\n      description: this.addeditblogForm.controls.description.value,\n      category: this.addeditblogForm.controls.category.value,\n      date: new Date()\n    };\n    if (this.editId) {\n      this.blogObj.id = this.editId;\n      this.store.dispatch(new Edit(this.blogObj));\n    } else {\n      this.store.dispatch(new Insert(this.blogObj));\n    }\n    this.submitted = false;\n    this.blogsObservable.subscribe((data) => {\n      this.message = data.Message;\n      if (this.message === 'blog Edited successfully') {\n        setTimeout(() => {\n          this.router.navigateByUrl('/');\n        }, 1000);\n      }\n      if (this.message === 'blog added successfully') {\n        setTimeout(() => {\n          this.message = null;\n        }, 1000);\n      }\n      this.addeditblogForm.reset();\n    });\n  }\n}\n\n\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -2076,7 +2103,7 @@
                         "type": "Store<AppState>"
                     }
                 ],
-                "line": 21,
+                "line": 22,
                 "jsdoctags": [
                     {
                         "name": "fb",
@@ -2111,7 +2138,18 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div>{{message}}</div>\n<form [formGroup]=\"addeditblogForm\">\n        <div>\n            <label>Title</label>\n            <input type=\"text\" name=\"title\"  formControlName=\"title\">\n        </div>\n        <div>\n            <label>Image Url</label>\n            <input type=\"url\" name=\"imageUrl\" formControlName=\"imageUrl\">\n        </div>\n        <div>\n            <label>Description</label>\n            <textarea name=\"description\" formControlName=\"description\"></textarea>\n        </div>\n        <div>\n            <label>Category</label>\n            <select  name=\"password\" formControlName=\"category\">\n                <option *ngFor='let category of categoryList'>{{category}}</option>\n            </select>\n        </div>\n        <input type=\"button\" value=\"submit\" (click)=\"onSubmit()\" />\n    </form>"
+            "accessors": {
+                "f": {
+                    "name": "f",
+                    "getSignature": {
+                        "name": "f",
+                        "type": "",
+                        "returnType": "",
+                        "line": 70
+                    }
+                }
+            },
+            "templateData": "<section class=\"form-outer\">\n<h2> {{addEditText}} Blog</h2>\n<div>{{message}}</div>\n<form [formGroup]=\"addeditblogForm\" class=\"form-container\">\n        <div>\n            <label>Title *</label>\n            <input type=\"text\" name=\"title\"  class=\"input\"  formControlName=\"title\">\n        </div>\n        <div *ngIf=\"submitted && f.title.errors\" class=\"error\">\n                <div *ngIf=\"f.title.errors.required\">title is required</div>\n        </div>\n        <div>\n            <label>Image Url</label>\n            <input type=\"url\" name=\"imageUrl\"  class=\"input\"  formControlName=\"imageUrl\">\n        </div>\n        <div *ngIf=\"submitted && f.imageUrl.errors\" class=\"error\">\n                <div *ngIf=\"f.imageUrl.errors.required\">Image Url is required</div>\n        </div>\n        <div>\n            <label>Description</label>\n            <textarea name=\"description\"  class=\"input\"  formControlName=\"description\"></textarea>\n        </div>\n        <div *ngIf=\"submitted && f.description.errors\" class=\"error\">\n                <div *ngIf=\"f.description.errors.required\">descriptionis required</div>\n        </div>\n        <div>\n            <label>Category</label>\n            <select  name=\"password\"  class=\"input\"  formControlName=\"category\">\n                <option *ngFor='let category of categoryList'>{{category}}</option>\n            </select>\n        </div>\n        <div *ngIf=\"submitted && f.category.errors\" class=\"error\">\n                <div *ngIf=\"f.category.errors.required\">category is required</div>\n        </div>\n        <div class=\"form-button-outer\">\n        <input type=\"submit\" value=\"submit\" class=\"button\" (click)=\"onSubmit()\" />\n        </div>\n    </form>\n</section>"
         },
         {
             "name": "AppComponent",
@@ -2158,11 +2196,11 @@
                 }
             ],
             "stylesData": "",
-            "templateData": "<app-header></app-header>\r\n<router-outlet></router-outlet>"
+            "templateData": "<app-header></app-header>\r\n<main>\r\n    <router-outlet></router-outlet>\r\n</main>\r\n\r\n<app-footer></app-footer>"
         },
         {
             "name": "BlogListComponent",
-            "id": "component-BlogListComponent-80445171bac329c61dc6d2778f83e7dc",
+            "id": "component-BlogListComponent-fff215ce21685618470335f9f8007026",
             "file": "src/app/blog-list/blog-list.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2216,7 +2254,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 43,
+                    "line": 47,
                     "jsdoctags": [
                         {
                             "name": "id",
@@ -2238,7 +2276,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 40,
+                    "line": 44,
                     "jsdoctags": [
                         {
                             "name": "id",
@@ -2263,11 +2301,11 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { IBlog } from '../models/blog';\nimport { Store, select } from '@ngrx/store';\nimport { AppState } from '../models/store/app.state';\nimport { Load, DeleteBlog } from '../store/actions/blog.action';\nimport { Observable } from 'rxjs';\nimport { BlogState } from '../models/blog-state';\nimport { map } from 'rxjs/operators';\nimport { Router } from '@angular/router';\nimport { AuthService } from '../services/auth.service';\n\n@Component({\n  selector: 'app-blog-list',\n  templateUrl: './blog-list.component.html',\n  styleUrls: ['./blog-list.component.scss']\n})\nexport class BlogListComponent implements OnInit {\n  blogsObservable: Observable<any>;\n  bloglist: any;\n  isloggedin = false;\n  constructor(private store: Store<any>, private router: Router, private authService: AuthService, ) {\n    this.blogsObservable = this.store.select(state => state.blog);\n  }\n\n  ngOnInit(): void {\n    if (this.authService.getToken()) {\n      this.isloggedin = true;\n    }\n    this.blogsObservable.subscribe((data) => {\n      if (data) {\n        this.bloglist = data.blog;\n      }\n      if (data.Message === 'Succesfully deleted the blog') {\n        alert(data.Message);\n        this.store.dispatch(new Load());\n      }\n    });\n    this.store.dispatch(new Load());\n  }\n  editBlock(id) {\n    this.router.navigate(['addEdit', { id }]);\n  }\n  DeleteBlog(id) {\n    if (confirm('Are you sure you want to delete this blog?')) {\n      this.store.dispatch(new DeleteBlog(id));\n    }\n  }\n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { IBlog } from '../models/blog';\nimport { Store, select } from '@ngrx/store';\nimport { AppState } from '../models/store/app.state';\nimport { Load, DeleteBlog } from '../store/actions/blog.action';\nimport { Observable } from 'rxjs';\nimport { BlogState } from '../models/blog-state';\nimport { map } from 'rxjs/operators';\nimport { Router } from '@angular/router';\nimport { AuthService } from '../services/auth.service';\n\n@Component({\n  selector: 'app-blog-list',\n  templateUrl: './blog-list.component.html',\n  styleUrls: ['./blog-list.component.scss']\n})\nexport class BlogListComponent implements OnInit {\n  blogsObservable: Observable<any>;\n  bloglist: any;\n  isloggedin = false;\n  constructor(private store: Store<any>, private router: Router, private authService: AuthService, ) {\n    this.blogsObservable = this.store.select(state => state.blog);\n  }\n\n  ngOnInit(): void {\n    this.authService.token.subscribe((value) => {\n      if (value) {\n        this.isloggedin = true;\n      } else {\n        this.isloggedin = false;\n      }\n    });\n    this.blogsObservable.subscribe((data) => {\n      if (data) {\n        this.bloglist = data.blog;\n      }\n      if (data.Message === 'Succesfully deleted the blog') {\n        alert(data.Message);\n        this.store.dispatch(new Load());\n      }\n    });\n    this.store.dispatch(new Load());\n  }\n  editBlock(id) {\n    this.router.navigate(['addEdit', { id }]);\n  }\n  DeleteBlog(id) {\n    if (confirm('Are you sure you want to delete this blog?')) {\n      this.store.dispatch(new DeleteBlog(id));\n    }\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".blog-container{\r\n    display: flex;\r\n    flex-direction: column;\r\n    padding: 10px;\r\n    > li{\r\n        border-bottom: 1px solid;\r\n        margin: 10px 0;\r\n        padding: 5px;\r\n        > article {\r\n            > header{\r\n            h2{\r\n                font-size: 25px;\r\n                line-height: 40px;\r\n                }  \r\n            }\r\n            > section{\r\n                ul {\r\n                    li{\r\n                        display: flex;\r\n                        figure{\r\n                            width: 30%;\r\n                            img{\r\n                                max-width: 100%;\r\n                            }\r\n                        }\r\n                        section{\r\n                            width: 70%;\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+                    "data": ".blog-container{\r\n    display: flex;\r\n    flex-direction: column;\r\n    padding: 10px;\r\n    > li{\r\n        border-bottom: 1px solid;\r\n        margin: 10px 0;\r\n        padding: 5px;\r\n        > article {\r\n            > header{\r\n            h2{\r\n                font-size: 25px;\r\n                line-height: 40px;\r\n                }  \r\n            }\r\n            > section{\r\n                margin: 10px 0;\r\n                ul {\r\n                    li{\r\n                        display: flex;\r\n                        figure{\r\n                            width: 30%;\r\n                            img{\r\n                                max-width: 100%;\r\n                            }\r\n                        }\r\n                        >section{\r\n                            width: 70%;\r\n                            padding: 0 2% 10px;\r\n                            p{\r\n                                margin-bottom: 10px\r\n                            }\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    }\r\n    .add-delete-button-outer{\r\n        margin: 20px 0;\r\n        .editButton{\r\n            margin-right: 25px;\r\n        }\r\n    }\r\n}\r\n@media screen and (max-width: 680px) {\r\n    .blog-container{\r\n        > li{\r\n            > article {\r\n                > section{\r\n                    ul {\r\n                        li{\r\n                            flex-direction: column;\r\n                            figure{\r\n                                width: 100%;\r\n                               \r\n                            }\r\n                            >section{\r\n                                width: 100%;\r\n                               \r\n                            }\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n        }\r\n      \r\n    }\r\n}\r\n\r\n",
                     "styleUrl": "./blog-list.component.scss"
                 }
             ],
@@ -2317,7 +2355,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<main>\n    <ul *ngIf=\"bloglist\" class=\"blog-container\">\n        <li *ngFor=\"let blog of bloglist trackBy bloglist.id\">\n            <article>\n                <header>\n                    <h2>\n                        {{blog.title}}\n                    </h2>\n                    <div>\n                        {{blog.date | date}} \n                    </div>\n                </header>\n                <section>\n                    <ul>\n                        <li>\n                            <figure>\n                                <img [src]=\"blog.imageUrl\" [title]=\"blog.title\">\n                            </figure>\n                            <section>\n                            <p>\n                                    {{blog.description }}\n                            </p>\n                            <p>\n                                category: {{blog.category}}\n                            </p>\n                            </section>\n                           \n                        </li>\n                        <li *ngIf=\"isloggedin\">\n                            <button type=\"button\" (click)=\"editBlock(blog.id)\">Edit Blog</button>\n                            <button type=\"button\" (click)=\"DeleteBlog(blog.id)\">Delete Blog</button>\n                        </li>\n                    </ul>\n                </section>\n            </article>\n        </li>\n    </ul>\n</main>\n"
+            "templateData": "<ul *ngIf=\"bloglist\" class=\"blog-container\" aria-label=\"blog list container\">\n    <li *ngFor=\"let blog of bloglist trackBy bloglist.id\" aria-label=\"blog\">\n        <article>\n            <header>\n                <h2 aria-label=\"blog title\">\n                    {{blog.title}}\n                </h2>\n                <div aria-label=\"blog date\">\n                    {{blog.date | date}}\n                </div>\n            </header>\n            <section>\n                <ul>\n                    <li>\n                        <figure>\n                            <img [src]=\"blog.imageUrl\" aria-label=\"blog image\" [title]=\"blog.title\">\n                        </figure>\n                        <section>\n                            <p aria-label=\"blog description\">\n                                {{blog.description }}\n                            </p>\n                            <p aria-label=\"blog category\">\n                                category: {{blog.category}}\n                            </p>\n                            <section *ngIf=\"isloggedin\" class=\"add-delete-button-outer\">\n                                <button type=\"button\" class=\"button editButton\" (keyup.enter)=\"editBlock(blog.id)\"\n                                    (click)=\"editBlock(blog.id)\">Edit Blog</button>\n                                <button type=\"button\" class=\"button\" (keyup.enter)=\"DeleteBlog(blog.id)\"\n                                    (click)=\"DeleteBlog(blog.id)\">Delete Blog</button>\n                            </section>\n                        </section>\n\n                    </li>\n\n                </ul>\n            </section>\n        </article>\n    </li>\n</ul>\n"
         },
         {
             "name": "ButtonComponent",
@@ -2401,6 +2439,62 @@
             }
         },
         {
+            "name": "FooterComponent",
+            "id": "component-FooterComponent-868f3962f21c76b835aad91a76be5501",
+            "file": "src/app/footer/footer.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-footer",
+            "styleUrls": [
+                "./footer.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./footer.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 12
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-footer',\n  templateUrl: './footer.component.html',\n  styleUrls: ['./footer.component.scss']\n})\nexport class FooterComponent implements OnInit {\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "footer{\r\n    border-top:1px solid;\r\n    padding: 15px;\r\n}",
+                    "styleUrl": "./footer.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 8
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<footer><p>@Copyrigth Gayaprasad - tavisca </p></footer>\n"
+        },
+        {
             "name": "HeaderComponent",
             "id": "component-HeaderComponent-246e2a69dc126a3bd76c6328dd3b93e2",
             "file": "src/stories/header.component.ts",
@@ -2464,7 +2558,7 @@
         },
         {
             "name": "HeaderComponent",
-            "id": "component-HeaderComponent-18218c72768da13a35abd7a1492672f6-1",
+            "id": "component-HeaderComponent-dc2d45cc0298679403ddc9cff4251324-1",
             "file": "src/app/header/header.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2517,7 +2611,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 24
+                    "line": 28
                 },
                 {
                     "name": "logOut",
@@ -2525,7 +2619,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 21
+                    "line": 25
                 },
                 {
                     "name": "ngOnInit",
@@ -2541,11 +2635,11 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { Store } from '@ngrx/store';\nimport { AppState } from '../models/store/app.state';\nimport { LogOut } from '../store/actions/auth.actions';\nimport { ThemeService } from '../services/theme.service';\nimport { AuthService } from '../services/auth.service';\n@Component({\n  selector: 'app-header',\n  templateUrl: './header.component.html',\n  styleUrls: ['./header.component.scss']\n})\nexport class HeaderComponent implements OnInit {\n  theme = 'ligth';\n  constructor( private store: Store<AppState>, private authService: AuthService, public themeService: ThemeService ) { }\n  isloggedin = false;\n  ngOnInit(): void{\n    if (this.authService.getToken()){\n      this.isloggedin = true;\n    }\n  }\n  logOut(): void {\n    this.store.dispatch(new LogOut());\n  }\n  changeTheme(){\n    if (this.theme === 'ligth'){\n      this.themeService.setLightTheme();\n    } else{\n      this.themeService.setDarkTheme();\n    }\n  }\n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { Store } from '@ngrx/store';\nimport { AppState } from '../models/store/app.state';\nimport { LogOut } from '../store/actions/auth.actions';\nimport { ThemeService } from '../services/theme.service';\nimport { AuthService } from '../services/auth.service';\n@Component({\n  selector: 'app-header',\n  templateUrl: './header.component.html',\n  styleUrls: ['./header.component.scss']\n})\nexport class HeaderComponent implements OnInit {\n  theme = 'ligth';\n  constructor(private store: Store<AppState>, private authService: AuthService, public themeService: ThemeService) { }\n  isloggedin = false;\n  ngOnInit(): void {\n    this.authService.token.subscribe((data) => {\n      if (data) {\n        this.isloggedin = true;\n      } else {\n        this.isloggedin = false;\n      }\n    });\n  }\n  logOut(): void {\n    this.store.dispatch(new LogOut());\n  }\n  changeTheme() {\n    if (this.theme === 'ligth') {\n      this.themeService.setLightTheme();\n    } else {\n      this.themeService.setDarkTheme();\n    }\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "header{\r\n    display: flex;\r\n    margin: 0 0 10px;\r\n    padding: 9px 15px;\r\n    border-bottom: 1px solid;\r\n    h1{\r\n        margin: 0;\r\n        font-size: 27px;\r\n        line-height: 36px;\r\n    }\r\n    nav{\r\n        width: 85%;\r\n        ul{\r\n            display: inline-flex;\r\n            justify-content: center;\r\n            width: 100%;\r\n            padding: 0;\r\n            margin: 0;\r\n            \r\n            li{\r\n                padding: 10px;\r\n                list-style: none;\r\n                a{\r\n                    text-decoration: none;\r\n                    color:black\r\n                }\r\n            }\r\n        }\r\n    }\r\n    .themes{width: 20%; font-size:16px;margin:10px;}\r\n}",
+                    "data": "header{\r\n    display: flex;\r\n    margin: 0 0 10px;\r\n    padding: 9px 15px;\r\n    border-bottom: 1px solid;\r\n    h1{\r\n        margin: 0;\r\n        font-size: 27px;\r\n        line-height: 36px;\r\n        text-transform: uppercase;\r\n    }\r\n    nav{\r\n        width: 85%;\r\n        ul{\r\n            display: inline-flex;\r\n            justify-content: center;\r\n            width: 100%;\r\n            padding: 0;\r\n            margin: 0;\r\n            \r\n            li{\r\n                padding: 10px;\r\n                list-style: none;\r\n                a{\r\n                    text-decoration: none;\r\n                    color:black;\r\n                    text-transform: uppercase;\r\n                }\r\n                a.active{\r\n                    text-decoration: underline;\r\n                    color: green;\r\n                }\r\n            }\r\n        }\r\n    }\r\n    .themes{width: 20%; font-size:16px;margin:10px;}\r\n}\r\n\r\n\r\n@media screen and (max-width: 680px) {\r\n    header{\r\n        display: flex;\r\n        flex-direction: column;\r\n        nav{\r\n            width: 100%;\r\n            ul{\r\n                display: flex;\r\n                flex-direction: column;\r\n               li{\r\n                   border-bottom: 1px solid;\r\n               }\r\n            }\r\n        }\r\n        .themes{width: 100%;}\r\n    }\r\n  }",
                     "styleUrl": "./header.component.scss"
                 }
             ],
@@ -2598,7 +2692,7 @@
             "isDuplicate": true,
             "duplicateId": 1,
             "duplicateName": "HeaderComponent-1",
-            "templateData": "<header>\n    <h1>\n        Blogs\n    </h1>\n    <nav>\n        <ul >\n            <li><a tabindex=\"1\" routerLink=\"/\" routerLinkActive=\"active\">list</a>\n            </li>\n            <li  tabindex=\"1\"  *ngIf=\"isloggedin\"><a routerLink=\"/addEdit\" routerLinkActive=\"active\">add Blog</a>\n            </li>\n            <li  tabindex=\"1\"  *ngIf=\"!isloggedin\"><a routerLink=\"/log-in\" routerLinkActive=\"active\">log in</a>\n            </li>\n            <li  tabindex=\"1\"  *ngIf=\"isloggedin\"><a (click)='logOut()'>log out</a>\n            </li>\n            <li  tabindex=\"1\"  *ngIf=\"!isloggedin\"> <a routerLink=\"/sign-up\" routerLinkActive=\"active\">registration</a>\n            </li>\n        </ul>\n    </nav>\n    <div class=\"themes\">\n        <label class=\"radio-inline\">\n        <input type=\"radio\" value=\"ligth\" name=\"theme\"   [(ngModel)]=\"theme\" (change)=\"changeTheme()\"> ligth theme\n        </label>\n        <label class=\"radio-inline\">\n        <input type=\"radio\" value=\"dark\" name=\"theme\"  [(ngModel)]=\"theme\"  (change)=\"changeTheme()\"> dark theme\n        </label>\n    </div>\n</header>\n\n\n\n"
+            "templateData": "<header>\n    <h1>\n        Blogs\n    </h1>\n    <nav>\n        <ul >\n            <li><a tabindex=\"1\" routerLink=\"/\"  >List</a>\n            </li>\n            <li *ngIf=\"isloggedin\"><a routerLink=\"/addEdit\" tabindex=\"1\"  routerLinkActive=\"active\">Add Blog</a>\n            </li>\n            <li  *ngIf=\"!isloggedin\"><a routerLink=\"/log-in\" tabindex=\"1\" routerLinkActive=\"active\">Log in</a>\n            </li>\n            <li  *ngIf=\"isloggedin\"><a tabindex=\"1\"  (click)='logOut()'>Log out</a>\n            </li>\n            <li  *ngIf=\"!isloggedin\"> <a tabindex=\"1\"  routerLink=\"/sign-up\" routerLinkActive=\"active\">Registration</a>\n            </li>\n        </ul>\n    </nav>\n    <div class=\"themes\">\n        <label class=\"radio-inline\">\n        <input type=\"radio\" value=\"ligth\" name=\"theme\"   [(ngModel)]=\"theme\" (change)=\"changeTheme()\"> Ligth theme\n        </label>\n        <label class=\"radio-inline\">\n        <input type=\"radio\" value=\"dark\" name=\"theme\"  [(ngModel)]=\"theme\"  (change)=\"changeTheme()\"> Dark theme\n        </label>\n    </div>\n</header>\n\n\n\n"
         },
         {
             "name": "LogInComponent",
@@ -2699,7 +2793,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "\n<login-element  (my-event)=\"login($event)\" ></login-element>"
+            "templateData": "<section class=\"form-outer\">\n<login-element  (my-event)=\"login($event)\" ></login-element> \n</section>"
         },
         {
             "name": "PageComponent",
@@ -2765,7 +2859,7 @@
         },
         {
             "name": "RegistrationComponent",
-            "id": "component-RegistrationComponent-93026efe8644f3eaac92354dea7002ca",
+            "id": "component-RegistrationComponent-94f3cbfc24c6c09a86ee1cebb7c51c9f",
             "file": "src/app/registration/registration.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2797,6 +2891,14 @@
                     "optional": false,
                     "description": "",
                     "line": 14
+                },
+                {
+                    "name": "submitted",
+                    "defaultValue": "false",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 15
                 }
             ],
             "methodsClass": [
@@ -2806,7 +2908,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 17
+                    "line": 18
                 },
                 {
                     "name": "onSubmit",
@@ -2814,7 +2916,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 25
+                    "line": 27
                 }
             ],
             "hostBindings": [],
@@ -2822,7 +2924,7 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormBuilder, FormGroup, Validators } from '@angular/forms';\nimport { IUser } from '../models/user';\nimport { Store } from '@ngrx/store';\nimport { AppState } from '../models/store/app.state';\nimport { SignUp } from '../store/actions/auth.actions';\n@Component({\n  selector: 'app-registration',\n  templateUrl: './registration.component.html',\n  styleUrls: ['./registration.component.scss']\n})\nexport class RegistrationComponent implements OnInit {\n  registrationForm;\n  registrationObj: IUser;\n  constructor(private fb: FormBuilder, private store: Store<AppState>) { }\n\n  ngOnInit(): void {\n    this.registrationForm = this.fb.group({\n      userName: ['', Validators.required],\n      email: ['', Validators.required],\n      phoneNo: [''],\n      password: ['', Validators.required]\n    });\n  }\n  onSubmit() {\n    const name = this.registrationForm.controls.userName.value;\n    const email = this.registrationForm.controls.emai.value;\n    const phoneNo = this.registrationForm.controls.phoneNo.value;\n    const password = this.registrationForm.controls.password.value;\n    const payload = {\n      name,\n      email,\n      phoneNo,\n      password\n    };\n    this.store.dispatch(new SignUp(payload));\n    this.registrationForm.reset();\n  }\n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormBuilder, FormGroup, Validators } from '@angular/forms';\nimport { IUser } from '../models/user';\nimport { Store } from '@ngrx/store';\nimport { AppState } from '../models/store/app.state';\nimport { SignUp } from '../store/actions/auth.actions';\n@Component({\n  selector: 'app-registration',\n  templateUrl: './registration.component.html',\n  styleUrls: ['./registration.component.scss']\n})\nexport class RegistrationComponent implements OnInit {\n  registrationForm;\n  registrationObj: IUser;\n  submitted = false;\n  constructor(private fb: FormBuilder, private store: Store<AppState>) { }\n\n  ngOnInit(): void {\n    this.registrationForm = this.fb.group({\n      userName: ['', Validators.required],\n      email: ['', [Validators.required, Validators.email]],\n      phoneNo: ['', Validators.minLength(10)],\n      password: ['', [ Validators.required, Validators.minLength(6)]]\n    });\n  }\n  get f() { return this.registrationForm.controls; }\n  onSubmit() {\n    this.submitted = true;\n    if (this.registrationForm.invalid){\n      return;\n    }\n    const payload = {\n      name: this.registrationForm.controls.userName.value,\n      email: this.registrationForm.controls.email.value,\n      phoneNo: this.registrationForm.controls.phoneNo.value,\n      password: this.registrationForm.controls.password.value\n    };\n    this.store.dispatch(new SignUp(payload));\n    this.submitted = false;\n    this.registrationForm.reset();\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -2844,7 +2946,7 @@
                         "type": "Store<AppState>"
                     }
                 ],
-                "line": 14,
+                "line": 15,
                 "jsdoctags": [
                     {
                         "name": "fb",
@@ -2865,7 +2967,18 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<form [formGroup]=\"registrationForm\">\n    <div>\n        <label>User Name</label>\n        <input type=\"text\" name=\"name\" aria-placeholder=\"User Name\" placeholder=\"User Name\" formControlName=\"userName\">\n    </div>\n    <div>\n        <label>Email ID</label>\n        <input type=\"text\" name=\"email\" formControlName=\"email\"  aria-placeholder=\"email\" placeholder=\"email\" >\n    </div>\n    <div>\n        <label>Phone No</label>\n        <input type=\"text\" name=\"phoneNo\" formControlName=\"phoneNo\" aria-placeholder=\"phoneNo\" placeholder=\"phoneNo\" >\n    </div>\n    <div>\n        <label>Password</label>\n        <input type=\"text\" name=\"password\" formControlName=\"password\"  aria-placeholder=\"password\" placeholder=\"password\" >\n    </div>\n    <input type=\"button\" value=\"submit\" (click)=\"onSubmit()\" aria-label=\"submit Button\"/>\n</form>"
+            "accessors": {
+                "f": {
+                    "name": "f",
+                    "getSignature": {
+                        "name": "f",
+                        "type": "",
+                        "returnType": "",
+                        "line": 26
+                    }
+                }
+            },
+            "templateData": "<section class=\"form-outer\">\n<h2> Registration Form</h2>\n<form [formGroup]=\"registrationForm\" class=\"form-container\">\n    <div>\n        <label>User Name *</label>\n        <input type=\"text\" name=\"name\" class=\"input\" aria-placeholder=\"User Name\" placeholder=\"User Name\" formControlName=\"userName\">\n        \n    </div>\n    <div *ngIf=\"submitted && f.userName.errors\" class=\"error\">\n            <div *ngIf=\"f.userName.errors.required\">user  Name is required</div>\n    </div>\n    <div>\n        <label>Email ID *</label>\n        <input type=\"text\" name=\"email\"  class=\"input\" formControlName=\"email\"  aria-placeholder=\"email\" placeholder=\"email\" >\n    </div>\n    <div *ngIf=\"submitted && f.email.errors\" class=\"error\">\n            <div *ngIf=\"f.email.errors.required\">Email is required</div>\n            <div *ngIf=\"f.email.errors.email\">Email must be a valid email address</div>\n    </div>\n    <div>\n        <label>Phone No</label>\n        <input type=\"text\" name=\"phoneNo\"  class=\"input\" formControlName=\"phoneNo\" aria-placeholder=\"phoneNo\" placeholder=\"phoneNo\" >\n    </div>\n    <div>\n        <label>Password *</label>\n        <input type=\"password\" name=\"password\"   class=\"input\" formControlName=\"password\"  aria-placeholder=\"password\" placeholder=\"password\" >\n    </div>\n    <div *ngIf=\"submitted && f.password.errors\" class=\"error\">\n            <div *ngIf=\"f.password.errors.required\">Password is required</div>\n            <div *ngIf=\"f.password.errors.minlength\">Password must be at least 6 characters</div>\n        </div>\n    <div class=\"form-button-outer\">\n            <input type=\"button\" value=\"submit\" class=\"button\" (keyup.enter)=\"onSubmit()\" (click)=\"onSubmit()\" aria-label=\"submit Button\"/>\n    </div>\n   \n</form>\n</section>"
         }
     ],
     "modules": [
@@ -2893,7 +3006,7 @@
                             "name": "BlogListComponent"
                         },
                         {
-                            "name": "HeaderComponent"
+                            "name": "FooterComponent"
                         },
                         {
                             "name": "LogInComponent"
@@ -2967,7 +3080,7 @@
                 "subtype": "variable",
                 "file": "src/app/theme.ts",
                 "type": "Theme",
-                "defaultValue": "{\r\n  name: 'dark',\r\n  properties: {\r\n    '--background-default': '#797C80',\r\n    '--primary-default': '#ffffff',\r\n    '--popup-default': '#000000',\r\n  }\r\n}"
+                "defaultValue": "{\r\n  name: 'dark',\r\n  properties: {\r\n    '--background-default': '#797C80',\r\n    '--primary-default': '#ffffff',\r\n    '--primary-button' : '#046147',\r\n    '--popup-button-color': '#ffffff',\r\n  }\r\n}"
             },
             {
                 "name": "environment",
@@ -2989,17 +3102,17 @@
                 "name": "initialState",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/store/reducers/blog.reducer.ts",
-                "type": "BlogState",
-                "defaultValue": "{\r\n  blog: [],\r\n  Message: null\r\n}"
+                "file": "src/app/store/reducers/auth.reducers.ts",
+                "type": "State",
+                "defaultValue": "{\r\n  isAuthenticated: false,\r\n  user: null,\r\n  errorMessage: null\r\n}"
             },
             {
                 "name": "initialState",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/store/reducers/auth.reducers.ts",
-                "type": "State",
-                "defaultValue": "{\r\n  isAuthenticated: false,\r\n  user: null,\r\n  errorMessage: null\r\n}"
+                "file": "src/app/store/reducers/blog.reducer.ts",
+                "type": "BlogState",
+                "defaultValue": "{\r\n  blog: [],\r\n  Message: null\r\n}"
             },
             {
                 "name": "Large",
@@ -3015,7 +3128,7 @@
                 "subtype": "variable",
                 "file": "src/app/theme.ts",
                 "type": "Theme",
-                "defaultValue": "{\r\n  name: 'light',\r\n  properties: {\r\n    '--background-default': '#F4FAFF',\r\n    '--primary-default': '#000000',\r\n    '--popup-default': '#000000',\r\n  }\r\n}"
+                "defaultValue": "{\r\n  name: 'light',\r\n  properties: {\r\n    '--background-default': '#F4FAFF',\r\n    '--primary-default': '#000000',\r\n    '--popup-button': '#0cfdba',\r\n    '--popup-button-color': '#000000',\r\n  }\r\n}"
             },
             {
                 "name": "LoggedIn",
@@ -3288,7 +3401,7 @@
                     "subtype": "variable",
                     "file": "src/app/theme.ts",
                     "type": "Theme",
-                    "defaultValue": "{\r\n  name: 'dark',\r\n  properties: {\r\n    '--background-default': '#797C80',\r\n    '--primary-default': '#ffffff',\r\n    '--popup-default': '#000000',\r\n  }\r\n}"
+                    "defaultValue": "{\r\n  name: 'dark',\r\n  properties: {\r\n    '--background-default': '#797C80',\r\n    '--primary-default': '#ffffff',\r\n    '--primary-button' : '#046147',\r\n    '--popup-button-color': '#ffffff',\r\n  }\r\n}"
                 },
                 {
                     "name": "light",
@@ -3296,7 +3409,7 @@
                     "subtype": "variable",
                     "file": "src/app/theme.ts",
                     "type": "Theme",
-                    "defaultValue": "{\r\n  name: 'light',\r\n  properties: {\r\n    '--background-default': '#F4FAFF',\r\n    '--primary-default': '#000000',\r\n    '--popup-default': '#000000',\r\n  }\r\n}"
+                    "defaultValue": "{\r\n  name: 'light',\r\n  properties: {\r\n    '--background-default': '#F4FAFF',\r\n    '--primary-default': '#000000',\r\n    '--popup-button': '#0cfdba',\r\n    '--popup-button-color': '#000000',\r\n  }\r\n}"
                 }
             ],
             "src/environments/environment.prod.ts": [
@@ -3319,16 +3432,6 @@
                     "defaultValue": "{\n  production: false,\n  BASE_URL : 'http://localhost:3000/'\n}"
                 }
             ],
-            "src/app/store/reducers/blog.reducer.ts": [
-                {
-                    "name": "initialState",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/store/reducers/blog.reducer.ts",
-                    "type": "BlogState",
-                    "defaultValue": "{\r\n  blog: [],\r\n  Message: null\r\n}"
-                }
-            ],
             "src/app/store/reducers/auth.reducers.ts": [
                 {
                     "name": "initialState",
@@ -3337,6 +3440,16 @@
                     "file": "src/app/store/reducers/auth.reducers.ts",
                     "type": "State",
                     "defaultValue": "{\r\n  isAuthenticated: false,\r\n  user: null,\r\n  errorMessage: null\r\n}"
+                }
+            ],
+            "src/app/store/reducers/blog.reducer.ts": [
+                {
+                    "name": "initialState",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/store/reducers/blog.reducer.ts",
+                    "type": "BlogState",
+                    "defaultValue": "{\r\n  blog: [],\r\n  Message: null\r\n}"
                 }
             ],
             "src/stories/Button.stories.ts": [
@@ -3689,7 +3802,7 @@
                 "linktype": "component",
                 "name": "AddEditBlogListComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/11",
+                "coverageCount": "0/13",
                 "status": "low"
             },
             {
@@ -3715,6 +3828,15 @@
                 "type": "guard",
                 "linktype": "guard",
                 "name": "CanActivateAddEdit",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/footer/footer.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "FooterComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/3",
                 "status": "low"
@@ -3807,7 +3929,7 @@
                 "linktype": "component",
                 "name": "RegistrationComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/6",
+                "coverageCount": "0/7",
                 "status": "low"
             },
             {
@@ -3816,7 +3938,7 @@
                 "linktype": "injectable",
                 "name": "AuthService",
                 "coveragePercent": 0,
-                "coverageCount": "0/6",
+                "coverageCount": "0/7",
                 "status": "low"
             },
             {

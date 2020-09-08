@@ -4,7 +4,6 @@ import { IBlog } from '../models/blog';
 import { Store } from '@ngrx/store';
 import { AppState } from '../models/store/app.state';
 import { Insert, LoadSingle, Edit } from '../store/actions/blog.action';
-import { map } from 'rxjs/operators';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Observable } from 'rxjs';
 
