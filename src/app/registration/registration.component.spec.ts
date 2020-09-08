@@ -2,9 +2,8 @@ import {  ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
 import { RegistrationComponent } from './registration.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
-import { SignUp } from '../store/actions/auth.actions';
 
 describe('RegistrationComponent', () => {
   let component: RegistrationComponent;
@@ -18,10 +17,12 @@ describe('RegistrationComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ RegistrationComponent ],
-      imports: [ReactiveFormsModule, provideMockStore({initialState })],
+      imports: [FormsModule, ReactiveFormsModule],
+      providers: [provideMockStore({initialState})],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
+    mockStore = TestBed.inject(MockStore);
   }));
 
   beforeEach(() => {

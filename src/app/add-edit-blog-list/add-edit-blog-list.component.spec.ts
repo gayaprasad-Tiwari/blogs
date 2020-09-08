@@ -18,7 +18,8 @@ describe('AddEditBlogListComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ AddEditBlogListComponent ],
-      imports: [RouterTestingModule, ReactiveFormsModule, provideMockStore({initialState})],
+      imports: [RouterTestingModule, ReactiveFormsModule],
+      providers:[provideMockStore({initialState})],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
