@@ -107,7 +107,9 @@ export class AddEditBlogListComponent implements OnInit, OnDestroy {
     });
   }
   ngOnDestroy(){
+    if(this.subscription){
     this.subscription.unsubscribe();
+    }
   }
 }
 

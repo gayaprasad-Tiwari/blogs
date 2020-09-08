@@ -11,4 +11,17 @@ describe('BlogServiceService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+  it('should be ablle to login for registered user', () => {
+    const user = {
+      id: 1,
+      userName: 'abc',
+      email: 'mock@gmail.com',
+      password: 'mockpassword',
+    };
+    service
+      .blogList()
+      .subscribe((data) => {
+        expect(data).toBeDefined();
+        });
+  });
 });

@@ -47,6 +47,8 @@ export class BlogListComponent implements OnInit, OnDestroy {
     }
   }
   ngOnDestroy(){
+    if(this.subscription){
     this.subscription.unsubscribe();
+    }
   }
 }
