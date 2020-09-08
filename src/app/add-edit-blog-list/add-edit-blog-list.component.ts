@@ -1,21 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IBlog } from '../models/blog';
 import { Store } from '@ngrx/store';
 import { AppState } from '../models/store/app.state';
 import { Insert, LoadSingle, Edit } from '../store/actions/blog.action';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Unsubscribable } from 'rxjs';
 
 @Component({
   selector: 'app-add-edit-blog-list',
   templateUrl: './add-edit-blog-list.component.html',
   styleUrls: ['./add-edit-blog-list.component.scss']
 })
-export class AddEditBlogListComponent implements OnInit {
+export class AddEditBlogListComponent implements OnInit, OnDestroy {
   addeditblogForm;
   blogObj: IBlog;
   addEditText = 'Add';
+  subscription: Unsubscribable;
   blogsObservable: Observable<any>;
   message: any;
   editId: any;
@@ -26,7 +27,10 @@ export class AddEditBlogListComponent implements OnInit {
     router.events.subscribe((val) => {
       if (val instanceof NavigationEnd){
         if (val.url === '/addEdit'){
-          this.addeditblogForm.reset();
+          if ( this.addeditblogForm){
+              this.addeditblogForm.reset();
+          }
+
           this.editId = null;
         }
       }
@@ -87,7 +91,7 @@ export class AddEditBlogListComponent implements OnInit {
       this.store.dispatch(new Insert(this.blogObj));
     }
     this.submitted = false;
-    this.blogsObservable.subscribe((data) => {
+    this.subscription = this.blogsObservable.subscribe((data) => {
       this.message = data.Message;
       if (this.message === 'blog Edited successfully') {
         setTimeout(() => {
@@ -101,6 +105,9 @@ export class AddEditBlogListComponent implements OnInit {
       }
       this.addeditblogForm.reset();
     });
+  }
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 }
 

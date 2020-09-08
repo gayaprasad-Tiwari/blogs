@@ -22,12 +22,12 @@ describe('AddEditBlogListComponent', () => {
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
+    mockStore = TestBed.inject(MockStore);
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AddEditBlogListComponent);
     component = fixture.componentInstance;
-    mockStore = TestBed.inject(MockStore);
     fixture.detectChanges();
   });
 

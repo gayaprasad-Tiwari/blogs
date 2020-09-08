@@ -26,6 +26,7 @@
         <div>
             <label>Category</label>
             <select  name="password"  class="input"  formControlName="category">
+                <option>--select Category--</option>
                 <option *ngFor='let category of categoryList'>{{category}}</option>
             </select>
         </div>
