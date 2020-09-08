@@ -65,5 +65,8 @@ describe('AuthService', () => {
         Mock.verify();
       });
   });
-
+  it('Get token should be caled', () => {
+    spyOn(service, 'getToken').and.returnValue('abc');
+    expect(service.getToken()).toEqual('abc');
+  });
 });
