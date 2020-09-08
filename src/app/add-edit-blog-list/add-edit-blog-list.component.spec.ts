@@ -19,7 +19,7 @@ describe('AddEditBlogListComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ AddEditBlogListComponent ],
       imports: [RouterTestingModule, ReactiveFormsModule],
-      providers:[provideMockStore({initialState})],
+      providers: [provideMockStore({initialState})],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
