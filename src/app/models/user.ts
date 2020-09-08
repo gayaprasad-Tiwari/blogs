@@ -2,6 +2,6 @@ export interface IUser{
     userName?: string;
     email?: any;
     phoneNo?: number;
-    password?: number;
+    password?: any;
     accessToken?: any;
 }
