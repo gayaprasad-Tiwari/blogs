@@ -54,7 +54,7 @@ export class BlogEffects {
         ofType(blogActionType.INSERT),
         switchMap((payload) => {
             return this.blogService.addList(payload).pipe(
-                map((blog: IBlog[]) => {
+                map((blog: IBlog) => {
                     return new InsertSuccess(blog);
                 }),
                 catchError((error) => {

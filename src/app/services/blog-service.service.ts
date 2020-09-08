@@ -18,9 +18,9 @@ export class BlogService {
     const url = `${this.BASE_URL}blogList/${id.payload}`;
     return this.http.get<IBlog>(url);
   }
-  addList(payload): Observable<IBlog[]> {
+  addList(payload): Observable<IBlog> {
     const url = `${this.BASE_URL}blogList`;
-    return this.http.post<IBlog[]>(url, payload.payload);
+    return this.http.post<IBlog>(url, payload.payload);
   }
   editList(payload): Observable<IBlog[]> {
     const url = `${this.BASE_URL}blogList/${payload.payload.id}`;

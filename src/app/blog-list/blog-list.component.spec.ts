@@ -17,34 +17,37 @@ describe('BlogListComponent', () => {
   let component: BlogListComponent;
   let fixture: ComponentFixture<BlogListComponent>;
   let mockStore: MockStore;
+  let authService: AuthService;
   const initialState = {};
   const routes: Routes = [
     { path: 'log-in', component: LogInComponent },
     { path: 'sign-up', component: RegistrationComponent },
-    { path: 'addEdit', component: AddEditBlogListComponent, canActivate: [CanActivateAddEdit]},
+    { path: 'addEdit', component: AddEditBlogListComponent, canActivate: [CanActivateAddEdit] },
     { path: '', component: BlogListComponent },
-    { path: '**', redirectTo: '/', pathMatch: 'full'  }
+    { path: '**', redirectTo: '/', pathMatch: 'full' }
   ];
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ BlogListComponent, LogInComponent, RegistrationComponent, AddEditBlogListComponent, BlogListComponent ],
-      imports : [ FormsModule, ReactiveFormsModule, HttpClientTestingModule, RouterTestingModule.withRoutes(
+      declarations: [BlogListComponent, LogInComponent, RegistrationComponent, AddEditBlogListComponent, BlogListComponent],
+      imports: [FormsModule, ReactiveFormsModule, HttpClientTestingModule, RouterTestingModule.withRoutes(
         routes
       )],
-      providers: [provideMockStore({initialState}), AuthService],
+      providers: [provideMockStore({ initialState }), AuthService],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BlogListComponent);
     component = fixture.componentInstance;
     mockStore = TestBed.inject(MockStore);
+    authService = TestBed.inject(AuthService);
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+ 
 });

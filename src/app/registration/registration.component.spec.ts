@@ -35,4 +35,22 @@ describe('RegistrationComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should be called insert action', () => {
+    const obj ={
+      userName: 'tester',
+      email: 'tester@gmail.com',
+      phoneNo: 29389485555,
+      password: 'testerw'
+    }
+    component.registrationForm.patchValue(obj);
+    spyOn(mockStore, 'dispatch');
+    component.onSubmit();
+    expect(mockStore.dispatch).toHaveBeenCalled();
+    expect(mockStore.dispatch).toHaveBeenCalledWith({ payload: {
+      name: 'tester',
+      email: 'tester@gmail.com',
+      phoneNo: 29389485555,
+      password: 'testerw'
+    }, type: '[Auth] Signup'});
+  })
 });
