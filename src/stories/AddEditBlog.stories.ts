@@ -5,8 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { StoreModule } from '@ngrx/store';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { AddEditBlogListComponent } from 'src/app/add-edit-blog-list/add-edit-blog-list.component';
-import { AppRoutingModule } from 'src/app/app-routing.module';
+import { AddEditBlogListComponent } from '../app/add-edit-blog-list/add-edit-blog-list.component';
 import { RouterTestingModule } from '@angular/router/testing';
 
 
@@ -35,5 +34,5 @@ Add.args = {
 };
 export const Edit = Template.bind({});
 Edit.args = {
-  editId :1
+  editId : 1
 };

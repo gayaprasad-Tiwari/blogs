@@ -29,4 +29,4 @@ const Template: Story<HeaderComponent> = (args: HeaderComponent) => ({
 
 export const header = Template.bind({});
 header.args = {
-};
+}
