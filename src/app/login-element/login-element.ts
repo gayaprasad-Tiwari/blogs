@@ -59,13 +59,13 @@ export class LoginElement extends LitElement {
     <form>
         <div class="form-container">
             <div>
-                <label> Email *</label>
-                <input type='email' class="input" name="email" .value="${this.email}"
+                <label for="email"> Email *</label>
+                <input type='email' id="email" class="input" name="email" .value="${this.email}"
                 @change="${this.onEmail}" >
             </div>
             <div>
-                <label> Password *</label>
-                <input type='password'  class="input"  name="password" .value="${this.password}"
+                <label for="password"> Password *</label>
+                <input type='password' id="password"  class="input"  name="password" .value="${this.password}"
                 @change="${this.onPassword}" >
             </div>
             <div id="message">

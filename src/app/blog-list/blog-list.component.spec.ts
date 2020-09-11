@@ -49,5 +49,4 @@ describe('BlogListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
- 
 });

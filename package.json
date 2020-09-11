@@ -25,6 +25,7 @@
     "@angular/router": "~10.1.0",
     "@ngrx/effects": "^10.0.0",
     "@ngrx/store": "^10.0.0",
+    "@storybook/web-components": "^6.0.21",
     "lit-element": "^2.4.0",
     "pwa-helpers": "^0.9.1",
     "reselect": "^4.0.0",
@@ -64,7 +65,7 @@
   "jest": {
     "preset": "jest-preset-angular",
     "setupFilesAfterEnv": [
-        "<rootDir>/src/setupJest.ts"
+      "<rootDir>/src/setupJest.ts"
     ]
-}
+  }
 }

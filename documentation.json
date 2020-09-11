@@ -116,10 +116,10 @@
         },
         {
             "name": "IUser",
-            "id": "interface-IUser-044fa64eda02a83fdc5532b66109f957",
+            "id": "interface-IUser-8d331c027218cd200d398d23def3e795",
             "file": "src/app/models/user.ts",
             "type": "interface",
-            "sourceCode": "export interface IUser{\r\n    userName?: string;\r\n    email?: any;\r\n    phoneNo?: number;\r\n    password?: number;\r\n    accessToken?: any;\r\n}\r\n",
+            "sourceCode": "export interface IUser{\r\n    userName?: string;\r\n    email?: any;\r\n    phoneNo?: number;\r\n    password?: any;\r\n    accessToken?: any;\r\n}\r\n",
             "properties": [
                 {
                     "name": "accessToken",
@@ -137,7 +137,7 @@
                 },
                 {
                     "name": "password",
-                    "type": "number",
+                    "type": "any",
                     "optional": true,
                     "description": "",
                     "line": 5
@@ -495,7 +495,7 @@
         },
         {
             "name": "BlogEffects",
-            "id": "injectable-BlogEffects-4cced5df962e393cba4ea12cadc16241",
+            "id": "injectable-BlogEffects-e98512520933d69af0b098ad727f93b4",
             "file": "src/app/store/effects/blog.effects.ts",
             "properties": [
                 {
@@ -528,7 +528,7 @@
                 },
                 {
                     "name": "insert",
-                    "defaultValue": "this.actions.pipe(\r\n        ofType(blogActionType.INSERT),\r\n        switchMap((payload) => {\r\n            return this.blogService.addList(payload).pipe(\r\n                map((blog: IBlog[]) => {\r\n                    return new InsertSuccess(blog);\r\n                }),\r\n                catchError((error) => {\r\n                    alert(error.error);\r\n                    return of(error);\r\n                })\r\n                );\r\n        })\r\n    )",
+                    "defaultValue": "this.actions.pipe(\r\n        ofType(blogActionType.INSERT),\r\n        switchMap((payload) => {\r\n            return this.blogService.addList(payload).pipe(\r\n                map((blog: IBlog) => {\r\n                    return new InsertSuccess(blog);\r\n                }),\r\n                catchError((error) => {\r\n                    alert(error.error);\r\n                    return of(error);\r\n                })\r\n                );\r\n        })\r\n    )",
                     "type": "Observable<any>",
                     "optional": false,
                     "description": "",
@@ -571,7 +571,7 @@
             ],
             "methods": [],
             "description": "",
-            "sourceCode": "import { Injectable } from '@angular/core';\r\nimport { Action } from '@ngrx/store';\r\nimport { Router } from '@angular/router';\r\nimport { Actions, Effect, ofType } from '@ngrx/effects';\r\nimport { Observable, of } from 'rxjs';\r\nimport { tap, map, switchMap, catchError } from 'rxjs/operators';\r\nimport {\r\n    blogActionType, Load, Insert, LoadSuccess, InsertSuccess, LoadSingleSuccess, EditSuccess, DeleteSuccess\r\n} from '../actions/blog.action';\r\nimport { IBlog } from 'src/app/models/blog';\r\nimport { BlogService } from 'src/app/services/blog-service.service';\r\n\r\n@Injectable()\r\nexport class BlogEffects {\r\n    constructor(\r\n        private actions: Actions,\r\n        private router: Router,\r\n        private blogService: BlogService\r\n    ) { }\r\n\r\n    @Effect()\r\n    Load: Observable<any> = this.actions.pipe(\r\n        ofType(blogActionType.LOAD),\r\n        switchMap(() => {\r\n            return this.blogService.blogList().pipe(\r\n                map((blog: IBlog[]) => {\r\n                    return new LoadSuccess({ blog });\r\n                }),\r\n                catchError((error) => {\r\n                    alert(error.error);\r\n                    return of(error);\r\n                })\r\n            );\r\n        })\r\n    );\r\n    @Effect()\r\n    LoadSingle: Observable<any> = this.actions.pipe(\r\n        ofType(blogActionType.LOAD_SINGLE),\r\n        switchMap((id) => {\r\n            return this.blogService.blog(id).pipe(\r\n                map((blog) => {\r\n                    return new LoadSingleSuccess(blog);\r\n                }),\r\n                catchError((error) => {\r\n                    alert(error.error);\r\n                    return of(error);\r\n                })\r\n            );\r\n        })\r\n    );\r\n\r\n    @Effect()\r\n    insert: Observable<any> = this.actions.pipe(\r\n        ofType(blogActionType.INSERT),\r\n        switchMap((payload) => {\r\n            return this.blogService.addList(payload).pipe(\r\n                map((blog: IBlog[]) => {\r\n                    return new InsertSuccess(blog);\r\n                }),\r\n                catchError((error) => {\r\n                    alert(error.error);\r\n                    return of(error);\r\n                })\r\n                );\r\n        })\r\n    );\r\n    @Effect()\r\n    edit: Observable<any> = this.actions.pipe(\r\n        ofType(blogActionType.Edit),\r\n        switchMap((payload) => {\r\n            return this.blogService.editList(payload).pipe(\r\n                map((blog: IBlog[]) => {\r\n                    return new EditSuccess(blog);\r\n                }),\r\n                catchError((error) => {\r\n                    alert(error.error);\r\n                    return of(error);\r\n                })\r\n            );\r\n        })\r\n    );\r\n    @Effect()\r\n    deleteBlog: Observable<any> = this.actions.pipe(\r\n        ofType(blogActionType.DELETE),\r\n        switchMap((payload) => {\r\n            return this.blogService.deleteBlog(payload).pipe(\r\n                map((blog) => {\r\n                    return new DeleteSuccess(blog);\r\n                }),\r\n                catchError((error) => {\r\n                    alert(error.error);\r\n                    return of(error);\r\n                })\r\n            );\r\n        })\r\n    );\r\n}\r\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\r\nimport { Action } from '@ngrx/store';\r\nimport { Router } from '@angular/router';\r\nimport { Actions, Effect, ofType } from '@ngrx/effects';\r\nimport { Observable, of } from 'rxjs';\r\nimport { tap, map, switchMap, catchError } from 'rxjs/operators';\r\nimport {\r\n    blogActionType, Load, Insert, LoadSuccess, InsertSuccess, LoadSingleSuccess, EditSuccess, DeleteSuccess\r\n} from '../actions/blog.action';\r\nimport { IBlog } from 'src/app/models/blog';\r\nimport { BlogService } from 'src/app/services/blog-service.service';\r\n\r\n@Injectable()\r\nexport class BlogEffects {\r\n    constructor(\r\n        private actions: Actions,\r\n        private router: Router,\r\n        private blogService: BlogService\r\n    ) { }\r\n\r\n    @Effect()\r\n    Load: Observable<any> = this.actions.pipe(\r\n        ofType(blogActionType.LOAD),\r\n        switchMap(() => {\r\n            return this.blogService.blogList().pipe(\r\n                map((blog: IBlog[]) => {\r\n                    return new LoadSuccess({ blog });\r\n                }),\r\n                catchError((error) => {\r\n                    alert(error.error);\r\n                    return of(error);\r\n                })\r\n            );\r\n        })\r\n    );\r\n    @Effect()\r\n    LoadSingle: Observable<any> = this.actions.pipe(\r\n        ofType(blogActionType.LOAD_SINGLE),\r\n        switchMap((id) => {\r\n            return this.blogService.blog(id).pipe(\r\n                map((blog) => {\r\n                    return new LoadSingleSuccess(blog);\r\n                }),\r\n                catchError((error) => {\r\n                    alert(error.error);\r\n                    return of(error);\r\n                })\r\n            );\r\n        })\r\n    );\r\n\r\n    @Effect()\r\n    insert: Observable<any> = this.actions.pipe(\r\n        ofType(blogActionType.INSERT),\r\n        switchMap((payload) => {\r\n            return this.blogService.addList(payload).pipe(\r\n                map((blog: IBlog) => {\r\n                    return new InsertSuccess(blog);\r\n                }),\r\n                catchError((error) => {\r\n                    alert(error.error);\r\n                    return of(error);\r\n                })\r\n                );\r\n        })\r\n    );\r\n    @Effect()\r\n    edit: Observable<any> = this.actions.pipe(\r\n        ofType(blogActionType.Edit),\r\n        switchMap((payload) => {\r\n            return this.blogService.editList(payload).pipe(\r\n                map((blog: IBlog[]) => {\r\n                    return new EditSuccess(blog);\r\n                }),\r\n                catchError((error) => {\r\n                    alert(error.error);\r\n                    return of(error);\r\n                })\r\n            );\r\n        })\r\n    );\r\n    @Effect()\r\n    deleteBlog: Observable<any> = this.actions.pipe(\r\n        ofType(blogActionType.DELETE),\r\n        switchMap((payload) => {\r\n            return this.blogService.deleteBlog(payload).pipe(\r\n                map((blog) => {\r\n                    return new DeleteSuccess(blog);\r\n                }),\r\n                catchError((error) => {\r\n                    alert(error.error);\r\n                    return of(error);\r\n                })\r\n            );\r\n        })\r\n    );\r\n}\r\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -618,7 +618,7 @@
         },
         {
             "name": "BlogService",
-            "id": "injectable-BlogService-be3871f678ad4b593e026258e6d03046",
+            "id": "injectable-BlogService-8082b48726f07eef9040d3d37ca2e63d",
             "file": "src/app/services/blog-service.service.ts",
             "properties": [
                 {
@@ -643,7 +643,7 @@
                         }
                     ],
                     "optional": false,
-                    "returnType": "Observable<IBlog[]>",
+                    "returnType": "Observable<IBlog>",
                     "typeParameters": [],
                     "line": 21,
                     "jsdoctags": [
@@ -732,7 +732,7 @@
                 }
             ],
             "description": "",
-            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\nimport { IBlog } from '../models/blog';\nimport { Observable } from 'rxjs';\nimport {environment} from '../../environments/environment';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class BlogService {\n  private BASE_URL = environment.BASE_URL;\n  constructor(private http: HttpClient) {}\n  blogList(): Observable<IBlog[]> {\n    const url = `${this.BASE_URL}blogList`;\n    return this.http.get<IBlog[]>(url);\n  }\n  blog(id): Observable<IBlog> {\n    const url = `${this.BASE_URL}blogList/${id.payload}`;\n    return this.http.get<IBlog>(url);\n  }\n  addList(payload): Observable<IBlog[]> {\n    const url = `${this.BASE_URL}blogList`;\n    return this.http.post<IBlog[]>(url, payload.payload);\n  }\n  editList(payload): Observable<IBlog[]> {\n    const url = `${this.BASE_URL}blogList/${payload.payload.id}`;\n    return this.http.patch<IBlog[]>(url, payload.payload);\n  }\n  deleteBlog(payload): Observable<any> {\n    const url = `${this.BASE_URL}blogList/${payload.payload}`;\n    return this.http.delete<any>(url, payload.payload);\n  }\n}\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\nimport { IBlog } from '../models/blog';\nimport { Observable } from 'rxjs';\nimport {environment} from '../../environments/environment';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class BlogService {\n  private BASE_URL = environment.BASE_URL;\n  constructor(private http: HttpClient) {}\n  blogList(): Observable<IBlog[]> {\n    const url = `${this.BASE_URL}blogList`;\n    return this.http.get<IBlog[]>(url);\n  }\n  blog(id): Observable<IBlog> {\n    const url = `${this.BASE_URL}blogList/${id.payload}`;\n    return this.http.get<IBlog>(url);\n  }\n  addList(payload): Observable<IBlog> {\n    const url = `${this.BASE_URL}blogList`;\n    return this.http.post<IBlog>(url, payload.payload);\n  }\n  editList(payload): Observable<IBlog[]> {\n    const url = `${this.BASE_URL}blogList/${payload.payload.id}`;\n    return this.http.patch<IBlog[]>(url, payload.payload);\n  }\n  deleteBlog(payload): Observable<any> {\n    const url = `${this.BASE_URL}blogList/${payload.payload}`;\n    return this.http.delete<any>(url, payload.payload);\n  }\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -1949,7 +1949,7 @@
     "components": [
         {
             "name": "AddEditBlogListComponent",
-            "id": "component-AddEditBlogListComponent-9feb6260466a4baa1f12030f3e13f741",
+            "id": "component-AddEditBlogListComponent-8fda5c6a391a775ce7cda374bdacab34",
             "file": "src/app/add-edit-blog-list/add-edit-blog-list.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1995,7 +1995,7 @@
                     "type": "Observable<any>",
                     "optional": false,
                     "description": "",
-                    "line": 19
+                    "line": 20
                 },
                 {
                     "name": "categoryList",
@@ -2003,21 +2003,21 @@
                     "type": "[]",
                     "optional": false,
                     "description": "",
-                    "line": 35
+                    "line": 39
                 },
                 {
                     "name": "editId",
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 21
+                    "line": 22
                 },
                 {
                     "name": "message",
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 20
+                    "line": 21
                 },
                 {
                     "name": "submitted",
@@ -2025,7 +2025,14 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 22
+                    "line": 23
+                },
+                {
+                    "name": "subscription",
+                    "type": "Unsubscribable",
+                    "optional": false,
+                    "description": "",
+                    "line": 19
                 }
             ],
             "methodsClass": [
@@ -2040,7 +2047,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 67,
+                    "line": 71,
                     "jsdoctags": [
                         {
                             "name": "id",
@@ -2052,12 +2059,20 @@
                     ]
                 },
                 {
+                    "name": "ngOnDestroy",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 109
+                },
+                {
                     "name": "ngOnInit",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 44
+                    "line": 48
                 },
                 {
                     "name": "onSubmit",
@@ -2065,7 +2080,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 71
+                    "line": 75
                 }
             ],
             "hostBindings": [],
@@ -2073,7 +2088,7 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FormBuilder, FormGroup, Validators } from '@angular/forms';\nimport { IBlog } from '../models/blog';\nimport { Store } from '@ngrx/store';\nimport { AppState } from '../models/store/app.state';\nimport { Insert, LoadSingle, Edit } from '../store/actions/blog.action';\nimport { ActivatedRoute, Router, NavigationEnd } from '@angular/router';\nimport { Observable } from 'rxjs';\n\n@Component({\n  selector: 'app-add-edit-blog-list',\n  templateUrl: './add-edit-blog-list.component.html',\n  styleUrls: ['./add-edit-blog-list.component.scss']\n})\nexport class AddEditBlogListComponent implements OnInit {\n  addeditblogForm;\n  blogObj: IBlog;\n  addEditText = 'Add';\n  blogsObservable: Observable<any>;\n  message: any;\n  editId: any;\n  submitted = false;\n  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private store: Store<AppState>) {\n    this.editId = this.route.snapshot.paramMap.get('id');\n    this.blogsObservable = this.store.select(state => state.blog);\n    router.events.subscribe((val) => {\n      if (val instanceof NavigationEnd){\n        if (val.url === '/addEdit'){\n          this.addeditblogForm.reset();\n          this.editId = null;\n        }\n      }\n  });\n  }\n  categoryList = [\n    'Music',\n    'Fashion',\n    'Car',\n    'Real State',\n    'Beauty',\n    'Travel',\n    'others'\n  ];\n  ngOnInit(): void {\n    this.addeditblogForm = this.fb.group({\n      title: ['', Validators.required],\n      imageUrl: ['', Validators.required],\n      description: ['', Validators.required],\n      category: ['', Validators.required]\n    });\n    if (this.editId) {\n      this.addEditText = 'Edit';\n      this.blogsObservable.subscribe((data) => {\n        if (data && data.Message === 'single blog loaded') {\n          const dataObj = data.blog;\n          this.addeditblogForm.patchValue({\n            title: dataObj.title,\n            imageUrl: dataObj.imageUrl,\n            description: dataObj.description,\n            category: dataObj.category\n          });\n        }\n      });\n      this.getEditBlog(this.editId);\n    }\n  }\n  getEditBlog(id) {\n    this.store.dispatch(new LoadSingle(id));\n  }\n  get f() { return this.addeditblogForm.controls; }\n  onSubmit() {\n    this.submitted = true;\n    if (this.addeditblogForm.invalid){\n      return;\n    }\n    this.blogObj = {\n      title: this.addeditblogForm.controls.title.value,\n      imageUrl: this.addeditblogForm.controls.imageUrl.value,\n      description: this.addeditblogForm.controls.description.value,\n      category: this.addeditblogForm.controls.category.value,\n      date: new Date()\n    };\n    if (this.editId) {\n      this.blogObj.id = this.editId;\n      this.store.dispatch(new Edit(this.blogObj));\n    } else {\n      this.store.dispatch(new Insert(this.blogObj));\n    }\n    this.submitted = false;\n    this.blogsObservable.subscribe((data) => {\n      this.message = data.Message;\n      if (this.message === 'blog Edited successfully') {\n        setTimeout(() => {\n          this.router.navigateByUrl('/');\n        }, 1000);\n      }\n      if (this.message === 'blog added successfully') {\n        setTimeout(() => {\n          this.message = null;\n        }, 1000);\n      }\n      this.addeditblogForm.reset();\n    });\n  }\n}\n\n\n",
+            "sourceCode": "import { Component, OnInit, OnDestroy } from '@angular/core';\nimport { FormBuilder, FormGroup, Validators } from '@angular/forms';\nimport { IBlog } from '../models/blog';\nimport { Store } from '@ngrx/store';\nimport { AppState } from '../models/store/app.state';\nimport { Insert, LoadSingle, Edit } from '../store/actions/blog.action';\nimport { ActivatedRoute, Router, NavigationEnd } from '@angular/router';\nimport { Observable, Unsubscribable } from 'rxjs';\n\n@Component({\n  selector: 'app-add-edit-blog-list',\n  templateUrl: './add-edit-blog-list.component.html',\n  styleUrls: ['./add-edit-blog-list.component.scss']\n})\nexport class AddEditBlogListComponent implements OnInit, OnDestroy {\n  addeditblogForm;\n  blogObj: IBlog;\n  addEditText = 'Add';\n  subscription: Unsubscribable;\n  blogsObservable: Observable<any>;\n  message: any;\n  editId: any;\n  submitted = false;\n  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private store: Store<AppState>) {\n    this.editId = this.route.snapshot.paramMap.get('id');\n    this.blogsObservable = this.store.select(state => state.blog);\n    router.events.subscribe((val) => {\n      if (val instanceof NavigationEnd){\n        if (val.url === '/addEdit'){\n          if ( this.addeditblogForm){\n              this.addeditblogForm.reset();\n          }\n\n          this.editId = null;\n        }\n      }\n  });\n  }\n  categoryList = [\n    'Music',\n    'Fashion',\n    'Car',\n    'Real State',\n    'Beauty',\n    'Travel',\n    'others'\n  ];\n  ngOnInit(): void {\n    this.addeditblogForm = this.fb.group({\n      title: ['', Validators.required],\n      imageUrl: ['', Validators.required],\n      description: ['', Validators.required],\n      category: ['', Validators.required]\n    });\n    if (this.editId) {\n      this.addEditText = 'Edit';\n      this.blogsObservable.subscribe((data) => {\n        if (data && data.Message === 'single blog loaded') {\n          const dataObj = data.blog;\n          this.addeditblogForm.patchValue({\n            title: dataObj.title,\n            imageUrl: dataObj.imageUrl,\n            description: dataObj.description,\n            category: dataObj.category\n          });\n        }\n      });\n      this.getEditBlog(this.editId);\n    }\n  }\n  getEditBlog(id) {\n    this.store.dispatch(new LoadSingle(id));\n  }\n  get f() { return this.addeditblogForm.controls; }\n  onSubmit() {\n    this.submitted = true;\n    if (this.addeditblogForm.invalid){\n      return;\n    }\n    this.blogObj = {\n      title: this.addeditblogForm.controls.title.value,\n      imageUrl: this.addeditblogForm.controls.imageUrl.value,\n      description: this.addeditblogForm.controls.description.value,\n      category: this.addeditblogForm.controls.category.value,\n      date: new Date()\n    };\n    if (this.editId) {\n      this.blogObj.id = this.editId;\n      this.store.dispatch(new Edit(this.blogObj));\n    } else {\n      this.store.dispatch(new Insert(this.blogObj));\n    }\n    this.submitted = false;\n    this.subscription = this.blogsObservable.subscribe((data) => {\n      this.message = data.Message;\n      if (this.message === 'blog Edited successfully') {\n        setTimeout(() => {\n          this.router.navigateByUrl('/');\n        }, 1000);\n      }\n      if (this.message === 'blog added successfully') {\n        setTimeout(() => {\n          this.message = null;\n        }, 1000);\n      }\n      this.addeditblogForm.reset();\n    });\n  }\n  ngOnDestroy(){\n    if (this.subscription){\n    this.subscription.unsubscribe();\n    }\n  }\n}\n\n\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -2103,7 +2118,7 @@
                         "type": "Store<AppState>"
                     }
                 ],
-                "line": 22,
+                "line": 23,
                 "jsdoctags": [
                     {
                         "name": "fb",
@@ -2136,7 +2151,8 @@
                 ]
             },
             "implements": [
-                "OnInit"
+                "OnInit",
+                "OnDestroy"
             ],
             "accessors": {
                 "f": {
@@ -2145,11 +2161,11 @@
                         "name": "f",
                         "type": "",
                         "returnType": "",
-                        "line": 70
+                        "line": 74
                     }
                 }
             },
-            "templateData": "<section class=\"form-outer\">\n<h2> {{addEditText}} Blog</h2>\n<div>{{message}}</div>\n<form [formGroup]=\"addeditblogForm\" class=\"form-container\">\n        <div>\n            <label>Title *</label>\n            <input type=\"text\" name=\"title\"  class=\"input\"  formControlName=\"title\">\n        </div>\n        <div *ngIf=\"submitted && f.title.errors\" class=\"error\">\n                <div *ngIf=\"f.title.errors.required\">title is required</div>\n        </div>\n        <div>\n            <label>Image Url</label>\n            <input type=\"url\" name=\"imageUrl\"  class=\"input\"  formControlName=\"imageUrl\">\n        </div>\n        <div *ngIf=\"submitted && f.imageUrl.errors\" class=\"error\">\n                <div *ngIf=\"f.imageUrl.errors.required\">Image Url is required</div>\n        </div>\n        <div>\n            <label>Description</label>\n            <textarea name=\"description\"  class=\"input\"  formControlName=\"description\"></textarea>\n        </div>\n        <div *ngIf=\"submitted && f.description.errors\" class=\"error\">\n                <div *ngIf=\"f.description.errors.required\">descriptionis required</div>\n        </div>\n        <div>\n            <label>Category</label>\n            <select  name=\"password\"  class=\"input\"  formControlName=\"category\">\n                <option *ngFor='let category of categoryList'>{{category}}</option>\n            </select>\n        </div>\n        <div *ngIf=\"submitted && f.category.errors\" class=\"error\">\n                <div *ngIf=\"f.category.errors.required\">category is required</div>\n        </div>\n        <div class=\"form-button-outer\">\n        <input type=\"submit\" value=\"submit\" class=\"button\" (click)=\"onSubmit()\" />\n        </div>\n    </form>\n</section>"
+            "templateData": "<section class=\"form-outer\">\n<h2> {{addEditText}} Blog</h2>\n<div>{{message}}</div>\n<form [formGroup]=\"addeditblogForm\" class=\"form-container\">\n        <div>\n            <label>Title *</label>\n            <input type=\"text\" name=\"title\"  class=\"input\"  formControlName=\"title\">\n        </div>\n        <div *ngIf=\"submitted && f.title.errors\" class=\"error\">\n                <div *ngIf=\"f.title.errors.required\">title is required</div>\n        </div>\n        <div>\n            <label>Image Url</label>\n            <input type=\"url\" name=\"imageUrl\"  class=\"input\"  formControlName=\"imageUrl\">\n        </div>\n        <div *ngIf=\"submitted && f.imageUrl.errors\" class=\"error\">\n                <div *ngIf=\"f.imageUrl.errors.required\">Image Url is required</div>\n        </div>\n        <div>\n            <label>Description</label>\n            <textarea name=\"description\"  class=\"input\"  formControlName=\"description\"></textarea>\n        </div>\n        <div *ngIf=\"submitted && f.description.errors\" class=\"error\">\n                <div *ngIf=\"f.description.errors.required\">descriptionis required</div>\n        </div>\n        <div>\n            <label>Category</label>\n            <select  name=\"password\"  class=\"input\"  formControlName=\"category\">\n                <option>--select Category--</option>\n                <option *ngFor='let category of categoryList'>{{category}}</option>\n            </select>\n        </div>\n        <div *ngIf=\"submitted && f.category.errors\" class=\"error\">\n                <div *ngIf=\"f.category.errors.required\">category is required</div>\n        </div>\n        <div class=\"form-button-outer\">\n        <input type=\"submit\" value=\"submit\" class=\"button\" (click)=\"onSubmit()\" />\n        </div>\n    </form>\n</section>"
         },
         {
             "name": "AppComponent",
@@ -2200,7 +2216,7 @@
         },
         {
             "name": "BlogListComponent",
-            "id": "component-BlogListComponent-fff215ce21685618470335f9f8007026",
+            "id": "component-BlogListComponent-752939eeb30148c1da7ac60af824d830",
             "file": "src/app/blog-list/blog-list.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2224,14 +2240,14 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 19
+                    "line": 16
                 },
                 {
                     "name": "blogsObservable",
                     "type": "Observable<any>",
                     "optional": false,
                     "description": "",
-                    "line": 18
+                    "line": 14
                 },
                 {
                     "name": "isloggedin",
@@ -2239,34 +2255,19 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 20
+                    "line": 17
+                },
+                {
+                    "name": "subscription",
+                    "type": "Unsubscribable",
+                    "optional": false,
+                    "description": "",
+                    "line": 15
                 }
             ],
             "methodsClass": [
                 {
                     "name": "DeleteBlog",
-                    "args": [
-                        {
-                            "name": "id",
-                            "type": ""
-                        }
-                    ],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 47,
-                    "jsdoctags": [
-                        {
-                            "name": "id",
-                            "type": "",
-                            "tagName": {
-                                "text": "param"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "name": "editBlock",
                     "args": [
                         {
                             "name": "id",
@@ -2288,12 +2289,42 @@
                     ]
                 },
                 {
+                    "name": "editBlock",
+                    "args": [
+                        {
+                            "name": "id",
+                            "type": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 41,
+                    "jsdoctags": [
+                        {
+                            "name": "id",
+                            "type": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "ngOnDestroy",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 49
+                },
+                {
                     "name": "ngOnInit",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 25
+                    "line": 22
                 }
             ],
             "hostBindings": [],
@@ -2301,7 +2332,7 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { IBlog } from '../models/blog';\nimport { Store, select } from '@ngrx/store';\nimport { AppState } from '../models/store/app.state';\nimport { Load, DeleteBlog } from '../store/actions/blog.action';\nimport { Observable } from 'rxjs';\nimport { BlogState } from '../models/blog-state';\nimport { map } from 'rxjs/operators';\nimport { Router } from '@angular/router';\nimport { AuthService } from '../services/auth.service';\n\n@Component({\n  selector: 'app-blog-list',\n  templateUrl: './blog-list.component.html',\n  styleUrls: ['./blog-list.component.scss']\n})\nexport class BlogListComponent implements OnInit {\n  blogsObservable: Observable<any>;\n  bloglist: any;\n  isloggedin = false;\n  constructor(private store: Store<any>, private router: Router, private authService: AuthService, ) {\n    this.blogsObservable = this.store.select(state => state.blog);\n  }\n\n  ngOnInit(): void {\n    this.authService.token.subscribe((value) => {\n      if (value) {\n        this.isloggedin = true;\n      } else {\n        this.isloggedin = false;\n      }\n    });\n    this.blogsObservable.subscribe((data) => {\n      if (data) {\n        this.bloglist = data.blog;\n      }\n      if (data.Message === 'Succesfully deleted the blog') {\n        alert(data.Message);\n        this.store.dispatch(new Load());\n      }\n    });\n    this.store.dispatch(new Load());\n  }\n  editBlock(id) {\n    this.router.navigate(['addEdit', { id }]);\n  }\n  DeleteBlog(id) {\n    if (confirm('Are you sure you want to delete this blog?')) {\n      this.store.dispatch(new DeleteBlog(id));\n    }\n  }\n}\n",
+            "sourceCode": "import { Component, OnInit, OnDestroy } from '@angular/core';\nimport { Store } from '@ngrx/store';\nimport { Load, DeleteBlog } from '../store/actions/blog.action';\nimport { Observable, Unsubscribable } from 'rxjs';\nimport { Router } from '@angular/router';\nimport { AuthService } from '../services/auth.service';\n\n@Component({\n  selector: 'app-blog-list',\n  templateUrl: './blog-list.component.html',\n  styleUrls: ['./blog-list.component.scss']\n})\nexport class BlogListComponent implements OnInit, OnDestroy {\n  blogsObservable: Observable<any>;\n  subscription: Unsubscribable;\n  bloglist: any;\n  isloggedin = false;\n  constructor(private store: Store<any>, private router: Router, private authService: AuthService, ) {\n    this.blogsObservable = this.store.select(state => state.blog);\n  }\n\n  ngOnInit(): void {\n    this.authService.token.subscribe((value) => {\n      if (value) {\n        this.isloggedin = true;\n      } else {\n        this.isloggedin = false;\n      }\n    });\n    this.subscription = this.blogsObservable.subscribe((data) => {\n      if (data) {\n        this.bloglist = data.blog;\n      }\n      if (data && data.Message === 'Succesfully deleted the blog') {\n        alert(data.Message);\n        this.store.dispatch(new Load());\n      }\n    });\n    this.store.dispatch(new Load());\n  }\n  editBlock(id) {\n    this.router.navigate(['addEdit', { id }]);\n  }\n  DeleteBlog(id) {\n    if (confirm('Are you sure you want to delete this blog?')) {\n      this.store.dispatch(new DeleteBlog(id));\n    }\n  }\n  ngOnDestroy(){\n    if (this.subscription){\n    this.subscription.unsubscribe();\n    }\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -2327,7 +2358,7 @@
                         "type": "AuthService"
                     }
                 ],
-                "line": 20,
+                "line": 17,
                 "jsdoctags": [
                     {
                         "name": "store",
@@ -2353,7 +2384,8 @@
                 ]
             },
             "implements": [
-                "OnInit"
+                "OnInit",
+                "OnDestroy"
             ],
             "templateData": "<ul *ngIf=\"bloglist\" class=\"blog-container\" aria-label=\"blog list container\">\n    <li *ngFor=\"let blog of bloglist trackBy bloglist.id\" aria-label=\"blog\">\n        <article>\n            <header>\n                <h2 aria-label=\"blog title\">\n                    {{blog.title}}\n                </h2>\n                <div aria-label=\"blog date\">\n                    {{blog.date | date}}\n                </div>\n            </header>\n            <section>\n                <ul>\n                    <li>\n                        <figure>\n                            <img [src]=\"blog.imageUrl\" aria-label=\"blog image\" [title]=\"blog.title\">\n                        </figure>\n                        <section>\n                            <p aria-label=\"blog description\">\n                                {{blog.description }}\n                            </p>\n                            <p aria-label=\"blog category\">\n                                category: {{blog.category}}\n                            </p>\n                            <section *ngIf=\"isloggedin\" class=\"add-delete-button-outer\">\n                                <button type=\"button\" class=\"button editButton\" (keyup.enter)=\"editBlock(blog.id)\"\n                                    (click)=\"editBlock(blog.id)\">Edit Blog</button>\n                                <button type=\"button\" class=\"button\" (keyup.enter)=\"DeleteBlog(blog.id)\"\n                                    (click)=\"DeleteBlog(blog.id)\">Delete Blog</button>\n                            </section>\n                        </section>\n\n                    </li>\n\n                </ul>\n            </section>\n        </article>\n    </li>\n</ul>\n"
         },
@@ -2496,69 +2528,7 @@
         },
         {
             "name": "HeaderComponent",
-            "id": "component-HeaderComponent-246e2a69dc126a3bd76c6328dd3b93e2",
-            "file": "src/stories/header.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "storybook-header",
-            "styleUrls": [
-                "./header.css"
-            ],
-            "styles": [],
-            "template": "<header>    <div class=\"wrapper\">\n      <div>\n        <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n              fill=\"#FFF\"\n            />\n            <path\n              d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n              fill=\"#555AB9\"\n            />\n            <path\n              d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\n              fill=\"#91BAF8\"\n            />\n          </g>\n        </svg>\n        <h1>Acme</h1>\n      </div>\n      <div>\n        <storybook-button\n          *ngIf=\"user\"\n          size=\"small\"\n          (onClick)=\"onLogout.emit($event)\"\n          label=\"Log out\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          size=\"small\"\n          (onClick)=\"onLogin.emit($event)\"\n          label=\"Log in\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          primary\n          size=\"small\"\n          (onClick)=\"onCreateAccount.emit($event)\"\n          label=\"Sign up\"\n        ></storybook-button>\n      </div>\n    </div>\n  </header>",
-            "templateUrl": [],
-            "viewProviders": [],
-            "inputsClass": [
-                {
-                    "name": "user",
-                    "defaultValue": "null",
-                    "line": 53,
-                    "type": "unknown"
-                }
-            ],
-            "outputsClass": [
-                {
-                    "name": "onCreateAccount",
-                    "defaultValue": "new EventEmitter<Event>()",
-                    "line": 62,
-                    "type": "EventEmitter"
-                },
-                {
-                    "name": "onLogin",
-                    "defaultValue": "new EventEmitter<Event>()",
-                    "line": 56,
-                    "type": "EventEmitter"
-                },
-                {
-                    "name": "onLogout",
-                    "defaultValue": "new EventEmitter<Event>()",
-                    "line": 59,
-                    "type": "EventEmitter"
-                }
-            ],
-            "propertiesClass": [],
-            "methodsClass": [],
-            "hostBindings": [],
-            "hostListeners": [],
-            "description": "",
-            "rawdescription": "",
-            "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n  selector: 'storybook-header',\n  template: `<header>\n    <div class=\"wrapper\">\n      <div>\n        <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n              fill=\"#FFF\"\n            />\n            <path\n              d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n              fill=\"#555AB9\"\n            />\n            <path\n              d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\n              fill=\"#91BAF8\"\n            />\n          </g>\n        </svg>\n        <h1>Acme</h1>\n      </div>\n      <div>\n        <storybook-button\n          *ngIf=\"user\"\n          size=\"small\"\n          (onClick)=\"onLogout.emit($event)\"\n          label=\"Log out\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          size=\"small\"\n          (onClick)=\"onLogin.emit($event)\"\n          label=\"Log in\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          primary\n          size=\"small\"\n          (onClick)=\"onCreateAccount.emit($event)\"\n          label=\"Sign up\"\n        ></storybook-button>\n      </div>\n    </div>\n  </header>`,\n  styleUrls: ['./header.css'],\n})\nexport default class HeaderComponent {\n  @Input()\n  user: unknown = null;\n\n  @Output()\n  onLogin = new EventEmitter<Event>();\n\n  @Output()\n  onLogout = new EventEmitter<Event>();\n\n  @Output()\n  onCreateAccount = new EventEmitter<Event>();\n}\n",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": ".wrapper {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n  padding: 15px 20px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n\nsvg {\n  display: inline-block;\n  vertical-align: top;\n}\n\nh1 {\n  font-weight: 900;\n  font-size: 20px;\n  line-height: 1;\n  margin: 6px 0 6px 10px;\n  display: inline-block;\n  vertical-align: top;\n}\n\nbutton + button {\n  margin-left: 10px;\n}\n",
-                    "styleUrl": "./header.css"
-                }
-            ],
-            "stylesData": ""
-        },
-        {
-            "name": "HeaderComponent",
-            "id": "component-HeaderComponent-dc2d45cc0298679403ddc9cff4251324-1",
+            "id": "component-HeaderComponent-dc2d45cc0298679403ddc9cff4251324",
             "file": "src/app/header/header.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2689,9 +2659,6 @@
             "implements": [
                 "OnInit"
             ],
-            "isDuplicate": true,
-            "duplicateId": 1,
-            "duplicateName": "HeaderComponent-1",
             "templateData": "<header>\n    <h1>\n        Blogs\n    </h1>\n    <nav>\n        <ul >\n            <li><a tabindex=\"1\" routerLink=\"/\"  >List</a>\n            </li>\n            <li *ngIf=\"isloggedin\"><a routerLink=\"/addEdit\" tabindex=\"1\"  routerLinkActive=\"active\">Add Blog</a>\n            </li>\n            <li  *ngIf=\"!isloggedin\"><a routerLink=\"/log-in\" tabindex=\"1\" routerLinkActive=\"active\">Log in</a>\n            </li>\n            <li  *ngIf=\"isloggedin\"><a tabindex=\"1\"  (click)='logOut()'>Log out</a>\n            </li>\n            <li  *ngIf=\"!isloggedin\"> <a tabindex=\"1\"  routerLink=\"/sign-up\" routerLinkActive=\"active\">Registration</a>\n            </li>\n        </ul>\n    </nav>\n    <div class=\"themes\">\n        <label class=\"radio-inline\">\n        <input type=\"radio\" value=\"ligth\" name=\"theme\"   [(ngModel)]=\"theme\" (change)=\"changeTheme()\"> Ligth theme\n        </label>\n        <label class=\"radio-inline\">\n        <input type=\"radio\" value=\"dark\" name=\"theme\"  [(ngModel)]=\"theme\"  (change)=\"changeTheme()\"> Dark theme\n        </label>\n    </div>\n</header>\n\n\n\n"
         },
         {
@@ -3009,6 +2976,9 @@
                             "name": "FooterComponent"
                         },
                         {
+                            "name": "HeaderComponent"
+                        },
+                        {
                             "name": "LogInComponent"
                         },
                         {
@@ -3075,6 +3045,22 @@
     "miscellaneous": {
         "variables": [
             {
+                "name": "app",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/app.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "blog",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/List.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
                 "name": "dark",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -3097,6 +3083,38 @@
                 "file": "src/environments/environment.ts",
                 "type": "object",
                 "defaultValue": "{\n  production: false,\n  BASE_URL : 'http://localhost:3000/'\n}"
+            },
+            {
+                "name": "header",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Header.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "header",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Login.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "header",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/registration.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "initialState",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/List.stories.ts",
+                "type": "object",
+                "defaultValue": "{}"
             },
             {
                 "name": "initialState",
@@ -3129,38 +3147,6 @@
                 "file": "src/app/theme.ts",
                 "type": "Theme",
                 "defaultValue": "{\r\n  name: 'light',\r\n  properties: {\r\n    '--background-default': '#F4FAFF',\r\n    '--primary-default': '#000000',\r\n    '--popup-button': '#0cfdba',\r\n    '--popup-button-color': '#000000',\r\n  }\r\n}"
-            },
-            {
-                "name": "LoggedIn",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Header.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "LoggedIn",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Page.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "LoggedOut",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Header.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "LoggedOut",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Page.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
             },
             {
                 "name": "Primary",
@@ -3198,6 +3184,14 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/stories/app.stories.ts",
+                "type": "Story<AppComponent>",
+                "defaultValue": "(args: AppComponent) => ({\r\n  component: AppComponent,\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/stories/Button.stories.ts",
                 "type": "Story<Button>",
                 "defaultValue": "(args: Button) => ({\n  component: Button,\n  props: args,\n})"
@@ -3207,16 +3201,32 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/stories/Header.stories.ts",
-                "type": "Story<Header>",
-                "defaultValue": "(args: Header) => ({\n  component: Header,\n  props: args,\n})"
+                "type": "Story<HeaderComponent>",
+                "defaultValue": "(args: HeaderComponent) => ({\n  component: HeaderComponent,\n  props: args,\n})"
             },
             {
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/Page.stories.ts",
-                "type": "Story<Page>",
-                "defaultValue": "(args: Page) => ({\n  component: Page,\n  props: args,\n})"
+                "file": "src/stories/List.stories.ts",
+                "type": "Story<BlogListComponent>",
+                "defaultValue": "(args: BlogListComponent) => ({\n  component: BlogListComponent,\n  props: {\n    args\n  }\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Login.stories.ts",
+                "type": "Story<LogInComponent>",
+                "defaultValue": "(args: LogInComponent) => ({\r\n  component: LogInComponent,\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/registration.stories.ts",
+                "type": "Story<RegistrationComponent>",
+                "defaultValue": "(args: RegistrationComponent) => ({\r\n  component: RegistrationComponent,\r\n  props: args,\r\n})"
             }
         ],
         "functions": [
@@ -3394,6 +3404,50 @@
             }
         ],
         "groupedVariables": {
+            "src/stories/app.stories.ts": [
+                {
+                    "name": "app",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/app.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/app.stories.ts",
+                    "type": "Story<AppComponent>",
+                    "defaultValue": "(args: AppComponent) => ({\r\n  component: AppComponent,\r\n  props: args,\r\n})"
+                }
+            ],
+            "src/stories/List.stories.ts": [
+                {
+                    "name": "blog",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/List.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "initialState",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/List.stories.ts",
+                    "type": "object",
+                    "defaultValue": "{}"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/List.stories.ts",
+                    "type": "Story<BlogListComponent>",
+                    "defaultValue": "(args: BlogListComponent) => ({\n  component: BlogListComponent,\n  props: {\n    args\n  }\n})"
+                }
+            ],
             "src/app/theme.ts": [
                 {
                     "name": "dark",
@@ -3430,6 +3484,60 @@
                     "file": "src/environments/environment.ts",
                     "type": "object",
                     "defaultValue": "{\n  production: false,\n  BASE_URL : 'http://localhost:3000/'\n}"
+                }
+            ],
+            "src/stories/Header.stories.ts": [
+                {
+                    "name": "header",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Header.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Header.stories.ts",
+                    "type": "Story<HeaderComponent>",
+                    "defaultValue": "(args: HeaderComponent) => ({\n  component: HeaderComponent,\n  props: args,\n})"
+                }
+            ],
+            "src/stories/Login.stories.ts": [
+                {
+                    "name": "header",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Login.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Login.stories.ts",
+                    "type": "Story<LogInComponent>",
+                    "defaultValue": "(args: LogInComponent) => ({\r\n  component: LogInComponent,\r\n  props: args,\r\n})"
+                }
+            ],
+            "src/stories/registration.stories.ts": [
+                {
+                    "name": "header",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/registration.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/registration.stories.ts",
+                    "type": "Story<RegistrationComponent>",
+                    "defaultValue": "(args: RegistrationComponent) => ({\r\n  component: RegistrationComponent,\r\n  props: args,\r\n})"
                 }
             ],
             "src/app/store/reducers/auth.reducers.ts": [
@@ -3492,58 +3600,6 @@
                     "file": "src/stories/Button.stories.ts",
                     "type": "Story<Button>",
                     "defaultValue": "(args: Button) => ({\n  component: Button,\n  props: args,\n})"
-                }
-            ],
-            "src/stories/Header.stories.ts": [
-                {
-                    "name": "LoggedIn",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Header.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "LoggedOut",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Header.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Header.stories.ts",
-                    "type": "Story<Header>",
-                    "defaultValue": "(args: Header) => ({\n  component: Header,\n  props: args,\n})"
-                }
-            ],
-            "src/stories/Page.stories.ts": [
-                {
-                    "name": "LoggedIn",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Page.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "LoggedOut",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Page.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Page.stories.ts",
-                    "type": "Story<Page>",
-                    "defaultValue": "(args: Page) => ({\n  component: Page,\n  props: args,\n})"
                 }
             ],
             "src/app/models/store/app.state.ts": [
@@ -3802,7 +3858,7 @@
                 "linktype": "component",
                 "name": "AddEditBlogListComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/13",
+                "coverageCount": "0/15",
                 "status": "low"
             },
             {
@@ -3820,7 +3876,7 @@
                 "linktype": "component",
                 "name": "BlogListComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/8",
+                "coverageCount": "0/10",
                 "status": "low"
             },
             {
@@ -4272,17 +4328,7 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "LoggedIn",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Header.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedOut",
+                "name": "header",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -4298,27 +4344,67 @@
                 "status": "low"
             },
             {
-                "filePath": "src/stories/Page.stories.ts",
+                "filePath": "src/stories/List.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "LoggedIn",
+                "name": "blog",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
             },
             {
-                "filePath": "src/stories/Page.stories.ts",
+                "filePath": "src/stories/List.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "LoggedOut",
+                "name": "initialState",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
             },
             {
-                "filePath": "src/stories/Page.stories.ts",
+                "filePath": "src/stories/List.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Login.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "header",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Login.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/app.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "app",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/app.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -4337,21 +4423,32 @@
                 "status": "very-good"
             },
             {
-                "filePath": "src/stories/header.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "HeaderComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/5",
-                "status": "low"
-            },
-            {
                 "filePath": "src/stories/page.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "PageComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/registration.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "header",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/registration.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             }
         ]

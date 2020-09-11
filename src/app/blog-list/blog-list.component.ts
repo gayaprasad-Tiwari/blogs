@@ -31,7 +31,7 @@ export class BlogListComponent implements OnInit, OnDestroy {
       if (data) {
         this.bloglist = data.blog;
       }
-      if (data.Message === 'Succesfully deleted the blog') {
+      if (data && data.Message === 'Succesfully deleted the blog') {
         alert(data.Message);
         this.store.dispatch(new Load());
       }
