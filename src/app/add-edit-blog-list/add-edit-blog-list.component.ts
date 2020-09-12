@@ -25,16 +25,17 @@ export class AddEditBlogListComponent implements OnInit, OnDestroy {
     this.editId = this.route.snapshot.paramMap.get('id');
     this.blogsObservable = this.store.select(state => state.blog);
     router.events.subscribe((val) => {
-      if (val instanceof NavigationEnd){
-        if (val.url === '/addEdit'){
-          if ( this.addeditblogForm){
-              this.addeditblogForm.reset();
+      if (val instanceof NavigationEnd) {
+        if (val.url === '/addEdit') {
+          if (this.addeditblogForm) {
+            this.addEditText = 'Add';
+            this.addeditblogForm.reset();
           }
 
           this.editId = null;
         }
       }
-  });
+    });
   }
   categoryList = [
     'Music',
@@ -74,7 +75,7 @@ export class AddEditBlogListComponent implements OnInit, OnDestroy {
   get f() { return this.addeditblogForm.controls; }
   onSubmit() {
     this.submitted = true;
-    if (this.addeditblogForm.invalid){
+    if (this.addeditblogForm.invalid) {
       return;
     }
     this.blogObj = {
@@ -106,11 +107,9 @@ export class AddEditBlogListComponent implements OnInit, OnDestroy {
       this.addeditblogForm.reset();
     });
   }
-  ngOnDestroy(){
-    if (this.subscription){
-    this.subscription.unsubscribe();
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 }
-
-

@@ -27,6 +27,6 @@ const Template: Story<HeaderComponent> = (args: HeaderComponent) => ({
   props: args,
 });
 
-export const header = Template.bind({});
-header.args = {
-}
+export const Defualt = Template.bind({});
+Defualt.args = {
+};

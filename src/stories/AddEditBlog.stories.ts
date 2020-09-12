@@ -34,5 +34,9 @@ Add.args = {
 };
 export const Edit = Template.bind({});
 Edit.args = {
-  editId : 1
+  editId : 1,
+};
+export const SubmitedWithNoData = Template.bind({});
+SubmitedWithNoData.args = {
+  submitted : true,
 };

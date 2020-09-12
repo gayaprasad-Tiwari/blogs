@@ -1,5 +1,5 @@
-<ul *ngIf="bloglist" class="blog-container" aria-label="blog list container">
-    <li *ngFor="let blog of bloglist trackBy bloglist.id" aria-label="blog">
+<ul *ngIf="list" class="blog-container" aria-label="blog list container">
+    <li *ngFor="let blog of list trackBy list.id" aria-label="blog">
         <article>
             <header>
                 <h2 aria-label="blog title">

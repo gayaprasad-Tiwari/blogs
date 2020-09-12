@@ -27,6 +27,12 @@ const Template: Story<RegistrationComponent> = (args: RegistrationComponent) => 
   props: args,
 });
 
-export const header = Template.bind({});
-header.args = {
+export const RegistrationForm = Template.bind({});
+RegistrationForm.args = {
 };
+
+export const RegistrationFormSubmittedWithNoData = Template.bind({});
+RegistrationFormSubmittedWithNoData.args = {
+  submitted: true
+};
+

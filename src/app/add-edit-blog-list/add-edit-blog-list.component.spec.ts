@@ -56,5 +56,5 @@ describe('AddEditBlogListComponent', () => {
     spyOn(mockStore, 'dispatch');
     component.onSubmit();
     expect(mockStore.dispatch).toHaveBeenCalled();
-  })
+  });
 });

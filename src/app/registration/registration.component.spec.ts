@@ -36,12 +36,12 @@ describe('RegistrationComponent', () => {
     expect(component).toBeTruthy();
   });
   it('should be called insert action', () => {
-    const obj ={
+    const obj = {
       userName: 'tester',
       email: 'tester@gmail.com',
       phoneNo: 29389485555,
       password: 'testerw'
-    }
+    };
     component.registrationForm.patchValue(obj);
     spyOn(mockStore, 'dispatch');
     component.onSubmit();
@@ -52,5 +52,5 @@ describe('RegistrationComponent', () => {
       phoneNo: 29389485555,
       password: 'testerw'
     }, type: '[Auth] Signup'});
-  })
+  });
 });

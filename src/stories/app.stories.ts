@@ -56,7 +56,7 @@ const Template: Story<AppComponent> = (args: AppComponent) => ({
   props: args,
 });
 
-export const app = Template.bind({});
-app.args = {
+export const Default = Template.bind({});
+Default.args = {
   user: {},
 };

@@ -124,16 +124,30 @@
       "name": "naman tiwari",
       "phoneNo": "9866666666",
       "id": 19
+    },
+    {
+      "email": "gayaprasad_tiwari@persistent.com",
+      "password": "$2a$10$ixA1yQ/Roqdvrkq5cDsYRew.jTcDcklTpiEkpMBsNAbjTrLQMzF4e",
+      "name": "gayarasad_tiwari",
+      "phoneNo": "9866666666",
+      "id": 20
+    },
+    {
+      "email": "gaya@g.com",
+      "password": "$2a$10$ytoeSBq/XRaF47.OCgwAfOaxqy/2dkdOkRRHJ7aNFtroMOc6E4I3a",
+      "name": "gaya",
+      "phoneNo": "9866666666",
+      "id": 21
     }
   ],
   "blogList": [
     {
       "id": 1,
-      "title": "Rental: $20dsssds0ak in Profit Without Owning Any Propertdyvf",
+      "title": "Rental: $20dsssds0ak in Profit Without Owning Any Propertdyvfs",
       "imageUrl": "https://www.sidehustlenation.com/wp-content/uploads/2020/08/rental-arbitrage.jpg",
       "description": "Rental sar bhjbitrage gives you a sway to make money with Airbnb — without owning any prop.Traditionally, building a real estate side hustle takes big bucks for down payments, closing costs, and renovation projects. But enterprising short-term rental moguls are questioning if owning the property is even necessary. These rental arbitrage entrepreneurs sign long-term leases, and then turn around and sub-let the property on a short-term basis — profiting on the spread.",
-      "category": "Real State",
-      "date": "2020-09-11T08:26:07.113Z"
+      "category": "Beauty",
+      "date": "2020-09-12T13:49:04.174Z"
     },
     {
       "title": "Rental Arbitrage: $201k in Profit Without Owning Any Property",
@@ -142,30 +156,6 @@
       "category": "others",
       "date": "2020-09-05T09:55:36.275Z",
       "id": 30
-    },
-    {
-      "title": "Rental Arbitrage: $201k in Profit Without Owning Any Property",
-      "imageUrl": "https://www.sidehustlenation.com/wp-content/uploads/2020/08/rental-arbitrage.jpg",
-      "description": "Rental arbitrage gives you a way to make money with Airbnb — without owning any prop.Traditionally, building a real estate side hustle takes big bucks for down payments, closing costs, and renovation projects. But enterprising short-term rental moguls are questioning if owning the property is even necessary. These rental arbitrage entrepreneurs sign long-term leases, and then turn around and sub-let the property on a short-term basis — profiting on the spread.",
-      "category": "others",
-      "date": "2020-09-05T09:56:03.379Z",
-      "id": 31
-    },
-    {
-      "title": "Bar with negative stack",
-      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
-      "description": "dsghwehh",
-      "category": "Fashion",
-      "date": "2020-09-08T17:14:36.443Z",
-      "id": 32
-    },
-    {
-      "title": "Bar with negative stack",
-      "imageUrl": "https://www.dummies.com/wp-content/uploads/blogging-ideas.jpg",
-      "description": "wafawafwa sehh",
-      "category": "Car",
-      "date": "2020-09-08T19:25:36.499Z",
-      "id": 33
     }
   ]
 }
